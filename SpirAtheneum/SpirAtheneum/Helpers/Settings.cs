@@ -26,7 +26,7 @@ namespace SpirAtheneum.Helpers
 
 
 		private static readonly string SettingsDefault = string.Empty;
-        private static readonly int LoginDefault = 0;
+        private static readonly bool LoginDefault = false;
 
         #endregion
 
@@ -42,7 +42,7 @@ namespace SpirAtheneum.Helpers
 				AppSettings.AddOrUpdateValue(SettingsKey, value);
 			}
 		}
-        public static int Login
+        public static bool IsLogin
         {
             get
             {

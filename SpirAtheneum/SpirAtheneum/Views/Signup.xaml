@@ -1,80 +1,90 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:Local="clr-namespace:SpirAtheneum.Renderers"
-             x:Class="SpirAtheneum.Views.Signup">
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+     xmlns="http://xamarin.com/schemas/2014/forms"
+     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+     x:Class="SpirAtheneum.Views.Signup"
+     xmlns:local="clr-namespace:SpirAtheneum.Renderers" >
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand" 
-                     HorizontalOptions="FillAndExpand" 
-                     Orientation="Vertical">
+        <StackLayout 
+             VerticalOptions="FillAndExpand" 
+             HorizontalOptions="FillAndExpand"
+             x:Name = "main_container"
+             BackgroundColor="{StaticResource BackgroundColor}"         
+             Orientation="Vertical">
+            <!--Sign title -->
+              <Label 
+                    Margin="0,15,0,0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center" 
+                    Text="Sign Up" 
+                    FontSize="{StaticResource HeadingFontSize}" 
+                    TextColor="{StaticResource NormalTextColor}"/>
+                <Label
+                    Margin="0,10,0,0"
+                    IsEnabled="{Binding ShowError}"
+                    IsVisible="{Binding ShowError}"
+                    HorizontalOptions="CenterAndExpand"
+                    TextColor="{ DynamicResource ErrorColor }"
+                    FontSize = "14"
+                    Text="{Binding Message}"
+                    HorizontalTextAlignment="Center"
+                />
+            <!-- Sign Up Forms -->
+            <StackLayout 
+                 Margin="16,15,16,0"
+                 VerticalOptions="CenterAndExpand" 
+                 HorizontalOptions="FillAndExpand">
 
-            <StackLayout VerticalOptions="FillAndExpand" 
-                         HorizontalOptions="FillAndExpand"
-                         x:Name="user_profile"
-                         BackgroundColor="{StaticResource BackgroundColor}">
+                <Label VerticalOptions="Center"
+                   HorizontalOptions="Start" 
+                   Text="Email:" 
+                   FontSize="{StaticResource NormalFontSize}" 
+                   TextColor="{StaticResource NormalTextColor}"
+                   Margin="0,45,0,0"/>
 
-                <StackLayout Padding="15,0,15,0"
-                         VerticalOptions="CenterAndExpand" 
-                         HorizontalOptions="FillAndExpand">
-                        
-                    <Label VerticalOptions="Center"
-                       HorizontalOptions="Center" 
-                       Text="Sign up" 
- 
-                       FontSize="{StaticResource HeadingFontSize}" 
-                       TextColor="{StaticResource NormalTextColor}"/>
+                <local:LoginEntry 
+                    VerticalOptions="Center"
+                    HorizontalOptions="FillAndExpand"
+                    Text="{Binding  DBUser.Email}"
+                    BackgroundColor="{StaticResource BackgroundColor}" 
+                    TextColor="{StaticResource NormalTextColor}"/>
+                   
+                <Label 
+                   Margin="0,5,0,0"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   Text="Password:" 
+                   FontSize="{StaticResource NormalFontSize}" 
+                   TextColor="{StaticResource NormalTextColor}" />
 
-                    <Label VerticalOptions="Center"
-                       HorizontalOptions="Start" 
-                       Text="Email:" 
- 
-                       FontSize="{StaticResource NormalFontSize}" 
-                       TextColor="{StaticResource NormalTextColor}"
-                       Margin="0,45,0,0"/>
-
-                    <Local:LoginEntry VerticalOptions="Center"
-                                        HorizontalOptions="FillAndExpand"
-                                        Text="{Binding  DBUser.Email}"
-                                        TextColor="{StaticResource NormalTextColor}"
-                                       />
-
-                    <Label VerticalOptions="Center"
-                       HorizontalOptions="Start"
-                       Text="Password:" 
-                       
-                       FontSize="{StaticResource NormalFontSize}" 
-                       TextColor="{StaticResource NormalTextColor}" />
-
-                    <Local:LoginEntry VerticalOptions="Center"
-                                        HorizontalOptions="FillAndExpand"
-                                         Text="{Binding  DBUser.Password}"
-                                        TextColor="{StaticResource NormalTextColor}"
-                                       />
-
-                    <Button Margin="0,20,0,20"
-                        HeightRequest="50"  
-                        HorizontalOptions="FillAndExpand" 
-                        VerticalOptions="Center" 
-                        Text="SignUp" 
-                            Command="{Binding AddButtonCommand}"
-                           CommandParameter="{Binding Source={x:Reference user_profile}, Path=BindingContext}"
-                        />
-                </StackLayout>
-
+                <local:LoginEntry
+                    VerticalOptions="Center"
+                    HorizontalOptions="FillAndExpand"
+                    Text="{Binding  DBUser.Password}"
+                    BackgroundColor="{StaticResource BackgroundColor}" 
+                    TextColor="{StaticResource NormalTextColor}" />
+               <local:GeneralButton 
+                    Margin="0,25,0,20"
+                    HeightRequest="40"  
+                    HorizontalOptions="FillAndExpand" 
+                    VerticalOptions="Center" 
+                    Text="SignUp" 
+                     Style="{StaticResource ButtonStyle}"
+                    Command="{Binding AddButtonCommand}"
+                    CommandParameter="{Binding Source={x:Reference main_container}, Path=BindingContext}"/>
             </StackLayout>
-
-            <StackLayout VerticalOptions="End"
-                     HorizontalOptions="FillAndExpand">
-
-                <Label VerticalOptions="End"
-                       HorizontalOptions="FillAndExpand"
-                       HorizontalTextAlignment="Center"
-                       Text="Advertisement" 
-                       TextColor="Black"
-                       FontSize="Large" 
-                       Margin="0,0,0,8"/>
-
-            </StackLayout>
+             <!-- Ads label--> 
+            <Label 
+               VerticalOptions="EndAndExpand"
+               HorizontalOptions="FillAndExpand"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               Text="Advertisement"
+               BackgroundColor="White" 
+               TextColor="Black"
+               FontSize="Large" 
+               HeightRequest="50"
+               Margin="0,10,0,8"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

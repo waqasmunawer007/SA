@@ -11,6 +11,7 @@
             <x:Double x:Key="CellHeadingFontSize">16</x:Double>
            
 
+            <Color x:Key="ErrorColor">Red</Color>
             <Color x:Key="ButtonTextColor">White</Color>
             <Color x:Key="ButtonBackgroundColor">#7E313B</Color>
             <Color x:Key="NormalTextColor">White</Color>

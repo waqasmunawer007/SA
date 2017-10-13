@@ -29,7 +29,7 @@ namespace SpirAtheneum.Views.Menu
                 if (item.TargetType == typeof(Login.LoginPage))
                 {
 
-                    Settings.Login = 0;
+                    Settings.IsLogin = false;
                     App.Current.MainPage = new NavigationPage(new LoginPage());
                 }
                 else

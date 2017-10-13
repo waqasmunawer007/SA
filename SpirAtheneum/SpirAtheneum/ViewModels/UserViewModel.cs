@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using SpirAtheneum.Constants;
 
 namespace SpirAtheneum.ViewModels
 {
@@ -22,15 +23,18 @@ namespace SpirAtheneum.ViewModels
         private SQLiteConnection database;
         private static object collisionLock = new object();
         public User user;
-
+        private bool showError;
+        private string message; //could be an error or a success message
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand AddButtonCommand { get; set; }
         public ICommand LoginButtonCommand { get; set; }
         public ICommand tapCommand;
+        INavigation navigation;
 
-        public UserViewModel()
+        public UserViewModel(INavigation nav)
         {
+            navigation = nav;
             database = DependencyService.Get<IDatabaseConnection>().DbConnection();
             database.CreateTable<User>();
             user = new User();
@@ -51,32 +55,55 @@ namespace SpirAtheneum.ViewModels
 
         void OnTapped(object s)   // Sign up button command
         {
-            App.Current.MainPage = new Signup();
-            Settings.Login = 0;
-
+            navigation.PushAsync(new Signup());
+           // Settings.Login = 0;
         }
-       
 
-       public void  SaveUser(User u)  // save user in local database
+		public bool ShowError
+		{
+			get { return showError; }
+			set
+			{
+				if (showError != value)
+				{
+					showError = value;
+					OnPropertyChanged("ShowError");
+				}
+			}
+		}
+        public string Message
+		{
+			get { return message; }
+			set
+			{
+				if (message != value)
+				{
+					message = value;
+					OnPropertyChanged("Message");
+				}
+			}
+		}
+       
+        /// <summary>
+        /// Performs sign up for new user 
+        /// </summary>
+        /// <param name="u">U.</param>
+        public  void  SaveUser(User u) 
         {
             lock (collisionLock)
             {
-                if (isUserExist(u) == false)
+                if (isUserExist(u) == false) //user not exist in db, create new user
                 {
                     database.Insert(u);
-                    Settings.Login = 1;
-                    App.Current.MainPage = new Views.Menu.MainPage();
-                   
+                   Message = AppConstant.RegistrarionSuccess;
                 }
                 else
                 {
-                    App.Current.MainPage = new LoginPage();
-                    Settings.Login = 0;
-                    
+                    ShowError = true;
+                    Message = AppConstant.RegistrarionError;
                 }
-
             }
-           
+			//await Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.RegistrarionSuccess, AppConstant.Done);
         }
         public void LoginUser(User u)
         {
@@ -84,18 +111,15 @@ namespace SpirAtheneum.ViewModels
             {
                 if (isUserCredentialMatchToLogin(u) == true)
                 {
-                    Settings.Login = 1;
-                    App.Current.MainPage  = new Views.Menu.MainPage();
+                    Settings.IsLogin = true;
+                    App.Current.MainPage = new Views.Menu.MainPage();
                 }
                 else
                 {
-                    App.Current.MainPage = new LoginPage();
-                    Settings.Login = 0;
-                    
+                    ShowError = true;
+                    Message = AppConstant.LoginError;  
                 }
-
             }
-
         }
 
         public bool isUserCredentialMatchToLogin(User u) 
@@ -105,8 +129,6 @@ namespace SpirAtheneum.ViewModels
                 return database.Table<User>().Any(user => user.Email == u.Email && user.Password == u.Password);
             }
         }
-       
-
         public bool isUserExist(User u)  
         {
             lock (collisionLock)

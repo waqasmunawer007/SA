@@ -17,14 +17,9 @@ namespace SpirAtheneum.Views.Login
         public LoginPage()
         {
             InitializeComponent();
-            uv = new UserViewModel();
+            NavigationPage.SetBackButtonTitle(this, "");
+            uv = new UserViewModel(Navigation);
             BindingContext = uv;
         }
-
-        //public void loginButtonClicked(object sender, EventArgs e)
-        //{
-        //    App.Current.MainPage = new Menu.MainPage();
-            
-        //}
     }
 }

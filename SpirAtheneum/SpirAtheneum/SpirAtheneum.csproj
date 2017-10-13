@@ -95,6 +95,7 @@
       <DependentUpon>Upgrade.xaml</DependentUpon>
     </Compile>
     <Compile Include="Renderers\GeneralButton.cs" />
+    <Compile Include="Constants\AppConstant.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

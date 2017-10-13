@@ -17,15 +17,13 @@ namespace SpirAtheneum.Views
         public Signup()
         {
             InitializeComponent();
-            uv = new UserViewModel();
+            uv = new UserViewModel(Navigation);
             BindingContext = uv;
 
         }
-        public void loginButtonClicked(object sender, EventArgs e)
-        {
-
-
-            App.Current.MainPage = new Menu.MainPage();
-        }
+        //public void loginButtonClicked(object sender, EventArgs e)
+        //{
+        //    App.Current.MainPage = new Menu.MainPage();
+        //}
     }
 }

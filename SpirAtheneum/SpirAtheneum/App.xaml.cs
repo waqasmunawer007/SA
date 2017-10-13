@@ -10,12 +10,9 @@ namespace SpirAtheneum
         public App()
         {
             InitializeComponent();
-
-            int flag = Settings.Login;
-            if (flag>0)
+            if (Settings.IsLogin)
             {
-                 MainPage = new Views.Menu.MainPage();
-               
+                 MainPage = new Views.Menu.MainPage();  
             }
             else
             {
