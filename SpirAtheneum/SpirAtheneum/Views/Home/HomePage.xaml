@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpirAtheneum.Views.Home.HomePage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" 
+                     HorizontalOptions="FillAndExpand" 
+                     Orientation="Vertical">
+            
+            <StackLayout Padding="20,0,20,0"
+                         BackgroundColor="{StaticResource BackgroundColor}"
+                         VerticalOptions="FillAndExpand" 
+                         HorizontalOptions="FillAndExpand"
+                         Orientation="Vertical">
+                
+                <!--Containder-->
+                <StackLayout VerticalOptions="CenterAndExpand" 
+                             HorizontalOptions="FillAndExpand"
+                             Orientation="Vertical">
+
+                    <!--Button-->
+                    <StackLayout Padding="20,0,0,0"
+                                 HorizontalOptions="FillAndExpand" 
+                                 VerticalOptions="FillAndExpand"
+                                 Orientation="Horizontal"
+                                 HeightRequest="70" 
+                                 BackgroundColor="{StaticResource BurgundyColor}"
+                                 >
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Button1Click" />
+                        </StackLayout.GestureRecognizers>
+
+                        <Image VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Start"
+                               Source="icon.png"
+                               HeightRequest="35"/>
+
+                        <Label Margin="10,0,0,0"
+                               Text="Daily Digest"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Start"
+                               TextColor="White"
+                               FontSize="{StaticResource HeadingFontSize}"
+         />
+
+                    </StackLayout>
+
+                    <!--Button-->
+                    <StackLayout Padding="20,0,0,0"
+                                 Margin="0,4,0,0"
+                                 HorizontalOptions="FillAndExpand" 
+                                 VerticalOptions="FillAndExpand"
+                                 Orientation="Horizontal"
+                                 HeightRequest="70" 
+                                 BackgroundColor="{StaticResource BurgundyColor}">
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Button2Click" />
+                        </StackLayout.GestureRecognizers>
+                        
+                        <Image VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Start"
+                               Source="icon.png"
+                               HeightRequest="35"/>
+
+                        <Label Margin="10,0,0,0"
+                               Text="Meditations"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Start"
+                               TextColor="White"
+                               FontSize="{StaticResource HeadingFontSize}"
+         />
+
+                    </StackLayout>
+
+                    <!--Button-->
+                    <StackLayout Padding="20,0,0,0"
+                                 Margin="0,4,0,0"
+                                 HorizontalOptions="FillAndExpand" 
+                                 VerticalOptions="FillAndExpand"
+                                 Orientation="Horizontal"
+                                 HeightRequest="70" 
+                                 BackgroundColor="{StaticResource BurgundyColor}">
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Button3Click" />
+                        </StackLayout.GestureRecognizers>
+                        
+                        <Image VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Start"
+                               Source="icon.png"
+                               HeightRequest="35"/>
+
+                        <Label Margin="10,0,0,0"
+                               Text="Content"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Start"
+                               TextColor="White"
+                               FontSize="{StaticResource HeadingFontSize}"
+         />
+
+                    </StackLayout>
+
+                    <!--Button-->
+                    <StackLayout Padding="20,0,0,0"
+                                 Margin="0,4,0,0"
+                                 HorizontalOptions="FillAndExpand" 
+                                 VerticalOptions="FillAndExpand"
+                                 Orientation="Horizontal"
+                                 HeightRequest="70" 
+                                 BackgroundColor="{StaticResource BurgundyColor}">
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Button4Click" />
+                        </StackLayout.GestureRecognizers>
+
+                        <Image VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Start"
+                               Source="icon.png"
+                               HeightRequest="35"/>
+
+                        <Label Margin="10,0,0,0"
+                               Text="Favourites"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Start"
+                               TextColor="White"
+                               FontSize="{StaticResource HeadingFontSize}"
+         />
+
+                    </StackLayout>
+
+                </StackLayout>
+
+
+            </StackLayout>
+
+            <StackLayout VerticalOptions="End"
+                     HorizontalOptions="FillAndExpand">
+
+                <Label VerticalOptions="End"
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Center"
+                       Text="Advertisement" 
+                       TextColor="Black"
+                       FontSize="Large" 
+                       Margin="0,0,0,8"/>
+
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

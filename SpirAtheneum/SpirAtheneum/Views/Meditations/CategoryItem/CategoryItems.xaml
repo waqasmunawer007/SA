@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpirAtheneum.Views.Meditations.CategoryItems.CategoryItems"
+              BackgroundColor="{StaticResource BackgroundColor}">
+    
+    <ContentPage.Content>
+        
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"  
+            Margin="10,10,10,0 ">
+             <ActivityIndicator 
+                IsVisible="{Binding IsBusy}"
+                IsRunning="{Binding IsBusy}"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"/>
+             <Label x:Name="NoDataLabel"
+               Text="No Data Found!" 
+               TextColor="White" 
+               FontSize="{StaticResource CellHeadingFontSize}" 
+               IsVisible="false" 
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"/>
+            <ListView 
+                x:Name="listView"
+                RowHeight="60"
+                SeparatorVisibility="Default"
+                ItemTapped="listView_ItemTapped"
+                IsVisible="false">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                       <ViewCell >
+                            <StackLayout Orientation="Horizontal" 
+                               VerticalOptions="FillAndExpand" 
+                               Margin="0,0,0,5"
+                               x:Name="category_item"
+                               BackgroundColor="{StaticResource BurgundyColor}">
+                                <Label
+                                    Text="{Binding title}"
+                                    HorizontalOptions="StartAndExpand"
+                                    Margin="10,0,0,0"
+                                    FontSize="{StaticResource CellHeadingFontSize}"
+                                    HorizontalTextAlignment="Start"
+                                    VerticalTextAlignment="Center"
+                                    TextColor="White" />
+                                <StackLayout
+                                    HorizontalOptions="EndAndExpand" 
+                                    Orientation="Horizontal">
+                                      <Image 
+                                         Source="icon.png" 
+                                         Margin="0,0,10,0" 
+                                         WidthRequest="30"
+                                         HeightRequest="30">
+                                         <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding FavouritButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
+                                         </Image.GestureRecognizers>
+
+                                    </Image>
+                                    <Image 
+                                        Source="icon.png" 
+                                        Margin="0,0,15,0"  
+                                        WidthRequest="30"
+                                        HeightRequest="30">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ShareButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </StackLayout>
+                             </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

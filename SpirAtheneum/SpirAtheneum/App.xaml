@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SpirAtheneum.App">
+    <Application.Resources>
+
+        <ResourceDictionary>
+
+            <x:Double x:Key="HeadingFontSize">30</x:Double>
+            <x:Double x:Key="SmallFontSize">12</x:Double>
+            <x:Double x:Key="NormalFontSize">22</x:Double>
+            <x:Double x:Key="CellHeadingFontSize">16</x:Double>
+           
+
+            <Color x:Key="ButtonTextColor">White</Color>
+            <Color x:Key="NormalTextColor">White</Color>
+            <Color x:Key="HamburgerBackground">#F5F5F5</Color>
+            <Color x:Key="ButtonBackground">#00BF9A</Color>
+            <Color x:Key="TabBarBackground">#FAFAFA</Color>
+            <Color x:Key="NavBarBackground">#1A1A1A</Color>
+            <Color x:Key="BackgroundColor">#404040</Color>
+            <Color x:Key="BurgundyColor">#7E313B</Color>
+
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource NavBarBackground}"/>
+                <Setter Property="BarTextColor" Value="Color.White"/>
+            </Style>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource ButtonBackground}" />
+                <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
+            </Style>
+
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>

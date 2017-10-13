@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:Local="clr-namespace:SpirAtheneum.Renderers"
+             x:Class="SpirAtheneum.Views.Signup">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" 
+                     HorizontalOptions="FillAndExpand" 
+                     Orientation="Vertical">
+
+            <StackLayout VerticalOptions="FillAndExpand" 
+                         HorizontalOptions="FillAndExpand"
+                         x:Name="user_profile"
+                         BackgroundColor="{StaticResource BackgroundColor}">
+
+                <StackLayout Padding="15,0,15,0"
+                         VerticalOptions="CenterAndExpand" 
+                         HorizontalOptions="FillAndExpand">
+                        
+                    <Label VerticalOptions="Center"
+                       HorizontalOptions="Center" 
+                       Text="Sign up" 
+ 
+                       FontSize="{StaticResource HeadingFontSize}" 
+                       TextColor="{StaticResource NormalTextColor}"/>
+
+                    <Label VerticalOptions="Center"
+                       HorizontalOptions="Start" 
+                       Text="Email:" 
+ 
+                       FontSize="{StaticResource NormalFontSize}" 
+                       TextColor="{StaticResource NormalTextColor}"
+                       Margin="0,45,0,0"/>
+
+                    <Local:LoginEntry VerticalOptions="Center"
+                                        HorizontalOptions="FillAndExpand"
+                                        Text="{Binding  DBUser.Email}"
+                                        TextColor="{StaticResource NormalTextColor}"
+                                       />
+
+                    <Label VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       Text="Password:" 
+                       
+                       FontSize="{StaticResource NormalFontSize}" 
+                       TextColor="{StaticResource NormalTextColor}" />
+
+                    <Local:LoginEntry VerticalOptions="Center"
+                                        HorizontalOptions="FillAndExpand"
+                                         Text="{Binding  DBUser.Password}"
+                                        TextColor="{StaticResource NormalTextColor}"
+                                       />
+
+                    <Button Margin="0,20,0,20"
+                        HeightRequest="50"  
+                        HorizontalOptions="FillAndExpand" 
+                        VerticalOptions="Center" 
+                        Text="SignUp" 
+                            Command="{Binding AddButtonCommand}"
+                           CommandParameter="{Binding Source={x:Reference user_profile}, Path=BindingContext}"
+                        />
+                </StackLayout>
+
+            </StackLayout>
+
+            <StackLayout VerticalOptions="End"
+                     HorizontalOptions="FillAndExpand">
+
+                <Label VerticalOptions="End"
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Center"
+                       Text="Advertisement" 
+                       TextColor="Black"
+                       FontSize="Large" 
+                       Margin="0,0,0,8"/>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
