@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpirAtheneum.Views.Menu.MasterPage"
@@ -23,18 +23,21 @@
                 <Image VerticalOptions="CenterAndExpand"
                                HorizontalOptions="Start"
                                Source="icon.png"
+                               WidthRequest="35"
                                HeightRequest="35"/>
                 <Label Margin="10,0,0,0"
                                Text="Spirtual Atheneum"
+                                FontSize="18"
+                                TextColor="Black"
                                VerticalOptions="CenterAndExpand"
-                               HorizontalOptions="Start"
-                               FontSize="{StaticResource HeadingFontSize}"
+                               HorizontalOptions="StartAndExpand"
+                              
          />
                     <!--<Label Text="Name: " VerticalOptions="Center" FontSize="{StaticResource NormalFontSize}" HorizontalOptions="StartAndExpand" TextColor="Black"/>
                 <Label Text="XYZ " x:Name="UserName" VerticalOptions="Center" FontSize="{StaticResource NormalFontSize}" HorizontalOptions="StartAndExpand" />-->
             </StackLayout>
             <!-- Menu Items -->
-            <ListView x:Name="listView" SeparatorVisibility="Default">
+            <ListView x:Name="listView" Margin="0,20,0,0" SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -44,7 +47,7 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="{Binding IconSource}" />
-                                <Label Grid.Column="1" Text="{Binding Title}" VerticalOptions="FillAndExpand" />
+                                <Label Grid.Column="1" TextColor="Black" FontSize="14" Text="{Binding Title}" VerticalOptions="FillAndExpand" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

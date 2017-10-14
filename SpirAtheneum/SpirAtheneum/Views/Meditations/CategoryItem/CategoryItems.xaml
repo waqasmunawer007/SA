@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpirAtheneum.Views.Meditations.CategoryItems.CategoryItems"
@@ -14,6 +14,7 @@
                 IsVisible="{Binding IsBusy}"
                 IsRunning="{Binding IsBusy}"
                 HorizontalOptions="CenterAndExpand"
+                Color="White"
                 VerticalOptions="CenterAndExpand"/>
              <Label x:Name="NoDataLabel"
                Text="No Data Found!" 
@@ -25,8 +26,9 @@
             <ListView 
                 x:Name="listView"
                 RowHeight="60"
-                SeparatorVisibility="Default"
+                SeparatorVisibility="None"
                 ItemTapped="listView_ItemTapped"
+                BackgroundColor="{StaticResource BackgroundColor}"
                 IsVisible="false">
                 <ListView.ItemTemplate>
                     <DataTemplate>

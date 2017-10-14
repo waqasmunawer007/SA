@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpirAtheneum.Views.Meditations.Categories"
@@ -9,6 +9,7 @@
             <ActivityIndicator 
                 IsVisible="{Binding IsBusy}"
                 IsRunning="{Binding IsBusy}"
+                Color="White"
                 HorizontalOptions="CenterAndExpand"
                 VerticalOptions="CenterAndExpand"/>
             <Label x:Name="NoDataLabel"
@@ -18,7 +19,7 @@
                IsVisible="false" 
                VerticalOptions="CenterAndExpand"
                HorizontalOptions="Center"/>
-            <ListView  x:Name="listView" RowHeight="80" SeparatorVisibility="Default" ItemTapped="listView_ItemTapped" IsVisible="False">
+            <ListView  x:Name="listView" RowHeight="80" BackgroundColor="{StaticResource BackgroundColor}" SeparatorVisibility="None" ItemTapped="listView_ItemTapped" IsVisible="False">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <!--<ImageCell Text="{Binding category}" Detail="{Binding title}" ImageSource="Logout.png" />-->

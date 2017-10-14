@@ -24,6 +24,7 @@ namespace SpirAtheneum.ViewModels
         private static object collisionLock = new object();
         public User user;
         private bool showError;
+        private bool showRegistrationMessage;
         private string message; //could be an error or a success message
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -71,6 +72,18 @@ namespace SpirAtheneum.ViewModels
 				}
 			}
 		}
+		public bool ShowRegistrationMessage
+		{
+			get { return showRegistrationMessage; }
+			set
+			{
+				if (showRegistrationMessage != value)
+				{
+					showRegistrationMessage = value;
+					OnPropertyChanged("ShowRegistrationMessage");
+				}
+			}
+		}
         public string Message
 		{
 			get { return message; }
@@ -90,20 +103,25 @@ namespace SpirAtheneum.ViewModels
         /// <param name="u">U.</param>
         public  void  SaveUser(User u) 
         {
+            bool ifRegistered = false;
             lock (collisionLock)
             {
                 if (isUserExist(u) == false) //user not exist in db, create new user
                 {
                     database.Insert(u);
-                   Message = AppConstant.RegistrarionSuccess;
-                }
-                else
-                {
-                    ShowError = true;
-                    Message = AppConstant.RegistrarionError;
+                    ifRegistered = true; 
+
                 }
             }
-			//await Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.RegistrarionSuccess, AppConstant.Done);
+            if (ifRegistered)
+            {
+                Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.RegistrarionSuccess, AppConstant.Done);
+            }
+            else
+            {
+                Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.RegistrarionError, AppConstant.Done);  
+            }
+			
         }
         public void LoginUser(User u)
         {

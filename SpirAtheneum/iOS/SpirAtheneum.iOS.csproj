@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\About.png" />
+    <BundleResource Include="Resources\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Dashboard.png" />

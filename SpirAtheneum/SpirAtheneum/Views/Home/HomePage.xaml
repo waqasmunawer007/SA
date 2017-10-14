@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpirAtheneum.Views.Home.HomePage">
@@ -18,7 +18,7 @@
                              HorizontalOptions="FillAndExpand"
                              Orientation="Vertical">
 
-                    <!--Button-->
+                    <!--Daiy Digest-->
                     <StackLayout Padding="20,0,0,0"
                                  HorizontalOptions="FillAndExpand" 
                                  VerticalOptions="FillAndExpand"
@@ -27,7 +27,7 @@
                                  BackgroundColor="{StaticResource BurgundyColor}"
                                  >
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="Button1Click" />
+                            <TapGestureRecognizer Tapped="DailyDigestClick_Handler" />
                         </StackLayout.GestureRecognizers>
 
                         <Image VerticalOptions="CenterAndExpand"
@@ -40,12 +40,11 @@
                                VerticalOptions="CenterAndExpand"
                                HorizontalOptions="Start"
                                TextColor="White"
-                               FontSize="{StaticResource HeadingFontSize}"
-         />
+                               FontSize="{StaticResource HeadingFontSize}"/>
 
                     </StackLayout>
 
-                    <!--Button-->
+                    <!--Meditation Button-->
                     <StackLayout Padding="20,0,0,0"
                                  Margin="0,4,0,0"
                                  HorizontalOptions="FillAndExpand" 
@@ -55,7 +54,7 @@
                                  BackgroundColor="{StaticResource BurgundyColor}">
 
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="Button2Click" />
+                            <TapGestureRecognizer Tapped="MeditationClick_Handler" />
                         </StackLayout.GestureRecognizers>
                         
                         <Image VerticalOptions="CenterAndExpand"
@@ -68,12 +67,11 @@
                                VerticalOptions="CenterAndExpand"
                                HorizontalOptions="Start"
                                TextColor="White"
-                               FontSize="{StaticResource HeadingFontSize}"
-         />
+                               FontSize="{StaticResource HeadingFontSize}"/>
 
                     </StackLayout>
 
-                    <!--Button-->
+                    <!-- Content Button-->
                     <StackLayout Padding="20,0,0,0"
                                  Margin="0,4,0,0"
                                  HorizontalOptions="FillAndExpand" 
@@ -83,7 +81,7 @@
                                  BackgroundColor="{StaticResource BurgundyColor}">
 
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="Button3Click" />
+                            <TapGestureRecognizer Tapped="ContentClick_Handler" />
                         </StackLayout.GestureRecognizers>
                         
                         <Image VerticalOptions="CenterAndExpand"
@@ -96,12 +94,11 @@
                                VerticalOptions="CenterAndExpand"
                                HorizontalOptions="Start"
                                TextColor="White"
-                               FontSize="{StaticResource HeadingFontSize}"
-         />
+                               FontSize="{StaticResource HeadingFontSize}"/>
 
                     </StackLayout>
 
-                    <!--Button-->
+                    <!-- Favourites Button-->
                     <StackLayout Padding="20,0,0,0"
                                  Margin="0,4,0,0"
                                  HorizontalOptions="FillAndExpand" 
@@ -111,7 +108,7 @@
                                  BackgroundColor="{StaticResource BurgundyColor}">
 
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="Button4Click" />
+                            <TapGestureRecognizer Tapped="FavouritesClick_Handler" />
                         </StackLayout.GestureRecognizers>
 
                         <Image VerticalOptions="CenterAndExpand"
@@ -124,8 +121,7 @@
                                VerticalOptions="CenterAndExpand"
                                HorizontalOptions="Start"
                                TextColor="White"
-                               FontSize="{StaticResource HeadingFontSize}"
-         />
+                               FontSize="{StaticResource HeadingFontSize}"/>
 
                     </StackLayout>
 

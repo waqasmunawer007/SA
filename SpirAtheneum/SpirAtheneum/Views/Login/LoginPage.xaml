@@ -19,6 +19,7 @@
                 Text="Login" 
                 FontSize="{StaticResource HeadingFontSize}" 
                 TextColor="{StaticResource NormalTextColor}"/>
+            <!-- Error Message Label -->
             <Label
                  Margin="0,10,0,0"
                 IsEnabled="{Binding ShowError}"

@@ -19,16 +19,7 @@
                     Text="Sign Up" 
                     FontSize="{StaticResource HeadingFontSize}" 
                     TextColor="{StaticResource NormalTextColor}"/>
-                <Label
-                    Margin="0,10,0,0"
-                    IsEnabled="{Binding ShowError}"
-                    IsVisible="{Binding ShowError}"
-                    HorizontalOptions="CenterAndExpand"
-                    TextColor="{ DynamicResource ErrorColor }"
-                    FontSize = "14"
-                    Text="{Binding Message}"
-                    HorizontalTextAlignment="Center"
-                />
+             
             <!-- Sign Up Forms -->
             <StackLayout 
                  Margin="16,15,16,0"

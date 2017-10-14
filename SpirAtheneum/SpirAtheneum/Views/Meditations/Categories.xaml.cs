@@ -20,6 +20,7 @@ namespace SpirAtheneum.Views.Meditations
 		public Categories ()
 		{
 			InitializeComponent ();
+            NavigationPage.SetBackButtonTitle(this, "");
             meditationVM = new MeditationVM();
             BindingContext = meditationVM;
             listView.ItemsSource = meditationVM.meditaions;

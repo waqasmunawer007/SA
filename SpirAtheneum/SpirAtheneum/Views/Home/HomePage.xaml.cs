@@ -15,29 +15,25 @@ namespace SpirAtheneum.Views.Home
         public HomePage()
         {
             InitializeComponent();
-           
-
-
-
-
+            NavigationPage.SetBackButtonTitle(this, "");
         }
 
-        void Button1Click(object sender, EventArgs e)
+        void DailyDigestClick_Handler(object sender, EventArgs e)
         {
             Navigation.PushAsync(new Views.DailyDigest.DailyDigest());
         }
 
-        void Button2Click(object sender, EventArgs e)
+        void MeditationClick_Handler(object sender, EventArgs e)
         {
             Navigation.PushAsync(new Views.Meditations.Categories());
         }
 
-        void Button3Click(object sender, EventArgs e)
+        void ContentClick_Handler(object sender, EventArgs e)
         {
             Navigation.PushAsync(new Views.Content.Content());
         }
 
-        void Button4Click(object sender, EventArgs e)
+        void FavouritesClick_Handler(object sender, EventArgs e)
         {
             Navigation.PushAsync(new Views.Favourites.Favourites());
         }
