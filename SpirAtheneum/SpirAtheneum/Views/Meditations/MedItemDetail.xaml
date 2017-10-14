@@ -29,7 +29,7 @@
                      Margin="0,8,0,0"
                      Orientation="Horizontal">
                     <Image 
-                        Source="icon.png" 
+                        Source="icon_heart_empty.png"  
                         WidthRequest="30"
                         HeightRequest="30">
                         <Image.GestureRecognizers>
@@ -38,7 +38,7 @@
 
                     </Image>
                     <Image 
-                          Source="icon.png" 
+                           Source="icon_share.png"
                           Margin="0,0,10,0"  
                           WidthRequest="30"
                           HeightRequest="30">

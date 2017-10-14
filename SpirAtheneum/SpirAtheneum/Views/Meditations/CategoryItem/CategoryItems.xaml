@@ -50,20 +50,20 @@
                                     HorizontalOptions="EndAndExpand" 
                                     Orientation="Horizontal">
                                       <Image 
-                                         Source="icon.png" 
+                                         Source="icon_heart_empty.png" 
                                          Margin="0,0,10,0" 
-                                         WidthRequest="30"
-                                         HeightRequest="30">
+                                         WidthRequest="25"
+                                         HeightRequest="25">
                                          <Image.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding FavouritButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
                                          </Image.GestureRecognizers>
 
                                     </Image>
                                     <Image 
-                                        Source="icon.png" 
+                                        Source="icon_share.png" 
                                         Margin="0,0,15,0"  
-                                        WidthRequest="30"
-                                        HeightRequest="30">
+                                        WidthRequest="25"
+                                        HeightRequest="25">
                                         <Image.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding ShareButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
                                         </Image.GestureRecognizers>

@@ -27,13 +27,6 @@ namespace SpirAtheneum.Views.Meditations
             Title = "All Categories";
 
         }
-
-        void Button1Click(object sender, EventArgs e)
-        {
-           
-            Navigation.PushAsync(new Views.Meditations.ListItems());
-        }
-
        public async void FetchAllMeditationsCategoryAsync()
         {
             meditationVM.IsBusy = true;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="Home"
              x:Class="SpirAtheneum.Views.Home.HomePage">
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" 
@@ -23,7 +24,7 @@
                                  HorizontalOptions="FillAndExpand" 
                                  VerticalOptions="FillAndExpand"
                                  Orientation="Horizontal"
-                                 HeightRequest="70" 
+                                 HeightRequest="60" 
                                  BackgroundColor="{StaticResource BurgundyColor}"
                                  >
                         <StackLayout.GestureRecognizers>
@@ -32,15 +33,17 @@
 
                         <Image VerticalOptions="CenterAndExpand"
                                HorizontalOptions="Start"
-                               Source="icon.png"
-                               HeightRequest="35"/>
+                               Source="icon_quill_white.png"
+                                WidthRequest="25"
+                               HeightRequest="25"/>
 
-                        <Label Margin="10,0,0,0"
+                        <Label Margin="10,5,0,0"
                                Text="Daily Digest"
                                VerticalOptions="CenterAndExpand"
                                HorizontalOptions="Start"
                                TextColor="White"
-                               FontSize="{StaticResource HeadingFontSize}"/>
+                               VerticalTextAlignment="Center"
+                               FontSize="{StaticResource NormalFontSize}"/>
 
                     </StackLayout>
 
@@ -50,7 +53,7 @@
                                  HorizontalOptions="FillAndExpand" 
                                  VerticalOptions="FillAndExpand"
                                  Orientation="Horizontal"
-                                 HeightRequest="70" 
+                                 HeightRequest="60" 
                                  BackgroundColor="{StaticResource BurgundyColor}">
 
                         <StackLayout.GestureRecognizers>
@@ -59,15 +62,17 @@
                         
                         <Image VerticalOptions="CenterAndExpand"
                                HorizontalOptions="Start"
-                               Source="icon.png"
-                               HeightRequest="35"/>
+                               Source="icon_quill_white.png"
+                                WidthRequest="25"
+                               HeightRequest="25"/>
 
-                        <Label Margin="10,0,0,0"
+                        <Label Margin="10,5,0,0"
                                Text="Meditations"
                                VerticalOptions="CenterAndExpand"
                                HorizontalOptions="Start"
                                TextColor="White"
-                               FontSize="{StaticResource HeadingFontSize}"/>
+                               VerticalTextAlignment="Center"
+                               FontSize="{StaticResource NormalFontSize}"/>
 
                     </StackLayout>
 
@@ -77,7 +82,7 @@
                                  HorizontalOptions="FillAndExpand" 
                                  VerticalOptions="FillAndExpand"
                                  Orientation="Horizontal"
-                                 HeightRequest="70" 
+                                 HeightRequest="60" 
                                  BackgroundColor="{StaticResource BurgundyColor}">
 
                         <StackLayout.GestureRecognizers>
@@ -86,15 +91,17 @@
                         
                         <Image VerticalOptions="CenterAndExpand"
                                HorizontalOptions="Start"
-                               Source="icon.png"
-                               HeightRequest="35"/>
+                               Source="icon_envlope_white.png"
+                                WidthRequest="25"
+                               HeightRequest="25"/>
 
                         <Label Margin="10,0,0,0"
                                Text="Content"
                                VerticalOptions="CenterAndExpand"
                                HorizontalOptions="Start"
                                TextColor="White"
-                               FontSize="{StaticResource HeadingFontSize}"/>
+                                VerticalTextAlignment="Center"
+                               FontSize="{StaticResource NormalFontSize}"/>
 
                     </StackLayout>
 
@@ -104,7 +111,7 @@
                                  HorizontalOptions="FillAndExpand" 
                                  VerticalOptions="FillAndExpand"
                                  Orientation="Horizontal"
-                                 HeightRequest="70" 
+                                 HeightRequest="60" 
                                  BackgroundColor="{StaticResource BurgundyColor}">
 
                         <StackLayout.GestureRecognizers>
@@ -113,15 +120,17 @@
 
                         <Image VerticalOptions="CenterAndExpand"
                                HorizontalOptions="Start"
-                               Source="icon.png"
-                               HeightRequest="35"/>
+                               Source="icon_heart_empty_white.png"
+                                WidthRequest="25"
+                               HeightRequest="25"/>
 
                         <Label Margin="10,0,0,0"
                                Text="Favourites"
                                VerticalOptions="CenterAndExpand"
+                                VerticalTextAlignment="Center"
                                HorizontalOptions="Start"
                                TextColor="White"
-                               FontSize="{StaticResource HeadingFontSize}"/>
+                               FontSize="{StaticResource NormalFontSize}"/>
 
                     </StackLayout>
 

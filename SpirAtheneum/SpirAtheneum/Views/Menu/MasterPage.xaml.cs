@@ -21,14 +21,14 @@ namespace SpirAtheneum.Views.Menu
 
             var masterpageitems = new List<MasterPageItem>();
 
-            masterpageitems.Add(new MasterPageItem { Title = "Home", IconSource = "icon.png", TargetType = typeof(Home.HomePage) });
-            masterpageitems.Add(new MasterPageItem { Title = "Daily Digest", IconSource = "icon.png", TargetType = typeof(DailyDigest.DailyDigest) });
-            masterpageitems.Add(new MasterPageItem { Title = "Meditations", IconSource = "icon.png", TargetType = typeof(Meditations.Categories) });
-            masterpageitems.Add(new MasterPageItem { Title = "Content", IconSource = "icon.png", TargetType = typeof(Content.Content) });
-            masterpageitems.Add(new MasterPageItem { Title = "Favourites", IconSource = "icon.png", TargetType = typeof(Favourites.Favourites) });
-            masterpageitems.Add(new MasterPageItem { Title = "Upgrade", IconSource = "icon.png", TargetType = typeof(Upgrade.Upgrade) });
-            masterpageitems.Add(new MasterPageItem { Title = "Contact Us", IconSource = "icon.png", TargetType = typeof(ContactUs.ContactUs) });
-            masterpageitems.Add(new MasterPageItem { Title = "Sign Out", IconSource = "icon.png", TargetType = typeof(Login.LoginPage) });
+            masterpageitems.Add(new MasterPageItem { Title = "Home", IconSource = "icon_home_menu.png", TargetType = typeof(Home.HomePage) });
+            masterpageitems.Add(new MasterPageItem { Title = "Daily Digest", IconSource = "icon_quill_menu.png", TargetType = typeof(DailyDigest.DailyDigest) });
+            masterpageitems.Add(new MasterPageItem { Title = "Meditations", IconSource = "icon_quill_menu.png", TargetType = typeof(Meditations.Categories) });
+            masterpageitems.Add(new MasterPageItem { Title = "Content", IconSource = "icon_book_menu.png", TargetType = typeof(Content.Content) });
+            masterpageitems.Add(new MasterPageItem { Title = "Favourites", IconSource = "icon_heart_menu.png", TargetType = typeof(Favourites.Favourites) });
+            masterpageitems.Add(new MasterPageItem { Title = "Upgrade", IconSource = "icon_upgrade_menu.png", TargetType = typeof(Upgrade.Upgrade) });
+            masterpageitems.Add(new MasterPageItem { Title = "Contact Us", IconSource = "icon_envlope_menu.png", TargetType = typeof(ContactUs.ContactUs) });
+            masterpageitems.Add(new MasterPageItem { Title = "Sign Out", IconSource = "icon_signout_menu.png", TargetType = typeof(Login.LoginPage) });
 
             listView.ItemsSource = masterpageitems;
         }

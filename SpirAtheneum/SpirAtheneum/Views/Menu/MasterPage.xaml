@@ -43,11 +43,11 @@
                         <ViewCell>
                             <Grid Padding="10,10">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="25"/>
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="{Binding IconSource}" />
-                                <Label Grid.Column="1" TextColor="Black" FontSize="14" Text="{Binding Title}" VerticalOptions="FillAndExpand" />
+                                <Label Grid.Column="1" TextColor="Black" Margin="10,0,0,0" VerticalTextAlignment="Center" FontSize="14" Text="{Binding Title}" VerticalOptions="FillAndExpand" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

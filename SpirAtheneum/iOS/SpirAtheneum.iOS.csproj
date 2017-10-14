@@ -157,6 +157,45 @@
   <ItemGroup>
     <BundleResource Include="Resources\About.png" />
     <BundleResource Include="Resources\icon.png" />
+    <BundleResource Include="Resources\icon_home_home.png" />
+    <BundleResource Include="Resources\icon_home_menu%402x.png" />
+    <BundleResource Include="Resources\icon_home_menu%403x.png" />
+    <BundleResource Include="Resources\icon_heart_menu.png" />
+    <BundleResource Include="Resources\icon_heart_menu%402x.png" />
+    <BundleResource Include="Resources\icon_heart_menu%403x.png" />
+    <BundleResource Include="Resources\icon_book_menu.png" />
+    <BundleResource Include="Resources\icon_book_menu%402x.png" />
+    <BundleResource Include="Resources\icon_book_menu%403x.png" />
+    <BundleResource Include="Resources\icon_envlope_menu.png" />
+    <BundleResource Include="Resources\icon_envlope_menu%402x.png" />
+    <BundleResource Include="Resources\icon_envlope_menu%403x.png" />
+    <BundleResource Include="Resources\icon_upgrade_menu.png" />
+    <BundleResource Include="Resources\icon_upgrade_menu%402x.png" />
+    <BundleResource Include="Resources\icon_upgrade_menu%403x.png" />
+    <BundleResource Include="Resources\icon_signout_menu.png" />
+    <BundleResource Include="Resources\icon_signout_menu%402x.png" />
+    <BundleResource Include="Resources\icon_signout_menu%403x.png" />
+    <BundleResource Include="Resources\icon_quill_menu.png" />
+    <BundleResource Include="Resources\icon_quill_menu%402x.png" />
+    <BundleResource Include="Resources\icon_quill_menu%403x.png" />
+    <BundleResource Include="Resources\icon_heart_filled.png" />
+    <BundleResource Include="Resources\icon_heart_filled%402x.png" />
+    <BundleResource Include="Resources\icon_heart_filled%403x.png" />
+    <BundleResource Include="Resources\icon_heart_empty.png" />
+    <BundleResource Include="Resources\icon_heart_empty%402x.png" />
+    <BundleResource Include="Resources\icon_heart_empty%403x.png" />
+    <BundleResource Include="Resources\icon_share.png" />
+    <BundleResource Include="Resources\icon_share%402x.png" />
+    <BundleResource Include="Resources\icon_share%403x.png" />
+    <BundleResource Include="Resources\icon_quill_white.png" />
+    <BundleResource Include="Resources\icon_quill_white%402x.png" />
+    <BundleResource Include="Resources\icon-quill_white_%403x.png" />
+    <BundleResource Include="Resources\icon_envlope_white.png" />
+    <BundleResource Include="Resources\icon_envlope_white%402x.png" />
+    <BundleResource Include="Resources\icon_envlope_white%403x.png" />
+    <BundleResource Include="Resources\icon_heart_empty_white.png" />
+    <BundleResource Include="Resources\icon_heart_empty_white%402x.png" />
+    <BundleResource Include="Resources\icon_heart_empty_white%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Dashboard.png" />
