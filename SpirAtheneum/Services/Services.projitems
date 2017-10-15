@@ -10,9 +10,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)BaseService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DailyDigest\DailyDigestModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Login\LoginModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Meditation\MeditationModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MyClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\DailyDigest\DailyDigestService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\DailyDigest\IDailyDigestService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Login\ILoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Login\LoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Meditation\IMeditationService.cs" />

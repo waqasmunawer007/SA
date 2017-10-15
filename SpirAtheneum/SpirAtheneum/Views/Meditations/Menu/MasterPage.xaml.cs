@@ -1,4 +1,5 @@
 ﻿using SpirAtheneum.Models;
+using SpirAtheneum.Views.DailyDigest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace SpirAtheneum.Views.Menu
             var masterpageitems = new List<MasterPageItem>();
 
             masterpageitems.Add(new MasterPageItem { Title = "Home", IconSource = "icon_home_menu.png", TargetType = typeof(Home.HomePage) });
-            masterpageitems.Add(new MasterPageItem { Title = "Daily Digest", IconSource = "icon_quill_menu.png", TargetType = typeof(DailyDigest.DailyDigest) });
+            masterpageitems.Add(new MasterPageItem { Title = "Daily Digest", IconSource = "icon_quill_menu.png", TargetType = typeof(DigestCategoryPage) });
             masterpageitems.Add(new MasterPageItem { Title = "Meditations", IconSource = "icon_quill_menu.png", TargetType = typeof(Meditations.Categories) });
             masterpageitems.Add(new MasterPageItem { Title = "Content", IconSource = "icon_book_menu.png", TargetType = typeof(Content.Content) });
             masterpageitems.Add(new MasterPageItem { Title = "Favourites", IconSource = "icon_heart_menu.png", TargetType = typeof(Favourites.Favourites) });

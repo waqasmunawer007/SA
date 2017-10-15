@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpirAtheneum.Views.DailyDigest;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,7 @@ namespace SpirAtheneum.Views.Home
 
         void DailyDigestClick_Handler(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Views.DailyDigest.DailyDigest());
+            Navigation.PushAsync(new DigestCategoryPage());
         }
 
         void MeditationClick_Handler(object sender, EventArgs e)

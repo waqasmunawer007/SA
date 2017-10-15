@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpirAtheneum.Views.DailyDigest.DigestCategoryItemsPage"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Content>
+
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"  
+            Margin="10,10,10,0 ">
+            <ActivityIndicator 
+                IsVisible="{Binding IsBusy}"
+                IsRunning="{Binding IsBusy}"
+                HorizontalOptions="CenterAndExpand"
+                Color="White"
+                VerticalOptions="CenterAndExpand"/>
+            <Label x:Name="NoDataLabel"
+               Text="No Data Found!" 
+               TextColor="White" 
+               FontSize="{StaticResource CellHeadingFontSize}" 
+               IsVisible="false" 
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"/>
+            <ListView 
+                x:Name="listView"
+                RowHeight="60"
+                SeparatorVisibility="None"
+               ItemTapped = "listView_ItemTappedAsync"
+                BackgroundColor="{StaticResource BackgroundColor}"
+                IsVisible="false">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell >
+                            <StackLayout Orientation="Horizontal" 
+                               VerticalOptions="FillAndExpand" 
+                               Margin="0,0,0,5"
+                               x:Name="category_item"
+                               BackgroundColor="{StaticResource BurgundyColor}">
+                                <Label
+                                    Text="{Binding title}"
+                                    HorizontalOptions="StartAndExpand"
+                                    Margin="10,0,0,0"
+                                    FontSize="{StaticResource CellHeadingFontSize}"
+                                    HorizontalTextAlignment="Start"
+                                    VerticalTextAlignment="Center"
+                                    TextColor="White" />
+                                <StackLayout
+                                    HorizontalOptions="EndAndExpand" 
+                                    Orientation="Horizontal">
+                                    <Image 
+                                         Source="icon_heart_empty.png" 
+                                         Margin="0,0,10,0" 
+                                         WidthRequest="25"
+                                         HeightRequest="25">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding FavouritButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
+                                        </Image.GestureRecognizers>
+
+                                    </Image>
+                                    <Image 
+                                        Source="icon_share.png" 
+                                        Margin="0,0,15,0"  
+                                        WidthRequest="25"
+                                        HeightRequest="25">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ShareButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

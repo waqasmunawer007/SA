@@ -15,7 +15,7 @@ namespace Services.Services.Meditation
         {
             try
             {
-                string r = client.BaseAddress+SpirAtheneum.Constants.APIsConstant.AllMeditation;
+               
                  var responseJson = await client.GetAsync(SpirAtheneum.Constants.APIsConstant.AllMeditation);
                 string json = await responseJson.Content.ReadAsStringAsync();
                 if (!json.Equals("[]")) //only parse json if it contains data

@@ -14,13 +14,12 @@ namespace SpirAtheneum.Constants
         #region API's
         // Meditation Api's                                        
         public static string AllMeditation = "api/Meditation";             //GET
-        public static string MeditationBaseOnId = "api/Meditation/{id}";  // GET
-        public static string CreateMeditation = "api/Meditation";        //POST
-        public static string UpdateMeditation = "api/Meditation";       //PUT
-        public static string DeleteMeditation = "api/Meditation/{id}";  // DELETE
-
-
         #endregion
+        #region  Digest Api's   
+                                             
+        public static string DigestAPi = "api/DailyDigest";             //GET
+        
+          #endregion
 
 
     }
