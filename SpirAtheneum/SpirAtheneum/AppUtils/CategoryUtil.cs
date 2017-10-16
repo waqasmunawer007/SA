@@ -15,11 +15,11 @@ namespace SpirAtheneum.AppUtils
         public static List<Category> GetCount(MeditationModel[] med)   // find and separate the Meditation category
         {
             List<Category> list   = new List<Category>();
-            var r = med.GroupBy(e => e.category).Select(g => new { count = g.Count(), category = g.Key, title = g.First().title });
+            var r = med.GroupBy(e => e.category).Select(g => new { count = g.Count(), category = g.Key, title = g.First().category });
            foreach (var m in r)
             {
                 Category c = new Category();
-                c.title = "{" + m.count + "}"+" " + "{" + m.title + "}";  // cancate count and first item title to show in {count}/{title}s format in main UI list cell
+                c.title =  m.count +" " + m.title;  // cancate count and first item title to show in {count}/{title}s format in main UI list cell
                 c.count =m.count;
                 c.category = m.category;
                 list.Add(c);

@@ -38,6 +38,7 @@
     </Compile>
     <Compile Include="AppUtils\CategoryUtil.cs" />
     <Compile Include="Constants\APIsConstant.cs" />
+    <Compile Include="Converters\CustomDateFormateChangeConverter.cs" />
     <Compile Include="Customization\LoginButton.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Interfaces\IDatabaseConnection.cs" />

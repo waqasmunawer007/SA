@@ -17,12 +17,15 @@ namespace SpirAtheneum.Views.Meditations
     {
         MeditationModel medItem;
         MeditationItemDetailVM medVM;
+
         public MedItemDetail(MeditationModel item)
         {
             InitializeComponent();
             medItem = item;
+           
             medVM = new MeditationItemDetailVM();
             BindingContext = medVM;
+           
         }
 
         public async void FetchAllMeditationsItems()
@@ -60,6 +63,12 @@ namespace SpirAtheneum.Views.Meditations
             medVM.IsBusy = false;
             NoDataLabel.IsVisible = false;
             base.OnDisappearing();
+        }
+
+        private void stepsList_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            if (e.Item == null) return;
+            ((ListView)sender).SelectedItem = null;
         }
     }
 }

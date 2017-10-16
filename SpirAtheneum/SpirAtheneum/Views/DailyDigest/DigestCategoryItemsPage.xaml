@@ -2,9 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpirAtheneum.Views.DailyDigest.DigestCategoryItemsPage"
+             xmlns:local="clr-namespace:SpirAtheneum.Converters"
              BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CustomDateFormateChangeConverter x:Key="CustomDateFormate"></local:CustomDateFormateChangeConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-
+        
         <StackLayout
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"  
@@ -24,49 +30,56 @@
                HorizontalOptions="Center"/>
             <ListView 
                 x:Name="listView"
-                RowHeight="60"
+                RowHeight="100"
+                HasUnevenRows="True"
                 SeparatorVisibility="None"
-               ItemTapped = "listView_ItemTappedAsync"
+                ItemTapped = "listView_ItemTappedAsync"
                 BackgroundColor="{StaticResource BackgroundColor}"
                 IsVisible="false">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell >
-                            <StackLayout Orientation="Horizontal" 
+                            <!--Root Layout for list Cell--> 
+                            <StackLayout 
                                VerticalOptions="FillAndExpand" 
                                Margin="0,0,0,5"
                                x:Name="category_item"
-                               BackgroundColor="{StaticResource BurgundyColor}">
+                               Orientation="Vertical">
+                                <!--Date Label-->
                                 <Label
-                                    Text="{Binding title}"
-                                    HorizontalOptions="StartAndExpand"
-                                    Margin="10,0,0,0"
+                                    Text="{Binding publish_date , StringFormat='{}{0:dddd MMMM dd, yyyy}'}"
+                                    HorizontalOptions="EndAndExpand"
                                     FontSize="{StaticResource CellHeadingFontSize}"
-                                    HorizontalTextAlignment="Start"
+                                    HorizontalTextAlignment="End"
                                     VerticalTextAlignment="Center"
                                     TextColor="White" />
                                 <StackLayout
-                                    HorizontalOptions="EndAndExpand" 
-                                    Orientation="Horizontal">
-                                    <Image 
-                                         Source="icon_heart_empty.png" 
-                                         Margin="0,0,10,0" 
-                                         WidthRequest="25"
-                                         HeightRequest="25">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding FavouritButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
-                                        </Image.GestureRecognizers>
-
-                                    </Image>
-                                    <Image 
-                                        Source="icon_share.png" 
-                                        Margin="0,0,15,0"  
-                                        WidthRequest="25"
-                                        HeightRequest="25">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShareButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
-                                        </Image.GestureRecognizers>
-                                    </Image>
+                                    Orientation="Vertical" 
+                                    MinimumHeightRequest="60" 
+                                    BackgroundColor="{StaticResource BurgundyColor}">
+                                     <Label
+                                        Text="{Binding text}"
+                                        HorizontalOptions="StartAndExpand"
+                                        Margin="10,10,0,0"
+                                        FontSize="{StaticResource CellHeadingFontSize}"
+                                        HorizontalTextAlignment="Start"
+                                        VerticalTextAlignment="Center"
+                                        TextColor="White" />
+                                        <!--Image will use as Share Button-->
+                                     <StackLayout
+                                           HorizontalOptions="EndAndExpand" 
+                                           Margin="0,0,0,10"
+                                           Orientation="Horizontal">
+                                           <Image 
+                                              Source="icon_share.png" 
+                                              Margin="0,0,15,0"  
+                                              WidthRequest="25"
+                                              HeightRequest="25">
+                                              <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ShareButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
+                                              </Image.GestureRecognizers>
+                                          </Image>
+                                    </StackLayout>
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>
