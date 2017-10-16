@@ -18,6 +18,7 @@
                IsVisible="false" 
                VerticalOptions="CenterAndExpand"
                HorizontalOptions="Center"/>
+            <!--Cintainer  for share and favourit button-->
             <StackLayout 
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
@@ -28,7 +29,8 @@
                      HorizontalOptions="EndAndExpand" 
                      Margin="0,8,0,0"
                      Orientation="Horizontal">
-                    <Image 
+                    <!--Favourit button image-->
+                     <Image 
                         Source="icon_heart_empty.png"  
                         WidthRequest="30"
                         HeightRequest="30">
@@ -36,21 +38,24 @@
                             <TapGestureRecognizer Command="{Binding FavouritButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
                         </Image.GestureRecognizers>
 
-                    </Image>
+                     </Image>
+                    <!--Share button image-->
                     <Image 
-                           Source="icon_share.png"
-                          Margin="0,0,10,0"  
-                          WidthRequest="30"
-                          HeightRequest="30">
+                        Source="icon_share.png"
+                        Margin="0,0,10,0"  
+                        WidthRequest="30"
+                        HeightRequest="30">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShareButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
+                           <TapGestureRecognizer Command="{Binding ShareButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
                         </Image.GestureRecognizers>
                     </Image>
                 </StackLayout>
+                <!--Item detail container -->
                 <StackLayout  
                   HorizontalOptions="FillAndExpand" 
                   Margin="5,5,0,0"
                   Orientation="Vertical">
+                    <!--intro heading label -->
                     <Label 
                      HorizontalOptions="StartAndExpand" 
                      VerticalOptions="StartAndExpand" 
@@ -58,13 +63,15 @@
                      FontSize="{StaticResource NormalFontSize}"   
                      
                      TextColor="White"></Label>
-                   <Label 
+                    <!--intro's detail label -->
+                    <Label 
                      HorizontalOptions="StartAndExpand" 
                      VerticalOptions="StartAndExpand" 
                      Text="{Binding  MedItem.intro}" 
                       Margin="0,3,0,0"
                      FontSize="{StaticResource LittleBitBigThanSmallFontSize}"
                      TextColor="White"></Label>
+                    <!--outro heading label -->
                     <Label 
                      HorizontalOptions="StartAndExpand" 
                      VerticalOptions="StartAndExpand" 
@@ -72,6 +79,7 @@
                      FontSize="{StaticResource NormalFontSize}"   
                      Margin="0,5,0,0"
                      TextColor="White"></Label>
+                    <!--outro's detail label -->
                     <Label 
                      HorizontalOptions="StartAndExpand" 
                      VerticalOptions="StartAndExpand" 
@@ -79,6 +87,7 @@
                      FontSize="{StaticResource LittleBitBigThanSmallFontSize}"   
                      Margin="0,3,0,0"
                      TextColor="White"></Label>
+                    <!--steps heading label -->
                     <Label 
                      HorizontalOptions="StartAndExpand" 
                      VerticalOptions="StartAndExpand" 
@@ -86,24 +95,32 @@
                      FontSize="{StaticResource NormalFontSize}"   
                      Margin="0,5,0,0"
                      TextColor="White"></Label>
-                    <!--List for showing the steps-->
-                        <StackLayout 
+                    <!--Steps container-->
+                    <StackLayout 
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand"
                             Margin="0,5,0,0">
-                            <ListView 
+                        <!--List showing the steps-->
+                        <ListView 
                                 x:Name="stepsList" 
                                 SeparatorVisibility="None"  
                                 ItemsSource="{Binding MedItem.steps}"
                                 HasUnevenRows="True"
                                 HorizontalOptions="Start"
-                               ItemTapped="stepsList_ItemTapped"
+                                ItemTapped="stepsList_ItemTapped"
                                 VerticalOptions="Start" >
                                  <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <ViewCell >
-                                            <Label Text="{Binding .}"  FontSize="{StaticResource LittleBitBigThanSmallFontSize}"  TextColor="White" />
-                                        </ViewCell>
+                                     <ViewCell >
+                                        <StackLayout 
+                                           HorizontalOptions="StartAndExpand"
+                                           VerticalOptions="StartAndExpand"
+                                           Margin="0,5,0,0"
+                                           Orientation="Horizontal">
+                                            <Label Text="O"  TextColor="White" Margin="0,3,5,0"></Label>
+                                                <Label Text="{Binding .}"  FontSize="{StaticResource LittleBitBigThanSmallFontSize}"  TextColor="White" />
+                                            </StackLayout>
+                                    </ViewCell>
                                     </DataTemplate>
                                  </ListView.ItemTemplate>
                             </ListView>

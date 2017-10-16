@@ -37,9 +37,15 @@ namespace SpirAtheneum.Views.Menu
 
                     Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType));
                     MasterPage.ListView.SelectedItem = null;
+                   
                     IsPresented = false;
                 }
             }
+        }
+
+        private void MainPage_Appearing(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

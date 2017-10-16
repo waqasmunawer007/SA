@@ -25,7 +25,7 @@
                HorizontalOptions="Center"/>
             <ListView 
                 x:Name="listView"
-                RowHeight="60"
+                RowHeight="70"
                 SeparatorVisibility="None"
                 ItemTapped="listView_ItemTapped"
                 BackgroundColor="{StaticResource BackgroundColor}"
@@ -33,22 +33,27 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                        <ViewCell >
-                            <StackLayout Orientation="Horizontal" 
-                               VerticalOptions="FillAndExpand" 
+                           <!--Cell root container-->
+                            <StackLayout
+                               Orientation="Horizontal" 
+                               MinimumHeightRequest="70"        
                                Margin="0,0,0,5"
                                x:Name="category_item"
                                BackgroundColor="{StaticResource BurgundyColor}">
+                                <!--Meditation Item Title label-->
                                 <Label
                                     Text="{Binding title}"
                                     HorizontalOptions="StartAndExpand"
                                     Margin="10,0,0,0"
-                                    FontSize="{StaticResource CellHeadingFontSize}"
+                                    FontSize="{StaticResource NormalFontSize}"
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
                                     TextColor="White" />
+                                 <!--Cell button Container-->
                                 <StackLayout
                                     HorizontalOptions="EndAndExpand" 
                                     Orientation="Horizontal">
+                                    <!--Favourit Button image-->
                                       <Image 
                                          Source="icon_heart_empty.png" 
                                          Margin="0,0,10,0" 
@@ -59,6 +64,7 @@
                                          </Image.GestureRecognizers>
 
                                     </Image>
+                                    <!--Share Button image-->
                                     <Image 
                                         Source="icon_share.png" 
                                         Margin="0,0,15,0"  

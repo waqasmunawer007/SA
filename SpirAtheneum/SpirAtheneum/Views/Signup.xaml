@@ -16,7 +16,7 @@
                     Margin="0,15,0,0"
                     VerticalOptions="Center"
                     HorizontalOptions="Center" 
-                    Text="Sign Up" 
+                    Text="Create Account" 
                     FontSize="{StaticResource HeadingFontSize}" 
                     TextColor="{StaticResource NormalTextColor}"/>
              
@@ -52,6 +52,7 @@
                     VerticalOptions="Center"
                     HorizontalOptions="FillAndExpand"
                     Text="{Binding  DBUser.Password}"
+                    IsPassword="True"
                     BackgroundColor="{StaticResource BackgroundColor}" 
                     TextColor="{StaticResource NormalTextColor}" />
                <local:GeneralButton 
