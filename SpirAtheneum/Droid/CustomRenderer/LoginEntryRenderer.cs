@@ -25,8 +25,8 @@ namespace SpirAtheneum.Droid.CustomRenderer
 
             if (Control != null)
             {
-                Control.SetHintTextColor(global::Android.Graphics.Color.Rgb(255, 255, 255));
                 Control.SetBackgroundResource(Resource.Drawable.LoginEntryBottomBorder);
+                Control.SetHintTextColor(global::Android.Graphics.Color.Rgb(255, 255, 255));
             }
         }
     }

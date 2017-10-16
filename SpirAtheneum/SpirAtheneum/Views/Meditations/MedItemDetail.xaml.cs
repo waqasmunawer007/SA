@@ -23,6 +23,7 @@ namespace SpirAtheneum.Views.Meditations
             medItem = item;
             medVM = new MeditationItemDetailVM();
             BindingContext = medVM;
+            listView.ItemsSource = medVM.MedItem.steps;
         }
 
         public async void FetchAllMeditationsItems()

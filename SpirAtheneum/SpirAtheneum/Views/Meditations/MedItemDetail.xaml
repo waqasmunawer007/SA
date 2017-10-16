@@ -56,7 +56,40 @@
                      VerticalOptions="StartAndExpand" 
                      Text="{Binding  MedItem.title}" 
                      TextColor="White"></Label>
-               </StackLayout>
+                    <Label 
+                     HorizontalOptions="StartAndExpand" 
+                     VerticalOptions="StartAndExpand" 
+                     Text="{Binding  MedItem.intro}" 
+                     TextColor="White"></Label>
+                    
+                    <ListView  x:Name="listView" RowHeight="80" SeparatorVisibility="None" IsVisible="False">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout 
+                                          Orientation="Horizontal">
+                                        <Image 
+                                                Source="icon_dot_white.png"  
+                                                WidthRequest="20" 
+                                                HeightRequest="20"  
+                                                Margin="10,10,0,0"/>
+                                        <Label 
+                                                Text="{Binding .}"
+                                                FontSize="{StaticResource NormalFontSize}"
+                                                TextColor="White" 
+                                                Margin="8,10,0,0"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    
+                    <!--<Label 
+                     HorizontalOptions="StartAndExpand" 
+                     VerticalOptions="StartAndExpand" 
+                     Text="{Binding  MedItem.outro}" 
+                     TextColor="White"></Label>-->
+                </StackLayout>
             </StackLayout>
        </StackLayout>
     </ContentPage.Content>
