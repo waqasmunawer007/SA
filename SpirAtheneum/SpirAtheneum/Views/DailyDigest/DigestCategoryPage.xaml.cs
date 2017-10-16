@@ -62,7 +62,8 @@ namespace SpirAtheneum.Views.DailyDigest
            
             var selectedCategory = ((ListView)sender).SelectedItem;
             Category category = (Category)selectedCategory;
-            await Navigation.PushAsync(new DigestCategoryItemsPage(category.category));
+            await Navigation.PushAsync(new DigestCategoryItemsPage());
+           
             ((ListView)sender).SelectedItem = null;
 
         }

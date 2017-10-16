@@ -17,17 +17,14 @@ namespace SpirAtheneum.Views.DailyDigest
     public partial class DigestCategoryItemsPage : ContentPage
     {
         DailyDigestCategoryItemsVM dailyDigestCategoryItemsVM;
-
-        string selectCategory;
-        public DigestCategoryItemsPage(string category)
+       public DigestCategoryItemsPage()
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
-            dailyDigestCategoryItemsVM = new DailyDigestCategoryItemsVM(category);
+            dailyDigestCategoryItemsVM = new DailyDigestCategoryItemsVM();
             BindingContext = dailyDigestCategoryItemsVM;
             listView.ItemsSource = dailyDigestCategoryItemsVM.digetCategotyItems;
-            selectCategory = category;
-            Title = category;
+           
         }
 
         public async void FetchAllDigestCategoryItems()
@@ -75,11 +72,13 @@ namespace SpirAtheneum.Views.DailyDigest
 
         private async Task listView_ItemTappedAsync(object sender, ItemTappedEventArgs e)
         {
+            // don't do anything if we just de-selected the row
+            if (e.Item == null) return;
             var selectedCategory = ((ListView)sender).SelectedItem;
+            ((ListView)sender).SelectedItem = null;
             DailyDigestModel item = (DailyDigestModel)selectedCategory;
             await Navigation.PushAsync(new DailyDigestCategoryItemDetail(item));
-            ((ListView)sender).SelectedItem = null;
-
+            
         }
     }
 }

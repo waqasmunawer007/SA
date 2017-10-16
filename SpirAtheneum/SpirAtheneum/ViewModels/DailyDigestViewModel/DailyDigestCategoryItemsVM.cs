@@ -22,10 +22,10 @@ namespace SpirAtheneum.ViewModels.DailyDigestViewModel
         public ICommand FavouritButtonCommand { get; set; }
         string selectedCategoryType;
         private bool isBusy = false;
-
-        public DailyDigestCategoryItemsVM(string type) {
+         // public DailyDigestCategoryItemsVM(string type) 
+        public DailyDigestCategoryItemsVM() {
             digetCategotyItems = new ObservableCollection<DailyDigestModel>();
-            selectedCategoryType = type;
+          //  selectedCategoryType = type;
 
             ShareButtonCommand = new Command((e) => {
 
@@ -54,7 +54,7 @@ namespace SpirAtheneum.ViewModels.DailyDigestViewModel
             DailyDigestModel[] allDigest = await dailydigestService.FetchAllDigestAsync();
             if (allDigest != null && allDigest.Length > 0) // extrect med items bases on selected category
             {
-                List<DailyDigestModel> digestBasesOnSelectedDigestCategory = allDigest.Where(g => g.category == selectedCategoryType).ToList();
+                List<DailyDigestModel> digestBasesOnSelectedDigestCategory = allDigest.ToList();
                 return digestBasesOnSelectedDigestCategory;
             }
             else

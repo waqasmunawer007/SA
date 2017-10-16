@@ -49,6 +49,7 @@
                                                 TextColor="White" 
                                                 Margin="8,10,0,0"/>
                                      </StackLayout>
+                                    <!--Label to show the cancatenation of "Number of Items in category" and "category name" -->
                                     <Label 
                                         Text="{Binding title}"
                                         HorizontalOptions="EndAndExpand"
