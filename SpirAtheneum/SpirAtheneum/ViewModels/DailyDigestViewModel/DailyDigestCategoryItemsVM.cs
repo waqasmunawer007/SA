@@ -55,7 +55,17 @@ namespace SpirAtheneum.ViewModels.DailyDigestViewModel
             if (allDigest != null && allDigest.Length > 0) // extrect med items bases on selected category
             {
                 List<DailyDigestModel> digestBasesOnSelectedDigestCategory = allDigest.ToList();
-                return digestBasesOnSelectedDigestCategory;
+                List<DailyDigestModel> digestBasedOnPublishedTime = new List<DailyDigestModel>();
+
+                foreach(var digest in digestBasesOnSelectedDigestCategory)
+                {
+                    if(DateTime.Now >= digest.publish_date)
+                    {
+                        digestBasedOnPublishedTime.Add(digest);
+                    }
+                }
+                var dailyDigestSorted = digestBasedOnPublishedTime.OrderByDescending(x => x.publish_date).ToList();
+                return dailyDigestSorted;
             }
             else
             {
