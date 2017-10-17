@@ -19,7 +19,7 @@ namespace SpirAtheneum.AppUtils
            foreach (var m in r)
             {
                 Category c = new Category();
-                c.title =  m.count +" " + m.title;  // cancate count and first item title to show in {count}/{title}s format in main UI list cell
+                c.title =  m.count +" " + "Meditation";  // cancate count and first item title to show in {count}/{title}s format in main UI list cell
                 c.count =m.count;
                 c.category = m.category;
                 list.Add(c);

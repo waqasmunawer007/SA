@@ -70,14 +70,14 @@ namespace SpirAtheneum.Views.DailyDigest
             base.OnDisappearing();
         }
 
-        private async Task listView_ItemTappedAsync(object sender, ItemTappedEventArgs e)
+        private void  listView_ItemTappedAsync(object sender, ItemTappedEventArgs e)
         {
             // don't do anything if we just de-selected the row
             if (e.Item == null) return;
             var selectedCategory = ((ListView)sender).SelectedItem;
             ((ListView)sender).SelectedItem = null;
-            DailyDigestModel item = (DailyDigestModel)selectedCategory;
-            await Navigation.PushAsync(new DailyDigestCategoryItemDetail(item));
+           // DailyDigestModel item = (DailyDigestModel)selectedCategory;
+             // await Navigation.PushAsync(new DailyDigestCategoryItemDetail(item));
             
         }
     }
