@@ -13,14 +13,17 @@ namespace SpirAtheneum.Constants
 
         #region API's
         // Meditation Api's                                        
-        public static string AllMeditation = "api/Meditation";             //GET
+        public static string AllMeditation = "api/Meditation";  //GET
         #endregion
         #region  Digest Api's   
                                              
         public static string DigestAPi = "api/DailyDigest";             //GET
-        
-          #endregion
 
+        #endregion
+
+        #region
+        public static string AllKnowledgeBase = "api/KnowledgeBase";
+        #endregion
 
     }
 }

@@ -52,6 +52,9 @@
     <Compile Include="ViewModels\DailyDigestViewModel\DailyDigestCategoryItemsVM.cs" />
     <Compile Include="ViewModels\DailyDigestViewModel\DigestCategoryViewModel.cs" />
     <Compile Include="ViewModels\DailyDigestViewModel\DailyDigestItemDetailVM.cs" />
+    <Compile Include="ViewModels\KnowledgeBaseViewModel\KnowledgeBaseItemDetailVM.cs" />
+    <Compile Include="ViewModels\KnowledgeBaseViewModel\KnowledgeBaseItemsVM.cs" />
+    <Compile Include="ViewModels\KnowledgeBaseViewModel\KnowledgeBaseVM.cs" />
     <Compile Include="ViewModels\MeditationViewModel\MeditationItemDetailVM.cs" />
     <Compile Include="ViewModels\MeditationViewModel\MeditationItmesVM.cs" />
     <Compile Include="ViewModels\MeditationViewModel\MeditationVM.cs" />

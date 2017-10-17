@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpirAtheneum.Views.Meditations.Categories"
-               BackgroundColor="{StaticResource BackgroundColor}">
+             BackgroundColor="{StaticResource BackgroundColor}">
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                      Margin="10,10,10,0 ">

@@ -1,10 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SpirAtheneum.Views.KnowledgeBase.Categories">
+             x:Class="SpirAtheneum.Views.KnowledgeBase.Categories"
+             BackgroundColor="{StaticResource BackgroundColor}">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                     Margin="10,10,10,0 ">
+            <ActivityIndicator 
+                IsVisible="{Binding IsBusy}"
+                IsRunning="{Binding IsBusy}"
+                Color="White"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"/>
+            <Label x:Name="NoDataLabel"
+               Text="No Data Found!" 
+               TextColor="White" 
+               FontSize="{StaticResource CellHeadingFontSize}" 
+               IsVisible="false" 
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"/>
+            <ListView  x:Name="listView" RowHeight="80" BackgroundColor="{StaticResource BackgroundColor}" SeparatorVisibility="None" ItemTapped="listView_ItemTapped" IsVisible="False">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <!--<ImageCell Text="{Binding category}" Detail="{Binding title}" ImageSource="Logout.png" />-->
+                        <ViewCell >
+                            <StackLayout
+                                Orientation="Vertical"
+                                Margin="0,0,0,5"
+                                VerticalOptions="FillAndExpand" 
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="{StaticResource BurgundyColor}">
+                                <StackLayout
+                                     Orientation="Vertical"
+                                     Margin="0,0,0,5" 
+                                     VerticalOptions="CenterAndExpand"
+                                     BackgroundColor="{StaticResource BurgundyColor}">
+                                    <StackLayout 
+                                          Orientation="Horizontal"  
+                                          BackgroundColor="{StaticResource BurgundyColor}"  >
+                                        <Image 
+                                                Source="icon.png"  
+                                                WidthRequest="20" 
+                                                HeightRequest="20"  
+                                                Margin="10,10,0,0"/>
+                                        <Label 
+                                                Text="{Binding category}"
+                                                FontSize="{StaticResource NormalFontSize}"
+                                                TextColor="White" 
+                                                Margin="8,10,0,0"/>
+                                    </StackLayout>
+                                    <!--Label to show the cancatenation of "Number of Items in category" and "category name" -->
+                                    <Label 
+                                        Text="{Binding title}"
+                                        HorizontalOptions="EndAndExpand"
+                                        Margin="0,0,10,10"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Start"
+                                       TextColor="White" />
+
+                                </StackLayout>
+                            </StackLayout>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
