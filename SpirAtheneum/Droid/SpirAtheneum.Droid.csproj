@@ -192,6 +192,9 @@
     <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable\general_rounded_button.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_filled_circle.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_filled_circle.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\icon_filled_circle.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\About.png" />

@@ -4,6 +4,10 @@
              x:Class="SpirAtheneum.Views.Meditations.MedItemDetail"
               BackgroundColor="{StaticResource BackgroundColor}">
     <ContentPage.Content>
+        <ScrollView VerticalOptions = "FillAndExpand" HorizontalOptions="FillAndExpand">
+
+
+       
         <StackLayout Margin = "10,5,10,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
             <ActivityIndicator 
                 IsVisible="{Binding IsBusy}"
@@ -71,34 +75,34 @@
                       Margin="0,3,0,0"
                      FontSize="{StaticResource LittleBitBigThanSmallFontSize}"
                      TextColor="White"></Label>
-                    <!--outro heading label -->
+                   <!--outro heading label -->
                     <Label 
-                     HorizontalOptions="StartAndExpand" 
-                     VerticalOptions="StartAndExpand" 
-                     Text= "Outro:" 
-                     FontSize="{StaticResource NormalFontSize}"   
-                     Margin="0,5,0,0"
-                     TextColor="White"></Label>
+                         HorizontalOptions="StartAndExpand" 
+                         VerticalOptions="StartAndExpand" 
+                         Text= "Outro:" 
+                         FontSize="{StaticResource NormalFontSize}"   
+                         Margin="0,0,0,0"
+                         TextColor="White"></Label>
                     <!--outro's detail label -->
                     <Label 
-                     HorizontalOptions="StartAndExpand" 
-                     VerticalOptions="StartAndExpand" 
-                     Text= "{Binding  MedItem.outro}" 
-                     FontSize="{StaticResource LittleBitBigThanSmallFontSize}"   
-                     Margin="0,3,0,0"
-                     TextColor="White"></Label>
-                    <!--steps heading label -->
+                         HorizontalOptions="StartAndExpand" 
+                         VerticalOptions="StartAndExpand" 
+                         Text= "{Binding  MedItem.outro}" 
+                         FontSize="{StaticResource LittleBitBigThanSmallFontSize}"   
+                         Margin="0,3,0,0"
+                         TextColor="White"></Label>
+                  <!--steps heading label -->
                     <Label 
-                     HorizontalOptions="StartAndExpand" 
-                     VerticalOptions="StartAndExpand" 
-                     Text= "Steps:" 
-                     FontSize="{StaticResource NormalFontSize}"   
-                     Margin="0,5,0,0"
-                     TextColor="White"></Label>
+                         HorizontalOptions="StartAndExpand" 
+                         VerticalOptions="StartAndExpand" 
+                         Text= "Steps:" 
+                         FontSize="{StaticResource NormalFontSize}"   
+                         Margin="0,5,0,0"
+                         TextColor="White"></Label>
                     <!--Steps container-->
                     <StackLayout 
                             HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand"
+                            VerticalOptions="StartAndExpand"
                             Margin="0,5,0,0">
                         <!--List showing the steps-->
                         <ListView 
@@ -107,6 +111,7 @@
                                 ItemsSource="{Binding MedItem.steps}"
                                 HasUnevenRows="True"
                                 HorizontalOptions="Start"
+                                BackgroundColor="{StaticResource BackgroundColor}"
                                 ItemTapped="stepsList_ItemTapped"
                                 VerticalOptions="Start" >
                                  <ListView.ItemTemplate>
@@ -117,8 +122,13 @@
                                            VerticalOptions="StartAndExpand"
                                            Margin="0,5,0,0"
                                            Orientation="Horizontal">
-                                            <Label Text="O"  TextColor="White" Margin="0,3,5,0"></Label>
-                                                <Label Text="{Binding .}"  FontSize="{StaticResource LittleBitBigThanSmallFontSize}"  TextColor="White" />
+                                            <Image 
+                                                Source="icon_filled_circle.png"
+                                                Margin="0,0,10,0"  
+                                                WidthRequest="15"
+                                                HeightRequest="15"/>
+                                           <!-- <Label Text="O"  TextColor="White" Margin="0,3,5,0"></Label>-->
+                                                <Label Text="{Binding .}" Margin="0,0,0,2" VerticalTextAlignment="Center" FontSize="{StaticResource LittleBitBigThanSmallFontSize}"  TextColor="White" />
                                             </StackLayout>
                                     </ViewCell>
                                     </DataTemplate>
@@ -128,5 +138,6 @@
                 </StackLayout>
             </StackLayout>
        </StackLayout>
+     </ScrollView>
     </ContentPage.Content>
 </ContentPage>
