@@ -4,11 +4,9 @@
              x:Class="SpirAtheneum.Views.Meditations.MedItemDetail"
               BackgroundColor="{StaticResource BackgroundColor}">
     <ContentPage.Content>
-        <ScrollView VerticalOptions = "FillAndExpand" HorizontalOptions="FillAndExpand">
-
-
+      <!--  <ScrollView VerticalOptions = "StartAndExpand" HorizontalOptions="FillAndExpand">-->
        
-        <StackLayout Margin = "10,5,10,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+        <StackLayout Margin = "10,5,10,0" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Orientation="Vertical">
             <ActivityIndicator 
                 IsVisible="{Binding IsBusy}"
                 IsRunning="{Binding IsBusy}"
@@ -22,10 +20,10 @@
                IsVisible="false" 
                VerticalOptions="CenterAndExpand"
                HorizontalOptions="Center"/>
-            <!--Cintainer  for share and favourit button-->
+            <!--Container  for share and favourit button-->
             <StackLayout 
                 HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand"
+                VerticalOptions="StartAndExpand"
                 Orientation="Vertical" 
                 x:Name="needToShowHideLayout"
                 IsVisible="False">
@@ -56,17 +54,9 @@
                 </StackLayout>
                 <!--Item detail container -->
                 <StackLayout  
-                  HorizontalOptions="FillAndExpand" 
+                  HorizontalOptions="StartAndExpand" 
                   Margin="5,5,0,0"
                   Orientation="Vertical">
-                    <!--intro heading label -->
-                    <Label 
-                     HorizontalOptions="StartAndExpand" 
-                     VerticalOptions="StartAndExpand" 
-                     Text= "Intro:" 
-                     FontSize="{StaticResource NormalFontSize}"   
-                     
-                     TextColor="White"></Label>
                     <!--intro's detail label -->
                     <Label 
                      HorizontalOptions="StartAndExpand" 
@@ -75,42 +65,19 @@
                       Margin="0,3,0,0"
                      FontSize="{StaticResource LittleBitBigThanSmallFontSize}"
                      TextColor="White"></Label>
-                   <!--outro heading label -->
-                    <Label 
-                         HorizontalOptions="StartAndExpand" 
-                         VerticalOptions="StartAndExpand" 
-                         Text= "Outro:" 
-                         FontSize="{StaticResource NormalFontSize}"   
-                         Margin="0,0,0,0"
-                         TextColor="White"></Label>
-                    <!--outro's detail label -->
-                    <Label 
-                         HorizontalOptions="StartAndExpand" 
-                         VerticalOptions="StartAndExpand" 
-                         Text= "{Binding  MedItem.outro}" 
-                         FontSize="{StaticResource LittleBitBigThanSmallFontSize}"   
-                         Margin="0,3,0,0"
-                         TextColor="White"></Label>
-                  <!--steps heading label -->
-                    <Label 
-                         HorizontalOptions="StartAndExpand" 
-                         VerticalOptions="StartAndExpand" 
-                         Text= "Steps:" 
-                         FontSize="{StaticResource NormalFontSize}"   
-                         Margin="0,5,0,0"
-                         TextColor="White"></Label>
                     <!--Steps container-->
                     <StackLayout 
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="StartAndExpand"
+                            HorizontalOptions="StartAndExpand"
+                            VerticalOptions="Start"
                             Margin="0,5,0,0">
                         <!--List showing the steps-->
                         <ListView 
                                 x:Name="stepsList" 
                                 SeparatorVisibility="None"  
                                 ItemsSource="{Binding MedItem.steps}"
-                                HasUnevenRows="True"
                                 HorizontalOptions="Start"
+                                RowHeight="40"
+                                HeightRequest="150"
                                 BackgroundColor="{StaticResource BackgroundColor}"
                                 ItemTapped="stepsList_ItemTapped"
                                 VerticalOptions="Start" >
@@ -135,9 +102,17 @@
                                  </ListView.ItemTemplate>
                             </ListView>
                     </StackLayout>
+                        <!--outro's detail label -->
+                    <Label 
+                         HorizontalOptions="StartAndExpand" 
+                         VerticalOptions="StartAndExpand" 
+                         Text= "{Binding  MedItem.outro}" 
+                         FontSize="{StaticResource LittleBitBigThanSmallFontSize}"   
+                         Margin="0,3,0,0"
+                         TextColor="White"></Label>
                 </StackLayout>
             </StackLayout>
        </StackLayout>
-     </ScrollView>
+     <!--</ScrollView>-->
     </ContentPage.Content>
 </ContentPage>
