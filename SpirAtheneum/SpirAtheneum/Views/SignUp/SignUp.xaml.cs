@@ -11,10 +11,10 @@ using Xamarin.Forms.Xaml;
 namespace SpirAtheneum.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Signup : ContentPage
+    public partial class SignUp : ContentPage
     {
         UserViewModel uv;
-        public Signup()
+        public SignUp()
         {
             InitializeComponent();
             uv = new UserViewModel(Navigation);

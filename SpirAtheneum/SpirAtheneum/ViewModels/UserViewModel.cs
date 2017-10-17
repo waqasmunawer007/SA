@@ -56,7 +56,7 @@ namespace SpirAtheneum.ViewModels
 
         void OnTapped(object s)   // Sign up button command
         {
-            navigation.PushAsync(new Signup());
+            navigation.PushAsync(new SignUp());
            // Settings.Login = 0;
         }
 
@@ -115,7 +115,7 @@ namespace SpirAtheneum.ViewModels
             }
             if (ifRegistered)
             {
-                Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.RegistrarionSuccess, AppConstant.Done);
+                LoginUser(u);
             }
             else
             {

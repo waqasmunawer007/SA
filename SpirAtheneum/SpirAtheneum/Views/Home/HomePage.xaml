@@ -50,7 +50,7 @@
                       HeightRequest="72" 
                       BackgroundColor="{StaticResource BurgundyColor}">
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="MeditationClick_Handler" />
+                        <TapGestureRecognizer Tapped="KnowledgeBaseClick_Handler" />
                     </StackLayout.GestureRecognizers>
                     <Image
                             VerticalOptions="CenterAndExpand"
@@ -66,6 +66,33 @@
                             VerticalTextAlignment="Center"
                             FontSize="{StaticResource HeadingFontSize}">
                         
+                    </Label>
+                </StackLayout>
+                <!--KnowledgeBase Button-->
+                <StackLayout 
+                      Padding="20,0,0,0"
+                      Margin="0,4,0,0"
+                      HorizontalOptions="FillAndExpand" 
+                      VerticalOptions="FillAndExpand"
+                      Orientation="Horizontal"
+                      HeightRequest="72" 
+                      BackgroundColor="{StaticResource BurgundyColor}">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="KnowledgeBaseClick_Handler" />
+                    </StackLayout.GestureRecognizers>
+                    <Image
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="Start"
+                            Source="icon_quill_white.png"
+                            WidthRequest="25"
+                            HeightRequest="25"/>
+                    <Label Margin="10,5,0,0"
+                            Text="Knowledge Base"
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="Start"
+                            TextColor="White"
+                            VerticalTextAlignment="Center"
+                            FontSize="{StaticResource HeadingFontSize}">
                     </Label>
                 </StackLayout>
                 <!-- Content Button-->

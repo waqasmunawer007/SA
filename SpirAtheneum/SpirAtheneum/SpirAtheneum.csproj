@@ -77,6 +77,15 @@
     <Compile Include="Views\Home\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\KnowledgeBase\Categories.xaml.cs">
+      <DependentUpon>Categories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KnowledgeBase\KnowledgeBaseItemDetail.xaml.cs">
+      <DependentUpon>KnowledgeBaseItemDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KnowledgeBase\KnowledgeBaseItems.xaml.cs">
+      <DependentUpon>KnowledgeBaseItems.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Login\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -95,8 +104,8 @@
     <Compile Include="Views\Menu\MasterPage.xaml.cs">
       <DependentUpon>MasterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Signup.xaml.cs">
-      <DependentUpon>Signup.xaml</DependentUpon>
+    <Compile Include="Views\SignUp\SignUp.xaml.cs">
+      <DependentUpon>SignUp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Upgrade\Upgrade.xaml.cs">
       <DependentUpon>Upgrade.xaml</DependentUpon>
@@ -197,7 +206,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Signup.xaml">
+    <EmbeddedResource Include="Views\SignUp\SignUp.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -228,6 +237,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\DailyDigest\DailyDigestCategoryItemDetail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\KnowledgeBase\Categories.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\KnowledgeBase\KnowledgeBaseItems.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\KnowledgeBase\KnowledgeBaseItemDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

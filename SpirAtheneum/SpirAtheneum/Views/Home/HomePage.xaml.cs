@@ -29,6 +29,11 @@ namespace SpirAtheneum.Views.Home
             Navigation.PushAsync(new Views.Meditations.Categories());
         }
 
+        void KnowledgeBaseClick_Handler(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Views.KnowledgeBase.Categories());
+        }
+
         void ContentClick_Handler(object sender, EventArgs e)
         {
             Navigation.PushAsync(new Views.Content.Content());
