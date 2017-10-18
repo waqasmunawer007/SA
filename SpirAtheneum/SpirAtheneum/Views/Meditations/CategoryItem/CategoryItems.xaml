@@ -45,7 +45,7 @@
                                     Text="{Binding title}"
                                     HorizontalOptions="StartAndExpand"
                                     Margin="10,0,0,0"
-                                    FontSize="{StaticResource NormalFontSize}"
+                                    FontSize="{StaticResource LittleBitBigThanSmallFontSize}"
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
                                     TextColor="White" />
@@ -82,4 +82,5 @@
             </ListView>
         </StackLayout>
     </ContentPage.Content>
+    
 </ContentPage>

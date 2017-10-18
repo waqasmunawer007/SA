@@ -49,10 +49,11 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
                 }
             }
         }
+
         public async Task<List<MeditationModel>> FetchAllMeditationCategoryItems()
         {
             var meditationService = new MeditationService();
-            MeditationModel[] allMeditation =   await meditationService.fetchAllMeditationAsync();
+            MeditationModel[] allMeditation =  await meditationService.fetchAllMeditationAsync();
             if (allMeditation != null && allMeditation.Length > 0) // extrect med items bases on selected category
             {
                 List<MeditationModel> medBasesOnSelectedMedCategory = allMeditation.Where(g => g.category == selectedCategoryType).ToList();

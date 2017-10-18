@@ -1,4 +1,5 @@
 ﻿using Services.Models.Meditation;
+using SpirAtheneum.Models;
 using SpirAtheneum.ViewModels.MeditationViewModel;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace SpirAtheneum.Views.Meditations
        public async void FetchAllMeditationsCategoryAsync()
         {
             meditationVM.IsBusy = true;
-            List<MeditationVM.Category> meditations = await meditationVM.FetchAllMeditationCategory();
+            List<Category> meditations = await meditationVM.FetchAllMeditationCategory();
             
             if (meditations != null && meditations.Count > 0)
             {
@@ -48,9 +49,9 @@ namespace SpirAtheneum.Views.Meditations
 
       
 
-        private void UpdatePage(List<MeditationVM.Category> data)
+        private void UpdatePage(List<Category> data)
         {
-            foreach(MeditationVM.Category m in data)
+            foreach(Category m in data)
             {
                 meditationVM.meditaions.Add(m);
             }

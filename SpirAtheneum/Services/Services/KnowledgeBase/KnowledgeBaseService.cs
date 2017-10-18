@@ -3,36 +3,52 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Services.Models.KnowledgeBase;
+using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace Services.Services.KnowledgeBase
 {
     class KnowledgeBaseService : BaseService, IKnowledgeBaseService
     {
-        public Task<KnowledgeBaseModel[]> fetchAllKnowledgeBaseAsync()
+        public async Task<KnowledgeBaseModel[]> FetchAllKnowledgeBaseAsync()
         {
-            throw new NotImplementedException();
-            //try
-            //{
+            try
+            {
+                var responseJson = await client.GetAsync(SpirAtheneum.Constants.APIsConstant.AllKnowledgeBase);
+                string json = await responseJson.Content.ReadAsStringAsync();
+                if(!json.Equals("[]")) //only parse json if it contains data
+                {
+                    var knowledgeBaseList = JsonConvert.DeserializeObject<KnowledgeBaseModel[]>(json);
+                    return knowledgeBaseList;
+                }
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("fetchAllKnowledgeBase", ex.Message);
+            }
 
-            //    var responseJson = await client.GetAsync(SpirAtheneum.Constants.APIsConstant.AllKnowledgeBase);
-            //    string json = await responseJson.Content.ReadAsStringAsync();
-            //    if (!json.Equals("[]")) //only parse json if it contains data
-            //    {
-            //        var meditationList = JsonConvert.DeserializeObject<MeditationModel[]>(json);
-            //        return meditationList;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Debug.WriteLine("FetchAllMeditation", ex.Message);
-            //}
-
-            //return null;
+            return null;
         }
 
-        public Task<KnowledgeBaseModel> fetchKnowledgeBaseUsingIdAsync(string id)
+        public async Task<KnowledgeBaseModel> FetchKnowledgeBaseUsingIdAsync(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string r = client.BaseAddress + SpirAtheneum.Constants.APIsConstant.AllKnowledgeBase + "?id=" + id;
+                var responseJson = await client.GetAsync(r);
+                string json = await responseJson.Content.ReadAsStringAsync();
+                if(!json.Equals(null))
+                {
+                    var knowledgeBase = JsonConvert.DeserializeObject<KnowledgeBaseModel>(json);
+                    return knowledgeBase;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("fetchKnowledgeBaseUsingId", ex.Message);
+            }
+
+            return null;
         }
     }
 }

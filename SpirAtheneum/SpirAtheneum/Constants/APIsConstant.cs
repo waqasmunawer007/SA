@@ -22,7 +22,7 @@ namespace SpirAtheneum.Constants
         #endregion
 
         #region
-        public static string AllKnowledgeBase = "api/KnowledgeBase";
+        public static string AllKnowledgeBase = "api/Knowledge";
         #endregion
 
     }

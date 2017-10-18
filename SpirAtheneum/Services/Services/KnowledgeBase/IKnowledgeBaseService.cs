@@ -8,7 +8,7 @@ namespace Services.Services.KnowledgeBase
 {
     public interface IKnowledgeBaseService
     {
-        Task<KnowledgeBaseModel[]> fetchAllKnowledgeBaseAsync();
-        Task<KnowledgeBaseModel> fetchKnowledgeBaseUsingIdAsync(string id);
+        Task<KnowledgeBaseModel[]> FetchAllKnowledgeBaseAsync();
+        Task<KnowledgeBaseModel> FetchKnowledgeBaseUsingIdAsync(string id);
     }
 }

@@ -42,6 +42,7 @@
     <Compile Include="Customization\LoginButton.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Interfaces\IDatabaseConnection.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\MasterPageItem.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Renderers\AdMob.cs" />
@@ -50,8 +51,6 @@
     <Compile Include="Renderers\UpgradeYellowButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\DailyDigestViewModel\DailyDigestCategoryItemsVM.cs" />
-    <Compile Include="ViewModels\DailyDigestViewModel\DigestCategoryViewModel.cs" />
-    <Compile Include="ViewModels\DailyDigestViewModel\DailyDigestItemDetailVM.cs" />
     <Compile Include="ViewModels\KnowledgeBaseViewModel\KnowledgeBaseItemDetailVM.cs" />
     <Compile Include="ViewModels\KnowledgeBaseViewModel\KnowledgeBaseItemsVM.cs" />
     <Compile Include="ViewModels\KnowledgeBaseViewModel\KnowledgeBaseVM.cs" />
@@ -65,14 +64,8 @@
     <Compile Include="Views\Content\Content.xaml.cs">
       <DependentUpon>Content.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DailyDigest\DailyDigestCategoryItemDetail.xaml.cs">
-      <DependentUpon>DailyDigestCategoryItemDetail.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\DailyDigest\DigestCategoryItemsPage.xaml.cs">
       <DependentUpon>DigestCategoryItemsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DailyDigest\DigestCategoryPage.xaml.cs">
-      <DependentUpon>DigestCategoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Favourites\Favourites.xaml.cs">
       <DependentUpon>Favourites.xaml</DependentUpon>
@@ -227,19 +220,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\DailyDigest\DigestCategoryPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Views\DailyDigest\DigestCategoryItemsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\DailyDigest\DailyDigestCategoryItemDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

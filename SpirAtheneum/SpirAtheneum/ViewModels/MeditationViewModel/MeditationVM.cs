@@ -1,5 +1,6 @@
 ﻿using Services.Models.Meditation;
 using Services.Services.Meditation;
+using SpirAtheneum.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,13 +29,12 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
 
             if (allMeditation != null && allMeditation.Length > 0)  // extract unique meditation categories from all meditattion list
             {
-                List<Category> list = AppUtils.CategoryUtil.GetCount(allMeditation);
+                List<Category> list = AppUtils.CategoryUtil.GetCountMeditation(allMeditation);
                 return list;
             }
             else {
-                Debug.WriteLine("Meditation list in Category page in empty");
+                Debug.WriteLine("Meditation list in Category page is empty");
                 return null;
-
             }
 
         }
@@ -60,14 +60,5 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
-        public class Category
-        {
-            public int count { get; set; }   // number of items discover againt one category 
-            public string title { get; set; }   // pick the first item's title  from the list of  all items shows againt one category
-            public string category { get; set; }  // name of category
-
-        }
-
     }
 }

@@ -50,7 +50,7 @@
                       HeightRequest="72" 
                       BackgroundColor="{StaticResource BurgundyColor}">
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="KnowledgeBaseClick_Handler" />
+                        <TapGestureRecognizer Tapped="MeditationClick_Handler" />
                     </StackLayout.GestureRecognizers>
                     <Image
                             VerticalOptions="CenterAndExpand"
@@ -83,7 +83,7 @@
                     <Image
                             VerticalOptions="CenterAndExpand"
                             HorizontalOptions="Start"
-                            Source="icon_quill_white.png"
+                            Source="icon_book_menu_white.png"
                             WidthRequest="25"
                             HeightRequest="25"/>
                     <Label Margin="10,5,0,0"
