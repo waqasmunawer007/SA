@@ -17,7 +17,7 @@ namespace SpirAtheneum.iOS.Dependenciese
     {
         public SQLiteConnection DbConnection()
         {
-            var dbName = "UserDb.db3";
+            var dbName = "SpirAtheneumDB.db3";
             string personalFolder =
               System.Environment.
               GetFolderPath(Environment.SpecialFolder.Personal);

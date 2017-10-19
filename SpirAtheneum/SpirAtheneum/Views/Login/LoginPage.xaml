@@ -49,7 +49,7 @@
                 <local:LoginEntry 
                     VerticalOptions="Center"
                     HorizontalOptions="FillAndExpand"
-                    Text="{Binding  DBUser.Email}"
+                    Text="{Binding  User.Email}"
                     BackgroundColor="{StaticResource BackgroundColor}" 
                     TextColor="{StaticResource NormalTextColor}"/>
 
@@ -64,7 +64,7 @@
                 <local:LoginEntry
                     VerticalOptions="Center"
                     HorizontalOptions="FillAndExpand"
-                    Text="{Binding  DBUser.Password}"
+                    Text="{Binding  User.Password}"
                     BackgroundColor="{StaticResource BackgroundColor}" 
                     TextColor="{StaticResource NormalTextColor}"
                     IsPassword="True"/>

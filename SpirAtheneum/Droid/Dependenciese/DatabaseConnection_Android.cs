@@ -21,10 +21,8 @@ namespace SpirAtheneum.Droid.Dependenciese
     {
         public SQLiteConnection DbConnection()
         {
-            var dbName = "UserDb.db3";
-            var path = Path.Combine(System.Environment.
-              GetFolderPath(System.Environment.
-              SpecialFolder.Personal), dbName);
+            var dbName = "SpirAtheneumDB.db3";
+            var path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), dbName);
             return new SQLiteConnection(path);
         }
     }

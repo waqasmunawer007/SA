@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using SpirAtheneum.Constants;
+using SpirAtheneum.Database;
 
 namespace SpirAtheneum.ViewModels
 {
@@ -32,126 +33,111 @@ namespace SpirAtheneum.ViewModels
         public ICommand LoginButtonCommand { get; set; }
         public ICommand tapCommand;
         INavigation navigation;
+        public DatabaseHelper databaseHelper;
 
         public UserViewModel(INavigation nav)
         {
             navigation = nav;
+            databaseHelper = new DatabaseHelper();
             database = DependencyService.Get<IDatabaseConnection>().DbConnection();
-            database.CreateTable<User>();
+
             user = new User();
-            AddButtonCommand = new Command((e)=> {
+
+            AddButtonCommand = new Command((e) => {
                 UserViewModel userViewModel = e as UserViewModel;
-                User  u = userViewModel.DBUser;
-                SaveUser(u);
+                User u = userViewModel.User;
+                SignupUser(u);
             });
+
             LoginButtonCommand = new Command((e) => {
                 UserViewModel userViewModel = e as UserViewModel;
-                User u = userViewModel.DBUser;
+                User u = userViewModel.User;
                 LoginUser(u);
             });
+
             tapCommand = new Command(OnTapped);
         }
-        public User DBUser { get { return user; } set { this.user = value; OnPropertyChanged("DBUser"); } }
+
+        public User User { get { return user; } set { this.user = value; OnPropertyChanged("User"); } }
+
         public ICommand TabCommand { get { return tapCommand; } set { tapCommand = value; } }
 
         void OnTapped(object s)   // Sign up button command
         {
             navigation.PushAsync(new SignUp());
-           // Settings.Login = 0;
+            // Settings.Login = 0;
         }
 
-		public bool ShowError
-		{
-			get { return showError; }
-			set
-			{
-				if (showError != value)
-				{
-					showError = value;
-					OnPropertyChanged("ShowError");
-				}
-			}
-		}
-		public bool ShowRegistrationMessage
-		{
-			get { return showRegistrationMessage; }
-			set
-			{
-				if (showRegistrationMessage != value)
-				{
-					showRegistrationMessage = value;
-					OnPropertyChanged("ShowRegistrationMessage");
-				}
-			}
-		}
-        public string Message
-		{
-			get { return message; }
-			set
-			{
-				if (message != value)
-				{
-					message = value;
-					OnPropertyChanged("Message");
-				}
-			}
-		}
-       
-        /// <summary>
-        /// Performs sign up for new user 
-        /// </summary>
-        /// <param name="u">U.</param>
-        public  void  SaveUser(User u) 
+        public bool ShowError
         {
-            bool ifRegistered = false;
-            lock (collisionLock)
+            get { return showError; }
+            set
             {
-                if (isUserExist(u) == false) //user not exist in db, create new user
+                if (showError != value)
                 {
-                    database.Insert(u);
-                    ifRegistered = true; 
-
+                    showError = value;
+                    OnPropertyChanged("ShowError");
                 }
             }
-            if (ifRegistered)
+        }
+
+        public bool ShowRegistrationMessage
+        {
+            get { return showRegistrationMessage; }
+            set
+            {
+                if (showRegistrationMessage != value)
+                {
+                    showRegistrationMessage = value;
+                    OnPropertyChanged("ShowRegistrationMessage");
+                }
+            }
+        }
+
+        public string Message
+        {
+            get { return message; }
+            set
+            {
+                if (message != value)
+                {
+                    message = value;
+                    OnPropertyChanged("Message");
+                }
+            }
+        }
+
+        /// <summary>
+        /// This function is used to login user
+        /// </summary>
+        /// <param name="u"></param>
+        public void LoginUser(User u)
+        {
+            if (databaseHelper.GetUser(u))
+            {
+                Settings.IsLogin = true;
+                App.Current.MainPage = new Views.Menu.MainPage();
+            }
+            else
+            {
+                ShowError = true;
+                Message = AppConstant.LoginError;
+            }
+        }
+
+        /// <summary>
+        /// This function is used to signup user
+        /// </summary>
+        /// <param name="u"></param>
+        public void SignupUser(User u)
+        {
+            if (databaseHelper.AddUser(u))
             {
                 LoginUser(u);
             }
             else
             {
-                Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.RegistrarionError, AppConstant.Done);  
-            }
-			
-        }
-        public void LoginUser(User u)
-        {
-            lock (collisionLock)
-            {
-                if (isUserCredentialMatchToLogin(u) == true)
-                {
-                    Settings.IsLogin = true;
-                    App.Current.MainPage = new Views.Menu.MainPage();
-                }
-                else
-                {
-                    ShowError = true;
-                    Message = AppConstant.LoginError;  
-                }
-            }
-        }
-
-        public bool isUserCredentialMatchToLogin(User u) 
-        {
-            lock (collisionLock) 
-            {
-                return database.Table<User>().Any(user => user.Email == u.Email && user.Password == u.Password);
-            }
-        }
-        public bool isUserExist(User u)  
-        {
-            lock (collisionLock)
-            {
-                return database.Table<User>().Any(user => user.Email == u.Email );
+                Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.RegistrarionError, AppConstant.Done);
             }
         }
 
@@ -160,8 +146,5 @@ namespace SpirAtheneum.ViewModels
             this.PropertyChanged?.Invoke(this,
               new PropertyChangedEventArgs(propertyName));
         }
-
-
-
     }
 }

@@ -25,6 +25,7 @@ namespace SpirAtheneum.Models
               
             }
         }
+
         private string _name;
         
         public string Name

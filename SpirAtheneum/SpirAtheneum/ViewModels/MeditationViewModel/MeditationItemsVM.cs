@@ -13,7 +13,7 @@ using Xamarin.Forms;
 
 namespace SpirAtheneum.ViewModels.MeditationViewModel
 {
-    class MeditationItmesVM : INotifyPropertyChanged
+    class MeditationItemsVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<MeditationModel> meditaions;
@@ -22,7 +22,7 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
         string selectedCategoryType;
         private bool isBusy = false;
 
-        public MeditationItmesVM(string type)
+        public MeditationItemsVM(string type)
         {
             meditaions = new ObservableCollection<MeditationModel>();
             selectedCategoryType = type;

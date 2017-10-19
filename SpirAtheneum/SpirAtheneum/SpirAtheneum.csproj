@@ -40,10 +40,15 @@
     <Compile Include="Constants\APIsConstant.cs" />
     <Compile Include="Converters\CustomDateFormateChangeConverter.cs" />
     <Compile Include="Customization\LoginButton.cs" />
+    <Compile Include="Database\DatabaseHelper.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Interfaces\IDatabaseConnection.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\DailyDigest.cs" />
+    <Compile Include="Models\KnowledgeBase.cs" />
     <Compile Include="Models\MasterPageItem.cs" />
+    <Compile Include="Models\Meditation.cs" />
+    <Compile Include="Models\Step.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Renderers\AdMob.cs" />
     <Compile Include="Renderers\LoginEntry.cs" />
@@ -55,7 +60,7 @@
     <Compile Include="ViewModels\KnowledgeBaseViewModel\KnowledgeBaseItemsVM.cs" />
     <Compile Include="ViewModels\KnowledgeBaseViewModel\KnowledgeBaseVM.cs" />
     <Compile Include="ViewModels\MeditationViewModel\MeditationItemDetailVM.cs" />
-    <Compile Include="ViewModels\MeditationViewModel\MeditationItmesVM.cs" />
+    <Compile Include="ViewModels\MeditationViewModel\MeditationItemsVM.cs" />
     <Compile Include="ViewModels\MeditationViewModel\MeditationVM.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\ContactUs\ContactUs.xaml.cs">

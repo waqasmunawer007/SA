@@ -15,14 +15,14 @@ namespace SpirAtheneum.Views.Meditations.CategoryItems
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoryItems : ContentPage
     {
-        MeditationItmesVM meditationVM;
+        MeditationItemsVM meditationVM;
 
         string selectCategory;
         public CategoryItems(string category)
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
-            meditationVM = new MeditationItmesVM(category);
+            meditationVM = new MeditationItemsVM(category);
             BindingContext = meditationVM;
             listView.ItemsSource = meditationVM.meditaions;
             selectCategory = category;
