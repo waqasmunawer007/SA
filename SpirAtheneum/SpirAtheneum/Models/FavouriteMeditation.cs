@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace SpirAtheneum.Models
 {
-    public class DailyDigest
+    public class FavouriteMeditation
     {
         [PrimaryKey, Unique, NotNull]
         public string id { get; set; }
-        public string text { get; set; }
-        public string publish_date { get; set; }
+        public string is_favourite { get; set; }
     }
 }

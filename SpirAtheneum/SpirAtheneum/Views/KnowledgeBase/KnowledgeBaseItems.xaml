@@ -10,19 +10,6 @@
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"  
             Margin="10,10,10,0 ">
-            <ActivityIndicator 
-                IsVisible="{Binding IsBusy}"
-                IsRunning="{Binding IsBusy}"
-                HorizontalOptions="CenterAndExpand"
-                Color="White"
-                VerticalOptions="CenterAndExpand"/>
-            <Label x:Name="NoDataLabel"
-               Text="No Data Found!" 
-               TextColor="White" 
-               FontSize="{StaticResource CellHeadingFontSize}" 
-               IsVisible="false" 
-               VerticalOptions="CenterAndExpand"
-               HorizontalOptions="Center"/>
             <ListView 
                 x:Name="listView"
                 RowHeight="70"
@@ -81,6 +68,7 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
+        
     </ContentPage.Content>
 
 </ContentPage>

@@ -1,12 +1,8 @@
 ﻿using Services.Models.Meditation;
+using SpirAtheneum.Models;
 using SpirAtheneum.ViewModels.MeditationViewModel;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,15 +20,14 @@ namespace SpirAtheneum.Views.Meditations.CategoryItems
             NavigationPage.SetBackButtonTitle(this, "");
             meditationVM = new MeditationItemsVM(category);
             BindingContext = meditationVM;
-            listView.ItemsSource = meditationVM.meditaions;
+            listView.ItemsSource = meditationVM.meditationList;
             selectCategory = category;
             Title = category;
         }
 
-       public async void FetchAllMeditationsCategoryItems()
+       public void FetchAllItems()
        {
-            meditationVM.IsBusy = true;
-            List<MeditationModel> categoryItems = await meditationVM.FetchAllMeditationCategoryItems();
+            List<Meditation> categoryItems = meditationVM.FetchAllCategoryItems();
             if (categoryItems != null && categoryItems.Count > 0)
              {
                     listView.IsVisible = true;
@@ -41,32 +36,27 @@ namespace SpirAtheneum.Views.Meditations.CategoryItems
             else
              {
                     listView.IsVisible = false;
-                    NoDataLabel.IsVisible = true;
                     Debug.WriteLine("Category list item is empty");
              }
-            meditationVM.IsBusy = false;
-            
         }
-        private void UpdatePage(List<MeditationModel> data)
+
+        private void UpdatePage(List<Meditation> data)
         {
-            foreach (MeditationModel m in data)
+            foreach (Meditation m in data)
             {
-                meditationVM.meditaions.Add(m);
+                meditationVM.meditationList.Add(m);
             }
         }
 
         protected override void OnAppearing()
         {
-            FetchAllMeditationsCategoryItems();
-
+            FetchAllItems();
             base.OnAppearing();
-           
         }
+
         protected override void OnDisappearing()
         {
-            meditationVM.meditaions.Clear();
-            NoDataLabel.IsVisible = false;
-            meditationVM.IsBusy = false;
+            meditationVM.meditationList.Clear();
             listView.IsVisible = false;
             base.OnDisappearing();
         }
@@ -74,7 +64,7 @@ namespace SpirAtheneum.Views.Meditations.CategoryItems
         private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var selectedCategory = ((ListView)sender).SelectedItem;
-            MeditationModel item = (MeditationModel)selectedCategory;
+            Meditation item = (Meditation)selectedCategory;
             await Navigation.PushAsync(new MedItemDetail(item));
             ((ListView)sender).SelectedItem = null;
 

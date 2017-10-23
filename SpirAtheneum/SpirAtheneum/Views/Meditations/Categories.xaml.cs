@@ -1,66 +1,58 @@
-﻿using Services.Models.Meditation;
-using SpirAtheneum.Models;
+﻿using SpirAtheneum.Models;
 using SpirAtheneum.ViewModels.MeditationViewModel;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using static SpirAtheneum.ViewModels.MeditationViewModel.MeditationVM;
 
 namespace SpirAtheneum.Views.Meditations
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Categories : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class Categories : ContentPage
+    {
         MeditationVM meditationVM;
-		public Categories ()
-		{
-			InitializeComponent ();
+
+        public Categories()
+        {
+            InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
             meditationVM = new MeditationVM();
             BindingContext = meditationVM;
-            listView.ItemsSource = meditationVM.meditaions;
+            listView.ItemsSource = meditationVM.meditationList;
             Title = "All Categories";
-
         }
-       public async void FetchAllMeditationsCategoryAsync()
+
+        public async void FetchAllMeditationAsync()
         {
             meditationVM.IsBusy = true;
-            List<Category> meditations = await meditationVM.FetchAllMeditationCategory();
-            
-            if (meditations != null && meditations.Count > 0)
+            List<Category> meditationCategories = await meditationVM.DatabaseOperation();
+
+            if (meditationCategories != null && meditationCategories.Count > 0)
             {
                 listView.IsVisible = true;
-                UpdatePage(meditations);
+                UpdatePage(meditationCategories);
             }
-            else {
+            else
+            {
                 listView.IsVisible = false;
                 NoDataLabel.IsVisible = true;
                 Debug.WriteLine("Meditation category list is empty");
-
             }
+
             meditationVM.IsBusy = false;
         }
 
-      
-
         private void UpdatePage(List<Category> data)
         {
-            foreach(Category m in data)
+            foreach (Category k in data)
             {
-                meditationVM.meditaions.Add(m);
+                meditationVM.meditationList.Add(k);
             }
         }
         protected override void OnAppearing()
         {
-            FetchAllMeditationsCategoryAsync();
+            FetchAllMeditationAsync();
             base.OnAppearing();
-           
         }
 
         private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -69,11 +61,11 @@ namespace SpirAtheneum.Views.Meditations
             Category category = (Category)selectedCategory;
             await Navigation.PushAsync(new CategoryItems.CategoryItems(category.category));
             ((ListView)sender).SelectedItem = null;
-
         }
+
         protected override void OnDisappearing()
         {
-            meditationVM.meditaions.Clear();
+            meditationVM.meditationList.Clear();
             NoDataLabel.IsVisible = false;
             meditationVM.IsBusy = false;
             listView.IsVisible = false;

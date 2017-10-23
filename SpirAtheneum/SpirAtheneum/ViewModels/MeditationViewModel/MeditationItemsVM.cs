@@ -1,12 +1,12 @@
 ﻿using Services.Models.Meditation;
 using Services.Services.Meditation;
-using System;
+using SpirAtheneum.Database;
+using SpirAtheneum.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -16,57 +16,41 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
     class MeditationItemsVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public ObservableCollection<MeditationModel> meditaions;
+        public DatabaseHelper databaseHelper;
+        public ObservableCollection<Meditation> meditationList;
         public ICommand ShareButtonCommand { get; set; }
-        public ICommand FavouritButtonCommand { get; set; }
+        public ICommand FavouriteButtonCommand { get; set; }
         string selectedCategoryType;
-        private bool isBusy = false;
 
         public MeditationItemsVM(string type)
         {
-            meditaions = new ObservableCollection<MeditationModel>();
+            meditationList = new ObservableCollection<Meditation>();
+            databaseHelper = new DatabaseHelper();
             selectedCategoryType = type;
 
             ShareButtonCommand = new Command((e) => {
               
                //todo
             });
-            FavouritButtonCommand = new Command((e) => {
+            FavouriteButtonCommand = new Command((e) => {
 
                 //todo
             });
-
-        }
-        public bool IsBusy
-        {
-            get { return isBusy; }
-            set
-            {
-                if (isBusy != value)
-                {
-                    isBusy = value;
-                    OnPropertyChanged("IsBusy");
-                }
-            }
         }
 
-        public async Task<List<MeditationModel>> FetchAllMeditationCategoryItems()
+        public List<Meditation> FetchAllCategoryItems()
         {
-            var meditationService = new MeditationService();
-            MeditationModel[] allMeditation =  await meditationService.fetchAllMeditationAsync();
-            if (allMeditation != null && allMeditation.Length > 0) // extrect med items bases on selected category
+            var allMeditation = databaseHelper.GetMeditation();
+            if (allMeditation != null)
             {
-                List<MeditationModel> medBasesOnSelectedMedCategory = allMeditation.Where(g => g.category == selectedCategoryType).ToList();
-                return medBasesOnSelectedMedCategory;
+                List<Meditation> meditationBasedOnSelectedCategory = allMeditation.Where(g => g.category == selectedCategoryType).ToList();
+                return meditationBasedOnSelectedCategory;
             }
             else
             {
-                Debug.WriteLine("Meditation list in Category item page in empty");
+                Debug.WriteLine("Meditation list in Category item page is empty");
                 return null;
-
             }
-              
-
         }
 
         protected virtual void OnPropertyChanged(string propertyName)

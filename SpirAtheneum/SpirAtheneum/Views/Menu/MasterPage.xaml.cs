@@ -23,7 +23,7 @@ namespace SpirAtheneum.Views.Menu
             var masterpageitems = new List<MasterPageItem>();
 
             masterpageitems.Add(new MasterPageItem { Title = "Home", IconSource = "icon_home_menu.png", TargetType = typeof(Home.HomePage) });
-            masterpageitems.Add(new MasterPageItem { Title = "Daily Digest", IconSource = "icon_quill_menu.png", TargetType = typeof(DigestCategoryItemsPage) });
+            masterpageitems.Add(new MasterPageItem { Title = "Daily Digest", IconSource = "icon_quill_menu.png", TargetType = typeof(DailyDigest.DailyDigestItemsPage) });
             masterpageitems.Add(new MasterPageItem { Title = "Meditations", IconSource = "icon_quill_menu.png", TargetType = typeof(Meditations.Categories) });
             masterpageitems.Add(new MasterPageItem { Title = "Knowledge Base", IconSource = "icon_book_menu.png", TargetType = typeof(KnowledgeBase.Categories) });
             masterpageitems.Add(new MasterPageItem { Title = "Content", IconSource = "icon_book_menu.png", TargetType = typeof(Content.Content) });

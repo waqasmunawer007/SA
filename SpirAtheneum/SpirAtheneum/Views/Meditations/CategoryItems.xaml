@@ -5,24 +5,11 @@
               BackgroundColor="{StaticResource BackgroundColor}">
     
     <ContentPage.Content>
-        
+
         <StackLayout
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"  
             Margin="10,10,10,0 ">
-             <ActivityIndicator 
-                IsVisible="{Binding IsBusy}"
-                IsRunning="{Binding IsBusy}"
-                HorizontalOptions="CenterAndExpand"
-                Color="White"
-                VerticalOptions="CenterAndExpand"/>
-             <Label x:Name="NoDataLabel"
-               Text="No Data Found!" 
-               TextColor="White" 
-               FontSize="{StaticResource CellHeadingFontSize}" 
-               IsVisible="false" 
-               VerticalOptions="CenterAndExpand"
-               HorizontalOptions="Center"/>
             <ListView 
                 x:Name="listView"
                 RowHeight="70"
@@ -53,14 +40,14 @@
                                 <StackLayout
                                     HorizontalOptions="EndAndExpand" 
                                     Orientation="Horizontal">
-                                    <!--Favourit Button image-->
+                                    <!--Favourite Button image-->
                                       <Image 
                                          Source="icon_heart_empty.png" 
                                          Margin="0,0,10,0" 
                                          WidthRequest="25"
                                          HeightRequest="25">
                                          <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding FavouritButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
+                                            <TapGestureRecognizer Command="{Binding FavouriteButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
                                          </Image.GestureRecognizers>
 
                                     </Image>

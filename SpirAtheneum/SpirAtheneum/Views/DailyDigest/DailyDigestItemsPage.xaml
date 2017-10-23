@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SpirAtheneum.Views.DailyDigest.DigestCategoryItemsPage"
+             x:Class="SpirAtheneum.Views.DailyDigest.DailyDigestItemsPage"
              xmlns:local="clr-namespace:SpirAtheneum.Converters"
              Title="Daily Digest"
              BackgroundColor="{StaticResource BackgroundColor}">

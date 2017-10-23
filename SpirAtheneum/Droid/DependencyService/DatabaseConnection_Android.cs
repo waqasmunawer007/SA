@@ -11,11 +11,11 @@ using Android.Views;
 using Android.Widget;
 using SpirAtheneum.Interfaces;
 using SQLite;
-using SpirAtheneum.Droid.Dependenciese;
+using SpirAtheneum.Droid.DependencyService;
 using System.IO;
 
 [assembly: Xamarin.Forms.Dependency(typeof(DatabaseConnection_Android))]
-namespace SpirAtheneum.Droid.Dependenciese
+namespace SpirAtheneum.Droid.DependencyService
 {
     class DatabaseConnection_Android : IDatabaseConnection
     {

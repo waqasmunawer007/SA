@@ -25,5 +25,11 @@ namespace SpirAtheneum.Constants
         public static string AllKnowledgeBase = "api/Knowledge";
         #endregion
 
+        #region AppActivity
+
+        public static string AppActivity = "api/AppActivity";
+
+        #endregion
+
     }
 }

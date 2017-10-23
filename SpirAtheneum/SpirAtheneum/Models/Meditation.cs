@@ -15,6 +15,5 @@ namespace SpirAtheneum.Models
         public string intro { get; set; }
         public string outro { get; set; }
         public string category { get; set; }
-        public string is_favourite { get; set; }
     }
 }

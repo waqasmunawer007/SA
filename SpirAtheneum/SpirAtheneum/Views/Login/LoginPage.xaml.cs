@@ -13,12 +13,12 @@ namespace SpirAtheneum.Views.Login
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
-        UserViewModel uv;
+        UserVM uv;
         public LoginPage()
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
-            uv = new UserViewModel(Navigation);
+            uv = new UserVM(Navigation);
             BindingContext = uv;
         }
     }

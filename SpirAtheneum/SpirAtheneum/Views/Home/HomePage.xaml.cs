@@ -21,7 +21,7 @@ namespace SpirAtheneum.Views.Home
 
         void DailyDigestClick_Handler(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new DigestCategoryItemsPage());
+            Navigation.PushAsync(new Views.DailyDigest.DailyDigestItemsPage());
         }
 
         void MeditationClick_Handler(object sender, EventArgs e)

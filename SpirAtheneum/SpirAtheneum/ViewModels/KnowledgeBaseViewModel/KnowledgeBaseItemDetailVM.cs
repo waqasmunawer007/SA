@@ -1,12 +1,8 @@
-﻿using Services.Models.KnowledgeBase;
-using Services.Services.KnowledgeBase;
-using System;
-using System.Collections.Generic;
+﻿using SpirAtheneum.Database;
+using SpirAtheneum.Models;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -14,14 +10,16 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
 {
     class KnowledgeBaseItemDetailVM : INotifyPropertyChanged
     {
-        private bool isBusy = false;
         public event PropertyChangedEventHandler PropertyChanged;
-        KnowledgeBaseModel item;
+        public DatabaseHelper databaseHelper;
+        KnowledgeBase item;
         public ICommand ShareButtonCommand { get; set; }
         public ICommand FavouriteButtonCommand { get; set; }
+
         public KnowledgeBaseItemDetailVM()
         {
-            Item = new KnowledgeBaseModel();
+            Item = new KnowledgeBase();
+            databaseHelper = new DatabaseHelper();
             ShareButtonCommand = new Command((e) => {
 
                 //todo
@@ -32,7 +30,7 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
             });
         }
 
-        public KnowledgeBaseModel Item
+        public KnowledgeBase Item
         {
             get { return item; }
             set
@@ -42,33 +40,21 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
             }
         }
 
-        public async Task<KnowledgeBaseModel> FetchKnowledgeBaseItemDetail(string id)
+        public KnowledgeBase FetchKnowledgeBaseItemDetail(string id)
         {
-            var knowledgeBaseService = new KnowledgeBaseService();
-            KnowledgeBaseModel knowledge = await knowledgeBaseService.FetchKnowledgeBaseUsingIdAsync(id);
-            if (knowledge != null)
+            var allKnowledgeBase = databaseHelper.GetKnowledgeBase();
+            if (allKnowledgeBase != null)
             {
-                return knowledge;
+                KnowledgeBase itemDetail = allKnowledgeBase.First(x => x.id == id);
+                return itemDetail;
             }
             else
             {
-                Debug.WriteLine("Knowledge empty return");
+                Debug.WriteLine("KnowledgeBase item detail in KnowledgeBaseItemDetail page is empty");
                 return null;
             }
         }
 
-        public bool IsBusy
-        {
-            get { return isBusy; }
-            set
-            {
-                if (isBusy != value)
-                {
-                    isBusy = value;
-                    OnPropertyChanged("IsBusy");
-                }
-            }
-        }
         protected virtual void OnPropertyChanged(string propertyName)
         {
             var changed = PropertyChanged;

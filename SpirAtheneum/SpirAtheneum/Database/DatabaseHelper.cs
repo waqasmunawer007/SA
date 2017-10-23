@@ -1,4 +1,7 @@
-﻿using SpirAtheneum.Interfaces;
+﻿using Services.Models.DailyDigest;
+using Services.Models.KnowledgeBase;
+using Services.Models.Meditation;
+using SpirAtheneum.Interfaces;
 using SpirAtheneum.Models;
 using SpirAtheneum.ViewModels;
 using SQLite;
@@ -87,8 +90,149 @@ namespace SpirAtheneum.Database
 
         #region DailyDigest
 
+        /// <summary>
+        /// Add dailydigest data into the DailyDigest database table
+        /// </summary>
+        /// <param name="dailyDigestList"></param>
+        public void AddDailyDigest(List<DailyDigestModel> dailyDigestList)
+        {
+            lock (collisionLock)
+            {
+                database.Query<DailyDigest>("Delete from DailyDigest");
+                database.Query<DailyDigest>("DELETE FROM SQLITE_SEQUENCE WHERE name = 'DailyDigest'");
 
+                foreach (var d in dailyDigestList)
+                {
+                    DailyDigest dailyDigest = new DailyDigest();
 
+                    dailyDigest.id = d.id;
+                    dailyDigest.text = d.text;
+                    dailyDigest.publish_date = d.publish_date.ToString();
+
+                    database.Insert(dailyDigest);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets all the items from the database's DailyDigest table
+        /// </summary>
+        /// <returns></returns>
+        public List<DailyDigest> GetDailyDigest()
+        {
+            lock(collisionLock)
+            {
+                var dailyDigestList = database.Table<DailyDigest>().ToList();
+                return dailyDigestList;
+            }
+        }
+
+        #endregion
+
+        #region KnowledgeBase
+
+        /// <summary>
+        /// Add KnowledgeBase data into the KnowledgeBase database 
+        /// </summary>
+        /// <param name="KnowledgeList"></param>
+        public void AddKnowledgeBase(List<KnowledgeBaseModel> KnowledgeList)
+        {
+            lock (collisionLock)
+            {
+                database.Query<KnowledgeBase>("Delete from KnowledgeBase");
+                database.Query<KnowledgeBase>("DELETE FROM SQLITE_SEQUENCE WHERE name = 'KnowledgeBase'");
+
+                foreach (var k in KnowledgeList)
+                {
+                    KnowledgeBase knowledgeBase = new KnowledgeBase();
+
+                    knowledgeBase.id = k.id;
+                    knowledgeBase.title = k.title;
+                    knowledgeBase.text = k.text;
+                    knowledgeBase.category = k.category;
+
+                    database.Insert(knowledgeBase);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets all the items from the database's KnowledgeBase table
+        /// </summary>
+        /// <returns></returns>
+        public List<KnowledgeBase> GetKnowledgeBase()
+        {
+            lock (collisionLock)
+            {
+                var knowledgeList = database.Table<KnowledgeBase>().ToList();
+                return knowledgeList;
+            }
+        }
+
+        #endregion
+
+        #region Meditation
+
+        /// <summary>
+        /// Add Meditation data into the Meditation database 
+        /// </summary>
+        /// <param name="meditationList"></param>
+        public void AddMeditation(List<MeditationModel> meditationList)
+        {
+            lock (collisionLock)
+            {
+                database.Query<Meditation>("Delete from Meditation");
+                database.Query<Meditation>("DELETE FROM SQLITE_SEQUENCE WHERE name = 'Meditation'");
+
+                database.Query<Step>("Delete from Step");
+                database.Query<Step>("DELETE FROM SQLITE_SEQUENCE WHERE name = 'Step'");
+
+                foreach (var m in meditationList)
+                {
+                    Meditation meditation = new Meditation();
+
+                    meditation.id = m.id;
+                    meditation.title = m.title;
+                    meditation.intro = m.intro;
+                    meditation.outro = m.outro;
+                    meditation.category = m.category;
+
+                    database.Insert(meditation);
+
+                    foreach (var s in m.steps)
+                    {
+                        Step step = new Step();
+
+                        step.step = s;
+                        step.meditation_id = m.id;
+
+                        database.Insert(step);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets all the items from the database's Meditation table
+        /// </summary>
+        /// <returns></returns>
+        public List<Meditation> GetMeditation()
+        {
+            lock (collisionLock)
+            {
+                var meditationList = database.Table<Meditation>().ToList();
+                return meditationList;
+            }
+        }
+
+        public List<Step> GetMeditationSteps()
+        {
+            lock(collisionLock)
+            {
+                var steps = database.Table<Step>().ToList();
+                return steps;
+            }
+        }
         #endregion
     }
 }

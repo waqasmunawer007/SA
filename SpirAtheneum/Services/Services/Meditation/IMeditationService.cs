@@ -8,14 +8,7 @@ namespace Services.Services.Meditation
 {
    public  interface IMeditationService
     {
-        Task<MeditationModel[]> fetchAllMeditationAsync();
-        Task<MeditationModel> fetchMeditationBaseOnIdAsync(string id);
-        //Task<string> CreateMeditation(MeditationModel med);
-        //Task<string> UpdateMeditation(MeditationModel med);
-        //Task<string> DeleteMeditation(int id);
-
-
-
-
+        Task<MeditationModel[]> FetchAllMeditationAsync();
+        Task<MeditationModel> FetchMeditationBaseOnIdAsync(string id);
     }
 }

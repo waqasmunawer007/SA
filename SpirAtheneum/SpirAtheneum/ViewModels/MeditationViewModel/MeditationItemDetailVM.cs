@@ -1,11 +1,10 @@
 ﻿using Services.Models.Meditation;
 using Services.Services.Meditation;
-using System;
-using System.Collections.Generic;
+using SpirAtheneum.Database;
+using SpirAtheneum.Models;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -14,61 +13,65 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
 {
     class MeditationItemDetailVM : INotifyPropertyChanged
     {
-        private bool isBusy = false;
         public event PropertyChangedEventHandler PropertyChanged;
-        MeditationModel medItem;
+        public DatabaseHelper databaseHelper;
+        Meditation item;
+        Step stepitems;
         public ICommand ShareButtonCommand { get; set; }
-        public ICommand FavouritButtonCommand { get; set; }
+        public ICommand FavouriteButtonCommand { get; set; }
+
         public MeditationItemDetailVM()
         {
-             medItem = new MeditationModel();
+            item = new Meditation();
+            databaseHelper = new DatabaseHelper();
+
             ShareButtonCommand = new Command((e) => {
 
                 //todo
             });
-            FavouritButtonCommand = new Command((e) => {
+            FavouriteButtonCommand = new Command((e) => {
 
                 //todo
             });
         }
 
-        public MeditationModel MedItem
+        public Meditation Item
          {
-            get { return medItem; }
+            get { return item; }
             set
             {
-                medItem = value;
-                OnPropertyChanged("MedItem");
+                item = value;
+                OnPropertyChanged("Item");
             }
          }
 
-        public async Task<MeditationModel> FetchAllMeditationDetailItem(string id)
+        public Step Steps
         {
-            var meditationService = new MeditationService();
-            MeditationModel med = await meditationService.fetchMeditationBaseOnIdAsync(id);
-            if (med != null) 
-             {
-                return med;
-             }
-            else
-             {
-                Debug.WriteLine("Meditaion empty return");
-                return null;
-             }
-        }
-
-        public bool IsBusy
-        {
-            get { return isBusy; }
+            get { return stepitems; }
             set
             {
-                if (isBusy != value)
-                {
-                    isBusy = value;
-                    OnPropertyChanged("IsBusy");
-                }
+                stepitems = value;
+                OnPropertyChanged("Steps");
             }
         }
+
+
+        public Meditation FetchMeditationItemDetail(string id)
+        {
+            var allMeditation = databaseHelper.GetMeditation();
+            var allSteps = databaseHelper.GetMeditationSteps();
+            if (allMeditation != null)
+            {
+                Meditation itemDetail = allMeditation.First(x => x.id == id);
+                return itemDetail;
+            }
+            else
+            {
+                Debug.WriteLine("Meditation item detail in MeditationItemDetail page is empty");
+                return null;
+            }
+        }
+
         protected virtual void OnPropertyChanged(string propertyName)
          {
             var changed = PropertyChanged;

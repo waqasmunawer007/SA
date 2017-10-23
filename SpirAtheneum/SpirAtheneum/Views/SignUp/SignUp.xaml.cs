@@ -13,11 +13,11 @@ namespace SpirAtheneum.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SignUp : ContentPage
     {
-        UserViewModel uv;
+        UserVM uv;
         public SignUp()
         {
             InitializeComponent();
-            uv = new UserViewModel(Navigation);
+            uv = new UserVM(Navigation);
             BindingContext = uv;
 
         }

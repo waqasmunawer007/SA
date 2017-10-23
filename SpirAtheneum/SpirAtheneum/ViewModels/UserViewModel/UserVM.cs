@@ -18,7 +18,7 @@ using SpirAtheneum.Database;
 
 namespace SpirAtheneum.ViewModels
 {
-    class UserViewModel : INotifyPropertyChanged
+    class UserVM : INotifyPropertyChanged
     {
 
         private SQLiteConnection database;
@@ -35,7 +35,7 @@ namespace SpirAtheneum.ViewModels
         INavigation navigation;
         public DatabaseHelper databaseHelper;
 
-        public UserViewModel(INavigation nav)
+        public UserVM(INavigation nav)
         {
             navigation = nav;
             databaseHelper = new DatabaseHelper();
@@ -44,13 +44,13 @@ namespace SpirAtheneum.ViewModels
             user = new User();
 
             AddButtonCommand = new Command((e) => {
-                UserViewModel userViewModel = e as UserViewModel;
+                UserVM userViewModel = e as UserVM;
                 User u = userViewModel.User;
                 SignupUser(u);
             });
 
             LoginButtonCommand = new Command((e) => {
-                UserViewModel userViewModel = e as UserViewModel;
+                UserVM userViewModel = e as UserVM;
                 User u = userViewModel.User;
                 LoginUser(u);
             });

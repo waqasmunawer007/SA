@@ -1,5 +1,9 @@
-﻿using Services.Models.KnowledgeBase;
+﻿using Plugin.Connectivity;
+using Services.Models.KnowledgeBase;
+using Services.Services.AppActivity;
 using Services.Services.KnowledgeBase;
+using SpirAtheneum.Database;
+using SpirAtheneum.Helpers;
 using SpirAtheneum.Models;
 using System;
 using System.Collections.Generic;
@@ -12,23 +16,70 @@ using System.Threading.Tasks;
 
 namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
 {
-    public class KnowledgeBaseVM : INotifyPropertyChanged
+    class KnowledgeBaseVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<Category> knowledgeBaseList;
+        public DatabaseHelper databaseHelper;
         private bool isBusy = false;
 
         public KnowledgeBaseVM()
         {
             knowledgeBaseList = new ObservableCollection<Category>();
+            databaseHelper = new DatabaseHelper();
         }
 
-        public async Task<List<Category>> FetchAllKnowledgeBaseCategory()
+        /// <summary>
+        /// This function checks that if network is available or not. if its available, it hits Knowledge api and store api's data into local db, if not available then it just get data from local db
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<Category>> DatabaseOperation()
+        {
+
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                var appActivityService = new AppActivityService();
+                var activity = await appActivityService.FetchAppActivityAsync();
+
+                if (Settings.KnowledgeBase_LastUpdate != activity.First().knowledge_lastupdated.last_updated)
+                {
+                    List<KnowledgeBaseModel> items = await FetchAllKnowledgeBaseData();
+                    databaseHelper.AddKnowledgeBase(items);
+                    Settings.KnowledgeBase_LastUpdate = activity.First().knowledge_lastupdated.last_updated;
+                    return FetchAllKnowledgeBaseCategories();
+                }
+                else
+                {
+                    return FetchAllKnowledgeBaseCategories();
+                }
+            }
+            else
+            {
+                return FetchAllKnowledgeBaseCategories();
+            }
+        }
+
+        public async Task<List<KnowledgeBaseModel>> FetchAllKnowledgeBaseData()
         {
             var knowledgeBaseService = new KnowledgeBaseService();
-            KnowledgeBaseModel[] allKnowledgeBase = await knowledgeBaseService.FetchAllKnowledgeBaseAsync();
+            KnowledgeBaseModel[] allKnowledge = await knowledgeBaseService.FetchAllKnowledgeBaseAsync();
+            if (allKnowledge != null && allKnowledge.Length > 0)
+            {
+                List<KnowledgeBaseModel> allKnowledgeData = allKnowledge.ToList();
+                return allKnowledgeData;
+            }
+            else
+            {
+                Debug.WriteLine("KnowledgeBase data is empty on KnowledgeBase Category page");
+                return null;
 
-            if(allKnowledgeBase != null && allKnowledgeBase.Length > 0) // extract unique meditation categories from all meditattion list
+            }
+        }
+
+        public List<Category> FetchAllKnowledgeBaseCategories()
+        {
+            var allKnowledgeBase = databaseHelper.GetKnowledgeBase();
+            if (allKnowledgeBase != null)
             {
                 List<Category> list = AppUtils.CategoryUtil.GetCountKnowledgeBase(allKnowledgeBase);
                 return list;

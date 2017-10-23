@@ -14,6 +14,5 @@ namespace SpirAtheneum.Models
         public string title { get; set; }
         public string text { get; set; }
         public string category { get; set; }
-        public string is_favourite { get; set; }
     }
 }

@@ -1,18 +1,12 @@
-﻿using Services.Models.KnowledgeBase;
-using SpirAtheneum.ViewModels.KnowledgeBaseViewModel;
-using System;
+﻿using SpirAtheneum.ViewModels.KnowledgeBaseViewModel;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace SpirAtheneum.Views.KnowledgeBase
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class KnowledgeBaseItems : ContentPage
 	{
         KnowledgeBaseItemsVM knowledgeBaseVM;
@@ -29,10 +23,9 @@ namespace SpirAtheneum.Views.KnowledgeBase
             Title = category;
         }
 
-        public async void FetchAllItems()
+        public void FetchAllItems()
         {
-            knowledgeBaseVM.IsBusy = true;
-            List<KnowledgeBaseModel> categoryItems = await knowledgeBaseVM.FetchAllCategoryItems();
+            List<Models.KnowledgeBase> categoryItems = knowledgeBaseVM.FetchAllCategoryItems();
             if (categoryItems != null && categoryItems.Count > 0)
             {
                 listView.IsVisible = true;
@@ -41,16 +34,13 @@ namespace SpirAtheneum.Views.KnowledgeBase
             else
             {
                 listView.IsVisible = false;
-                NoDataLabel.IsVisible = true;
                 Debug.WriteLine("Category list item is empty");
             }
-            knowledgeBaseVM.IsBusy = false;
-
         }
 
-        private void UpdatePage(List<KnowledgeBaseModel> data)
+        private void UpdatePage(List<Models.KnowledgeBase> data)
         {
-            foreach (KnowledgeBaseModel k in data)
+            foreach (Models.KnowledgeBase k in data)
             {
                 knowledgeBaseVM.knowledgeBaseList.Add(k);
             }
@@ -65,8 +55,6 @@ namespace SpirAtheneum.Views.KnowledgeBase
         protected override void OnDisappearing()
         {
             knowledgeBaseVM.knowledgeBaseList.Clear();
-            NoDataLabel.IsVisible = false;
-            knowledgeBaseVM.IsBusy = false;
             listView.IsVisible = false;
             base.OnDisappearing();
         }
@@ -74,7 +62,7 @@ namespace SpirAtheneum.Views.KnowledgeBase
         private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var selectedCategory = ((ListView)sender).SelectedItem;
-            KnowledgeBaseModel item = (KnowledgeBaseModel)selectedCategory;
+            Models.KnowledgeBase item = (Models.KnowledgeBase)selectedCategory;
             await Navigation.PushAsync(new KnowledgeBaseItemDetail(item));
             ((ListView)sender).SelectedItem = null;
         }

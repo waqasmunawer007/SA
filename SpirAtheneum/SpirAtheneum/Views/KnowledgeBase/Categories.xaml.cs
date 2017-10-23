@@ -1,21 +1,17 @@
 ﻿using SpirAtheneum.Models;
 using SpirAtheneum.ViewModels.KnowledgeBaseViewModel;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace SpirAtheneum.Views.KnowledgeBase
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Categories : ContentPage
 	{
         KnowledgeBaseVM knowledgeBaseVM;
+
         public Categories()
         {
             InitializeComponent();
@@ -24,12 +20,12 @@ namespace SpirAtheneum.Views.KnowledgeBase
             BindingContext = knowledgeBaseVM;
             listView.ItemsSource = knowledgeBaseVM.knowledgeBaseList;
             Title = "All Categories";
-
         }
+
         public async void FetchAllKnowledgeBaseAsync()
         {
             knowledgeBaseVM.IsBusy = true;
-            List<Category> knowledgeBaseCategories = await knowledgeBaseVM.FetchAllKnowledgeBaseCategory();
+            List<Category> knowledgeBaseCategories = await knowledgeBaseVM.DatabaseOperation();
 
             if (knowledgeBaseCategories != null && knowledgeBaseCategories.Count > 0)
             {
@@ -41,12 +37,10 @@ namespace SpirAtheneum.Views.KnowledgeBase
                 listView.IsVisible = false;
                 NoDataLabel.IsVisible = true;
                 Debug.WriteLine("KnowledgeBase category list is empty");
-
             }
+
             knowledgeBaseVM.IsBusy = false;
         }
-
-
 
         private void UpdatePage(List<Category> data)
         {
@@ -67,8 +61,8 @@ namespace SpirAtheneum.Views.KnowledgeBase
             Category category = (Category)selectedCategory;
             await Navigation.PushAsync(new KnowledgeBaseItems(category.category));
             ((ListView)sender).SelectedItem = null;
-
         }
+
         protected override void OnDisappearing()
         {
             knowledgeBaseVM.knowledgeBaseList.Clear();
@@ -77,6 +71,5 @@ namespace SpirAtheneum.Views.KnowledgeBase
             listView.IsVisible = false;
             base.OnDisappearing();
         }
-
     }
 }

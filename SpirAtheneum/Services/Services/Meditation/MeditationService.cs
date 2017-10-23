@@ -11,7 +11,7 @@ namespace Services.Services.Meditation
 {
     class MeditationService : BaseService, IMeditationService
     {
-        public async Task<MeditationModel[]> fetchAllMeditationAsync()
+        public async Task<MeditationModel[]> FetchAllMeditationAsync()
         {
             try
             {
@@ -32,7 +32,7 @@ namespace Services.Services.Meditation
             return null;
         }
 
-        public async Task<MeditationModel> fetchMeditationBaseOnIdAsync(string id)
+        public async Task<MeditationModel> FetchMeditationBaseOnIdAsync(string id)
         {
             try
             {

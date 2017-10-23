@@ -1,12 +1,7 @@
 ﻿using Services.Models.Meditation;
+using SpirAtheneum.Models;
 using SpirAtheneum.ViewModels.MeditationViewModel;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,59 +10,47 @@ namespace SpirAtheneum.Views.Meditations
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MedItemDetail : ContentPage
     {
-        MeditationModel medItem;
-        MeditationItemDetailVM medVM;
+        Meditation meditationItem;
+        MeditationItemDetailVM meditationVM;
 
-        public MedItemDetail(MeditationModel item)
+        public MedItemDetail(Meditation item)
         {
             InitializeComponent();
-            medItem = item;
-           
-            medVM = new MeditationItemDetailVM();
-            BindingContext = medVM;
+            meditationItem = item;
+            meditationVM = new MeditationItemDetailVM();
+            BindingContext = meditationVM;
         }
 
-        public async void FetchAllMeditationsItems()
+        public void FetchItemDetail()
         {
-            medVM.IsBusy = true;
-            MeditationModel response = await medVM.FetchAllMeditationDetailItem(medItem.id);
+            Meditation response = meditationVM.FetchMeditationItemDetail(meditationItem.id);
             if (response != null)
             {
-                needToShowHideLayout.IsVisible = true;
-         
                 UpdatePage(response);
                 //todo
             }
-            else {
-                needToShowHideLayout.IsVisible = false;
-                NoDataLabel.IsVisible = true;
+            else
+            {
                 Debug.WriteLine("Category list item is empty");
-
             }
-            medVM.IsBusy = false;
         }
-        private void UpdatePage(MeditationModel response)
+
+        private void UpdatePage(Meditation response)
         {
             Title = response.title;
-            medVM.MedItem = response;
-           
-        }
-        protected override void OnAppearing()
-        {
-            FetchAllMeditationsItems();
-            base.OnAppearing();
-        }
-        protected override void OnDisappearing()
-        {
-            medVM.IsBusy = false;
-            NoDataLabel.IsVisible = false;
-            base.OnDisappearing();
+            meditationVM.Item = response;
+            var e = meditationVM.Item.intro;
         }
 
-        private void stepsList_ItemTapped(object sender, ItemTappedEventArgs e)
+        protected override void OnAppearing()
         {
-            if (e.Item == null) return;
-            ((ListView)sender).SelectedItem = null;
+            FetchItemDetail();
+            base.OnAppearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
         }
     }
 }

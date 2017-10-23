@@ -8,10 +8,10 @@ using UIKit;
 using SpirAtheneum.Interfaces;
 using SQLite;
 using System.IO;
-using SpirAtheneum.iOS.Dependenciese;
+using SpirAtheneum.iOS.DependencyService;
 
 [assembly: Xamarin.Forms.Dependency(typeof(DatabaseConnection_iOS))]
-namespace SpirAtheneum.iOS.Dependenciese
+namespace SpirAtheneum.iOS.DependencyService
 {
     class DatabaseConnection_iOS : IDatabaseConnection
     {

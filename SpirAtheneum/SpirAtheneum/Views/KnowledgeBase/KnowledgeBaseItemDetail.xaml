@@ -2,82 +2,50 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpirAtheneum.Views.KnowledgeBase.KnowledgeBaseItemDetail"
+             xmlns:local="clr-namespace:SpirAtheneum.Converters"
              BackgroundColor="{StaticResource BackgroundColor}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:HTMLSourceConverter x:Key="htmlSource"></local:HTMLSourceConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <ContentPage.Content>
-        <!--  <ScrollView VerticalOptions = "StartAndExpand" HorizontalOptions="FillAndExpand">-->
 
-        <StackLayout Margin = "10,5,10,0" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Orientation="Vertical">
-            <ActivityIndicator 
-                IsVisible="{Binding IsBusy}"
-                IsRunning="{Binding IsBusy}"
-                Color="White"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="CenterAndExpand"/>
-            <Label x:Name="NoDataLabel"
-               Text="No Data Found!" 
-               TextColor="White" 
-               FontSize="{StaticResource CellHeadingFontSize}" 
-               IsVisible="false" 
-               VerticalOptions="CenterAndExpand"
-               HorizontalOptions="Center"/>
-            <!--Container  for share and favourit button-->
-            <StackLayout 
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="StartAndExpand"
-                Orientation="Vertical" 
-                x:Name="needToShowHideLayout"
-                IsVisible="False">
-                <StackLayout
-                     HorizontalOptions="EndAndExpand" 
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     Orientation="Vertical">
+
+            <StackLayout HorizontalOptions="EndAndExpand"
+                     VerticalOptions="Start"
                      Margin="0,8,0,0"
                      Orientation="Horizontal">
-                    <!--Favourite button image-->
-                    <Image 
-                        Source="icon_heart_empty.png"  
-                        WidthRequest="30"
-                        HeightRequest="30">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding FavouriteButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
-                        </Image.GestureRecognizers>
-
-                    </Image>
-                    <!--Share button image-->
-                    <Image 
-                        Source="icon_share.png"
-                        Margin="0,0,10,0"  
-                        WidthRequest="30"
-                        HeightRequest="30">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShareButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
-                        </Image.GestureRecognizers>
-                    </Image>
-                </StackLayout>
-                <!--Item detail container -->
-                <StackLayout  
-                  HorizontalOptions="StartAndExpand" 
-                  Margin="5,5,0,0"
-                  Orientation="Vertical">
-                    <!--intro's detail label -->
-                    <Label 
-                     HorizontalOptions="StartAndExpand" 
-                     VerticalOptions="StartAndExpand" 
-                     Text="{Binding  Item.title}" 
-                      Margin="0,3,0,0"
-                     FontSize="{StaticResource LittleBitBigThanSmallFontSize}"
-                     TextColor="White"></Label>
-                    <!--outro's detail label -->
-                    <Label 
-                         HorizontalOptions="StartAndExpand" 
-                         VerticalOptions="StartAndExpand" 
-                         Text= "{Binding  Item.text}" 
-                         FontSize="{StaticResource LittleBitBigThanSmallFontSize}"   
-                         Margin="0,3,0,0"
-                         TextColor="White"></Label>
-                </StackLayout>
+                <!--Favourite button image-->
+                <Image Source="icon_heart_empty.png"  
+                   WidthRequest="30"
+                   HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding FavouriteButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <!--Share button image-->
+                <Image Source="icon_share.png"
+                   Margin="0,0,10,0"  
+                   WidthRequest="30"
+                   HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ShareButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
             </StackLayout>
+
+            <StackLayout Orientation = "Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,10,0,10" >
+                <WebView VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" Source="{Binding Item.text, Converter={StaticResource htmlSource}}" />
+            </StackLayout>
+
         </StackLayout>
-        <!--</ScrollView>-->
+
     </ContentPage.Content>
     
 </ContentPage>

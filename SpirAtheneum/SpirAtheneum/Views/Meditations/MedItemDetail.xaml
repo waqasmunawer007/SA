@@ -7,37 +7,19 @@
       <!--  <ScrollView VerticalOptions = "StartAndExpand" HorizontalOptions="FillAndExpand">-->
        
         <StackLayout Margin = "10,5,10,0" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Orientation="Vertical">
-            <ActivityIndicator 
-                IsVisible="{Binding IsBusy}"
-                IsRunning="{Binding IsBusy}"
-                Color="White"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="CenterAndExpand"/>
-            <Label x:Name="NoDataLabel"
-               Text="No Data Found!" 
-               TextColor="White" 
-               FontSize="{StaticResource CellHeadingFontSize}" 
-               IsVisible="false" 
-               VerticalOptions="CenterAndExpand"
-               HorizontalOptions="Center"/>
-            <!--Container  for share and favourit button-->
-            <StackLayout 
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="StartAndExpand"
-                Orientation="Vertical" 
-                x:Name="needToShowHideLayout"
-                IsVisible="False">
+            <!--Container  for share and favourite button-->
+            
                 <StackLayout
                      HorizontalOptions="EndAndExpand" 
                      Margin="0,8,0,0"
                      Orientation="Horizontal">
-                    <!--Favourit button image-->
+                    <!--Favourite button image-->
                      <Image 
                         Source="icon_heart_empty.png"  
                         WidthRequest="30"
                         HeightRequest="30">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding FavouritButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
+                            <TapGestureRecognizer Command="{Binding FavouriteButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
                         </Image.GestureRecognizers>
 
                      </Image>
@@ -53,28 +35,30 @@
                     </Image>
                 </StackLayout>
                 <!--Item detail container -->
-                <StackLayout  
+            <StackLayout  
                   HorizontalOptions="StartAndExpand" 
                   Margin="5,5,0,0"
                   Orientation="Vertical">
-                    <!--intro's detail label -->
-                    <Label 
+                <!--intro's detail label -->
+                <Label 
                      HorizontalOptions="StartAndExpand" 
                      VerticalOptions="StartAndExpand" 
-                     Text="{Binding  MedItem.intro}" 
+                     Text="{Binding  Item.intro}" 
                       Margin="0,3,0,0"
                      FontSize="{StaticResource LittleBitBigThanSmallFontSize}"
                      TextColor="White"></Label>
-                    <!--Steps container-->
-                    <StackLayout 
+                <!--Steps container-->
+                <!--<StackLayout 
                             HorizontalOptions="StartAndExpand"
                             VerticalOptions="Start"
                             Margin="0,5,0,0">
-                        <!--List showing the steps-->
+                        
+                --><!--List showing the steps--><!--
+                
                         <ListView 
                                 x:Name="stepsList" 
                                 SeparatorVisibility="None"  
-                                ItemsSource="{Binding MedItem.steps}"
+                                ItemsSource="{Binding Item.steps}"
                                 HorizontalOptions="Start"
                                 RowHeight="40"
                                 HeightRequest="150"
@@ -94,25 +78,26 @@
                                                 Margin="0,0,10,0"  
                                                 WidthRequest="15"
                                                 HeightRequest="15"/>
-                                           <!-- <Label Text="O"  TextColor="White" Margin="0,3,5,0"></Label>-->
+                                           
+                 <Label Text="O"  TextColor="White" Margin="0,3,5,0"></Label>
+                
                                                 <Label Text="{Binding .}" Margin="0,0,0,2" VerticalTextAlignment="Center" FontSize="{StaticResource LittleBitBigThanSmallFontSize}"  TextColor="White" />
                                             </StackLayout>
                                     </ViewCell>
                                     </DataTemplate>
                                  </ListView.ItemTemplate>
                             </ListView>
-                    </StackLayout>
-                        <!--outro's detail label -->
-                    <Label 
+                    </StackLayout>-->
+                <!--outro's detail label -->
+                <Label 
                          HorizontalOptions="StartAndExpand" 
                          VerticalOptions="StartAndExpand" 
-                         Text= "{Binding  MedItem.outro}" 
+                         Text= "{Binding  Item.outro}" 
                          FontSize="{StaticResource LittleBitBigThanSmallFontSize}"   
                          Margin="0,3,0,0"
                          TextColor="White"></Label>
-                </StackLayout>
             </StackLayout>
-       </StackLayout>
+        </StackLayout>
      <!--</ScrollView>-->
     </ContentPage.Content>
 </ContentPage>
