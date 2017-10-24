@@ -10,20 +10,19 @@ namespace SpirAtheneum.Views.Meditations
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MedItemDetail : ContentPage
     {
-        Meditation meditationItem;
+        public MeditationBinding meditationItem;
         MeditationItemDetailVM meditationVM;
 
-        public MedItemDetail(Meditation item)
+        public MedItemDetail()
         {
             InitializeComponent();
-            meditationItem = item;
             meditationVM = new MeditationItemDetailVM();
             BindingContext = meditationVM;
         }
 
         public void FetchItemDetail()
         {
-            Meditation response = meditationVM.FetchMeditationItemDetail(meditationItem.id);
+            MeditationBinding response = meditationVM.FetchMeditationItemDetail(meditationItem.id);
             if (response != null)
             {
                 UpdatePage(response);
@@ -35,11 +34,10 @@ namespace SpirAtheneum.Views.Meditations
             }
         }
 
-        private void UpdatePage(Meditation response)
+        private void UpdatePage(MeditationBinding response)
         {
             Title = response.title;
             meditationVM.Item = response;
-            var e = meditationVM.Item.intro;
         }
 
         protected override void OnAppearing()

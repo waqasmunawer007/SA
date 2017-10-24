@@ -289,7 +289,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\icon_heart_empty.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\drawable-hdpi\icon_heart_empty_white.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_heart_empty_white.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\icon_heart_empty_white.png" />
@@ -383,6 +383,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\icon_book_menu_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\drawable-hdpi\icon_heart_filled.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

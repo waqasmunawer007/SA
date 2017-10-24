@@ -2,7 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpirAtheneum.Views.Meditations.CategoryItems.CategoryItems"
-              BackgroundColor="{StaticResource BackgroundColor}">
+             xmlns:local="clr-namespace:SpirAtheneum.Converters"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:FavouriteImageConverter x:Key="imageconverter"></local:FavouriteImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <ContentPage.Content>
 
@@ -41,15 +48,17 @@
                                     HorizontalOptions="EndAndExpand" 
                                     Orientation="Horizontal">
                                     <!--Favourite Button image-->
-                                      <Image 
-                                         Source="icon_heart_empty.png" 
+                                    <Image 
+                                         Source="{Binding is_favourite,Converter={StaticResource imageconverter}}" 
                                          Margin="0,0,10,0" 
                                          WidthRequest="25"
                                          HeightRequest="25">
-                                         <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding FavouriteButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
-                                         </Image.GestureRecognizers>
-
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding FavouriteButtonCommand}" 
+                                                                  BindingContext="{Binding Source={x:Reference listView}, Path=BindingContext}"
+                                                                  CommandParameter="{Binding Source={x:Reference category_item}, Path=BindingContext}">
+                                            </TapGestureRecognizer>
+                                        </Image.GestureRecognizers>
                                     </Image>
                                     <!--Share Button image-->
                                     <Image 

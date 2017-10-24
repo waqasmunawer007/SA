@@ -2,42 +2,53 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpirAtheneum.Views.Meditations.MedItemDetail"
-              BackgroundColor="{StaticResource BackgroundColor}">
+             xmlns:local="clr-namespace:SpirAtheneum.Converters"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:FavouriteImageConverter x:Key="imageconverter"></local:FavouriteImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-      <!--  <ScrollView VerticalOptions = "StartAndExpand" HorizontalOptions="FillAndExpand">-->
-       
-        <StackLayout Margin = "10,5,10,0" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Orientation="Vertical">
-            <!--Container  for share and favourite button-->
-            
-                <StackLayout
-                     HorizontalOptions="EndAndExpand" 
-                     Margin="0,8,0,0"
+
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" Spacing="-6">
+
+            <StackLayout Padding="10,10,10,10"  HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Orientation="Vertical" BackgroundColor="{StaticResource BurgundyColor}">
+
+                <StackLayout HorizontalOptions="EndAndExpand"
+                     VerticalOptions="CenterAndExpand"
                      Orientation="Horizontal">
                     <!--Favourite button image-->
-                     <Image 
-                        Source="icon_heart_empty.png"  
-                        WidthRequest="30"
-                        HeightRequest="30">
+                    <Image x:Name="heart_image"
+                           Source="{Binding Item.is_favourite,Converter={StaticResource imageconverter}}" 
+                           Margin="0,0,10,0" 
+                           WidthRequest="25"
+                           HeightRequest="25">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding FavouriteButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
+                            <TapGestureRecognizer Command="{Binding FavouriteButtonCommand}" 
+                                                  CommandParameter="{Binding Item}">
+                            </TapGestureRecognizer>
                         </Image.GestureRecognizers>
-
-                     </Image>
+                    </Image>
                     <!--Share button image-->
-                    <Image 
-                        Source="icon_share.png"
-                        Margin="0,0,10,0"  
-                        WidthRequest="30"
-                        HeightRequest="30">
+                    <Image Source="icon_share.png"
+                       Margin="0,0,10,0"  
+                       WidthRequest="30"
+                       HeightRequest="30">
                         <Image.GestureRecognizers>
-                           <TapGestureRecognizer Command="{Binding ShareButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
+                            <TapGestureRecognizer Command="{Binding ShareButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
                         </Image.GestureRecognizers>
                     </Image>
                 </StackLayout>
-                <!--Item detail container -->
+
+            </StackLayout>
+
+            <!--Item detail container -->
             <StackLayout  
                   HorizontalOptions="StartAndExpand" 
-                  Margin="5,5,0,0"
+                  Margin="10,5,10,0"
                   Orientation="Vertical">
                 <!--intro's detail label -->
                 <Label 
@@ -97,6 +108,7 @@
                          Margin="0,3,0,0"
                          TextColor="White"></Label>
             </StackLayout>
+            
         </StackLayout>
      <!--</ScrollView>-->
     </ContentPage.Content>

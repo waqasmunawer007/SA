@@ -8,20 +8,19 @@ namespace SpirAtheneum.Views.KnowledgeBase
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class KnowledgeBaseItemDetail : ContentPage
 	{
-        Models.KnowledgeBase knowledgeBaseItem;
+        public Models.KnowledgeBaseBinding knowledgeBaseItem;
         KnowledgeBaseItemDetailVM knowledgeBaseVM;
 
-        public KnowledgeBaseItemDetail(Models.KnowledgeBase item)
+        public KnowledgeBaseItemDetail()
         {
             InitializeComponent();
-            knowledgeBaseItem = item;
             knowledgeBaseVM = new KnowledgeBaseItemDetailVM();
             BindingContext = knowledgeBaseVM;
         }
 
         public void FetchItemDetail()
         {
-            Models.KnowledgeBase response = knowledgeBaseVM.FetchKnowledgeBaseItemDetail(knowledgeBaseItem.id);
+            Models.KnowledgeBaseBinding response = knowledgeBaseVM.FetchKnowledgeBaseItemDetail(knowledgeBaseItem.id);
             if (response != null)
             {
                 UpdatePage(response);
@@ -33,7 +32,7 @@ namespace SpirAtheneum.Views.KnowledgeBase
             }
         }
 
-        private void UpdatePage(Models.KnowledgeBase response)
+        private void UpdatePage(Models.KnowledgeBaseBinding response)
         {
             Title = response.title;
             knowledgeBaseVM.Item = response;

@@ -12,22 +12,22 @@ namespace SpirAtheneum.Views.Meditations.CategoryItems
     public partial class CategoryItems : ContentPage
     {
         MeditationItemsVM meditationVM;
-
         string selectCategory;
+
         public CategoryItems(string category)
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
             meditationVM = new MeditationItemsVM(category);
             BindingContext = meditationVM;
-            listView.ItemsSource = meditationVM.meditationList;
+            listView.ItemsSource = meditationVM.MeditationBinding;
             selectCategory = category;
             Title = category;
         }
 
        public void FetchAllItems()
        {
-            List<Meditation> categoryItems = meditationVM.FetchAllCategoryItems();
+            List<MeditationBinding> categoryItems = meditationVM.FetchAllCategoryItems();
             if (categoryItems != null && categoryItems.Count > 0)
              {
                     listView.IsVisible = true;
@@ -40,11 +40,11 @@ namespace SpirAtheneum.Views.Meditations.CategoryItems
              }
         }
 
-        private void UpdatePage(List<Meditation> data)
+        private void UpdatePage(List<MeditationBinding> data)
         {
-            foreach (Meditation m in data)
+            foreach (MeditationBinding m in data)
             {
-                meditationVM.meditationList.Add(m);
+                meditationVM.MeditationBinding.Add(m);
             }
         }
 
@@ -64,8 +64,10 @@ namespace SpirAtheneum.Views.Meditations.CategoryItems
         private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var selectedCategory = ((ListView)sender).SelectedItem;
-            Meditation item = (Meditation)selectedCategory;
-            await Navigation.PushAsync(new MedItemDetail(item));
+            MeditationBinding item = (MeditationBinding)selectedCategory;
+            MedItemDetail medItemDetail = new MedItemDetail();
+            medItemDetail.meditationItem = item;
+            await Navigation.PushAsync(medItemDetail);
             ((ListView)sender).SelectedItem = null;
 
         }

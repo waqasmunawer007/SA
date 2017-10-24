@@ -34,6 +34,8 @@ namespace SpirAtheneum.Database
             database.CreateTable<KnowledgeBase>();
             database.CreateTable<Meditation>();
             database.CreateTable<Step>();
+            database.CreateTable<FavouriteKnowledgeBase>();
+            database.CreateTable<FavouriteMeditation>();
         }
 
         #region User
@@ -153,6 +155,18 @@ namespace SpirAtheneum.Database
 
                     database.Insert(knowledgeBase);
                 }
+
+                foreach (var f in KnowledgeList)
+                {
+                    if (!(database.Table<FavouriteKnowledgeBase>().Any(x => x.id == f.id)))
+                    {
+                        FavouriteKnowledgeBase favourite = new FavouriteKnowledgeBase();
+                        favourite.id = f.id;
+                        favourite.is_favourite = "false";
+
+                        database.Insert(favourite);
+                    }
+                }
             }
         }
 
@@ -209,6 +223,18 @@ namespace SpirAtheneum.Database
                         database.Insert(step);
                     }
                 }
+
+                foreach (var f in meditationList)
+                {
+                    if(!(database.Table<FavouriteMeditation>().Any(x => x.id == f.id)))
+                    {
+                        FavouriteMeditation favourite = new FavouriteMeditation();
+                        favourite.id = f.id;
+                        favourite.is_favourite = "false";
+
+                        database.Insert(favourite);
+                    }
+                }
             }
         }
 
@@ -233,6 +259,66 @@ namespace SpirAtheneum.Database
                 return steps;
             }
         }
+        #endregion
+
+        #region FavouriteMeditation
+
+        public void UpdateFavouriteMeditation(string id)
+        {
+            lock (collisionLock)
+            {
+                var f = database.Table<FavouriteMeditation>().First(x => x.id == id);
+                if (f.is_favourite == "true")
+                {
+                    f.is_favourite = "false";
+                }
+                else if (f.is_favourite == "false")
+                {
+                    f.is_favourite = "true";
+                }
+                database.Update(f);
+            }
+        }
+
+        public List<FavouriteMeditation> GetMeditationFavourite()
+        {
+            lock(collisionLock)
+            {
+                var favouriteMeditationList = database.Table<FavouriteMeditation>().ToList();
+                return favouriteMeditationList;
+            }
+        }
+
+        #endregion
+
+        #region FavouriteKnowledge
+
+        public void UpdateFavouriteKnowledgeBase(string id)
+        {
+            lock (collisionLock)
+            {
+                var f = database.Table<FavouriteKnowledgeBase>().First(x => x.id == id);
+                if (f.is_favourite == "true")
+                {
+                    f.is_favourite = "false";
+                }
+                else if (f.is_favourite == "false")
+                {
+                    f.is_favourite = "true";
+                }
+                database.Update(f);
+            }
+        }
+
+        public List<FavouriteKnowledgeBase> GetKnowledgeBaseFavourite()
+        {
+            lock (collisionLock)
+            {
+                var favouriteKnowledgeBaseList = database.Table<FavouriteKnowledgeBase>().ToList();
+                return favouriteKnowledgeBaseList;
+            }
+        }
+
         #endregion
     }
 }

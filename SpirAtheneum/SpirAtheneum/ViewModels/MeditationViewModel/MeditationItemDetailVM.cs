@@ -15,14 +15,14 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public DatabaseHelper databaseHelper;
-        Meditation item;
-        Step stepitems;
+        MeditationBinding item;
+        //Step stepitems;
         public ICommand ShareButtonCommand { get; set; }
         public ICommand FavouriteButtonCommand { get; set; }
 
         public MeditationItemDetailVM()
         {
-            item = new Meditation();
+            item = new MeditationBinding();
             databaseHelper = new DatabaseHelper();
 
             ShareButtonCommand = new Command((e) => {
@@ -30,12 +30,21 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
                 //todo
             });
             FavouriteButtonCommand = new Command((e) => {
-
-                //todo
+                var meditation = (e as MeditationBinding);
+                databaseHelper.UpdateFavouriteMeditation(meditation.id);
+                if (meditation.is_favourite == "true")
+                {
+                    meditation.is_favourite = "false";
+                }
+                else if (meditation.is_favourite == "false")
+                {
+                    meditation.is_favourite = "true";
+                }
+                Item = meditation;
             });
         }
 
-        public Meditation Item
+        public MeditationBinding Item
          {
             get { return item; }
             set
@@ -45,25 +54,38 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
             }
          }
 
-        public Step Steps
-        {
-            get { return stepitems; }
-            set
-            {
-                stepitems = value;
-                OnPropertyChanged("Steps");
-            }
-        }
+        //public Step Steps
+        //{
+        //    get { return stepitems; }
+        //    set
+        //    {
+        //        stepitems = value;
+        //        OnPropertyChanged("Steps");
+        //    }
+        //}
 
 
-        public Meditation FetchMeditationItemDetail(string id)
+        public MeditationBinding FetchMeditationItemDetail(string id)
         {
             var allMeditation = databaseHelper.GetMeditation();
-            var allSteps = databaseHelper.GetMeditationSteps();
-            if (allMeditation != null)
+            var allMeditationFavourites = databaseHelper.GetMeditationFavourite();
+            //var allSteps = databaseHelper.GetMeditationSteps();
+
+            if (allMeditation != null && allMeditationFavourites != null)
             {
                 Meditation itemDetail = allMeditation.First(x => x.id == id);
-                return itemDetail;
+                FavouriteMeditation favourite = allMeditationFavourites.First(x => x.id == id);
+
+                MeditationBinding mb = new MeditationBinding();
+
+                mb.id = itemDetail.id;
+                mb.intro = itemDetail.intro;
+                mb.outro = itemDetail.outro;
+                mb.title = itemDetail.title;
+                mb.category = itemDetail.category;
+                mb.is_favourite = favourite.is_favourite;
+
+                return mb;
             }
             else
             {

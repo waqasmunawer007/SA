@@ -14,14 +14,27 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public DatabaseHelper databaseHelper;
-        public ObservableCollection<KnowledgeBase> knowledgeBaseList;
+        public ObservableCollection<KnowledgeBaseBinding> knowledgeBaseList;
         public ICommand ShareButtonCommand { get; set; }
         public ICommand FavouriteButtonCommand { get; set; }
         string selectedCategoryType;
 
+        public ObservableCollection<KnowledgeBaseBinding> KnowledgeBaseBinding
+        {
+            get { return knowledgeBaseList; }
+            set
+            {
+                if (knowledgeBaseList != value)
+                {
+                    knowledgeBaseList = value;
+                    OnPropertyChanged("KnowledgeBaseBinding");
+                }
+            }
+        }
+
         public KnowledgeBaseItemsVM(string type)
         {
-            knowledgeBaseList = new ObservableCollection<KnowledgeBase>();
+            knowledgeBaseList = new ObservableCollection<KnowledgeBaseBinding>();
             databaseHelper = new DatabaseHelper();
             selectedCategoryType = type;
 
@@ -30,18 +43,53 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
                 //todo
             });
             FavouriteButtonCommand = new Command((e) => {
-
-                //todo
+                var knowledge = (e as KnowledgeBaseBinding);
+                databaseHelper.UpdateFavouriteKnowledgeBase(knowledge.id);
+                if (knowledge.is_favourite == "true")
+                {
+                    knowledge.is_favourite = "false";
+                }
+                else if (knowledge.is_favourite == "false")
+                {
+                    knowledge.is_favourite = "true";
+                }
+                for (int i = 0; i < KnowledgeBaseBinding.Count; i++)
+                {
+                    if (KnowledgeBaseBinding[i].id == knowledge.id)
+                    {
+                        KnowledgeBaseBinding[i] = knowledge;
+                        break;
+                    }
+                }
             });
         }
 
-        public List<KnowledgeBase> FetchAllCategoryItems()
+        public List<KnowledgeBaseBinding> FetchAllCategoryItems()
         {
             var allKnowledgeBase = databaseHelper.GetKnowledgeBase();
-            if (allKnowledgeBase != null)
+            var allKnowledgeBaseFavourites = databaseHelper.GetKnowledgeBaseFavourite();
+
+            if (allKnowledgeBase != null && allKnowledgeBaseFavourites != null)
             {
                 List<KnowledgeBase> knowledgeBasedOnSelectedCategory = allKnowledgeBase.Where(g => g.category == selectedCategoryType).ToList();
-                return knowledgeBasedOnSelectedCategory;
+                List<KnowledgeBaseBinding> combinedList = new List<KnowledgeBaseBinding>();
+
+                foreach (var knowledge in knowledgeBasedOnSelectedCategory)
+                {
+                    var favourite = allKnowledgeBaseFavourites.Find(x => x.id == knowledge.id);
+
+                    KnowledgeBaseBinding kbb = new KnowledgeBaseBinding();
+
+                    kbb.id = knowledge.id;
+                    kbb.title = knowledge.title;
+                    kbb.text = knowledge.text;
+                    kbb.category = knowledge.category;
+                    kbb.is_favourite = favourite.is_favourite;
+
+                    combinedList.Add(kbb);
+                }
+
+                return combinedList;
             }
             else
             {

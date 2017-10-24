@@ -39,6 +39,7 @@
     <Compile Include="AppUtils\CategoryUtil.cs" />
     <Compile Include="Constants\APIsConstant.cs" />
     <Compile Include="Converters\CustomDateFormateChangeConverter.cs" />
+    <Compile Include="Converters\FavouriteImageConverter.cs" />
     <Compile Include="Converters\HTMLSourceConverter.cs" />
     <Compile Include="Customization\LoginButton.cs" />
     <Compile Include="Database\DatabaseHelper.cs" />
@@ -46,12 +47,13 @@
     <Compile Include="Interfaces\IDatabaseConnection.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\DailyDigest.cs" />
-    <Compile Include="Models\FavouriteDailyDigest.cs" />
     <Compile Include="Models\FavouriteKnowledgeBase.cs" />
     <Compile Include="Models\FavouriteMeditation.cs" />
     <Compile Include="Models\KnowledgeBase.cs" />
+    <Compile Include="Models\KnowledgeBaseBinding.cs" />
     <Compile Include="Models\MasterPageItem.cs" />
     <Compile Include="Models\Meditation.cs" />
+    <Compile Include="Models\MeditationBinding.cs" />
     <Compile Include="Models\Step.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Renderers\AdMob.cs" />

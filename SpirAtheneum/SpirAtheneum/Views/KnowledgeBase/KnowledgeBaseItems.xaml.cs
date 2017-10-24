@@ -6,26 +6,26 @@ using Xamarin.Forms.Xaml;
 
 namespace SpirAtheneum.Views.KnowledgeBase
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    //[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class KnowledgeBaseItems : ContentPage
 	{
         KnowledgeBaseItemsVM knowledgeBaseVM;
-
         string selectCategory;
+
         public KnowledgeBaseItems(string category)
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
             knowledgeBaseVM = new KnowledgeBaseItemsVM(category);
             BindingContext = knowledgeBaseVM;
-            listView.ItemsSource = knowledgeBaseVM.knowledgeBaseList;
+            listView.ItemsSource = knowledgeBaseVM.KnowledgeBaseBinding;
             selectCategory = category;
             Title = category;
         }
 
         public void FetchAllItems()
         {
-            List<Models.KnowledgeBase> categoryItems = knowledgeBaseVM.FetchAllCategoryItems();
+            List<Models.KnowledgeBaseBinding> categoryItems = knowledgeBaseVM.FetchAllCategoryItems();
             if (categoryItems != null && categoryItems.Count > 0)
             {
                 listView.IsVisible = true;
@@ -38,11 +38,11 @@ namespace SpirAtheneum.Views.KnowledgeBase
             }
         }
 
-        private void UpdatePage(List<Models.KnowledgeBase> data)
+        private void UpdatePage(List<Models.KnowledgeBaseBinding> data)
         {
-            foreach (Models.KnowledgeBase k in data)
+            foreach (Models.KnowledgeBaseBinding k in data)
             {
-                knowledgeBaseVM.knowledgeBaseList.Add(k);
+                knowledgeBaseVM.KnowledgeBaseBinding.Add(k);
             }
         }
 
@@ -62,8 +62,10 @@ namespace SpirAtheneum.Views.KnowledgeBase
         private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var selectedCategory = ((ListView)sender).SelectedItem;
-            Models.KnowledgeBase item = (Models.KnowledgeBase)selectedCategory;
-            await Navigation.PushAsync(new KnowledgeBaseItemDetail(item));
+            Models.KnowledgeBaseBinding item = (Models.KnowledgeBaseBinding)selectedCategory;
+            KnowledgeBaseItemDetail knowledgeBaseItemDetail = new KnowledgeBaseItemDetail();
+            knowledgeBaseItemDetail.knowledgeBaseItem = item;
+            await Navigation.PushAsync(knowledgeBaseItemDetail);
             ((ListView)sender).SelectedItem = null;
         }
     }

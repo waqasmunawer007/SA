@@ -12,25 +12,34 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public DatabaseHelper databaseHelper;
-        KnowledgeBase item;
+        KnowledgeBaseBinding item;
         public ICommand ShareButtonCommand { get; set; }
         public ICommand FavouriteButtonCommand { get; set; }
 
         public KnowledgeBaseItemDetailVM()
         {
-            Item = new KnowledgeBase();
+            Item = new KnowledgeBaseBinding();
             databaseHelper = new DatabaseHelper();
             ShareButtonCommand = new Command((e) => {
 
                 //todo
             });
             FavouriteButtonCommand = new Command((e) => {
-
-                //todo
+                var knowledge = (e as KnowledgeBaseBinding);
+                databaseHelper.UpdateFavouriteKnowledgeBase(knowledge.id);
+                if (knowledge.is_favourite == "true")
+                {
+                    knowledge.is_favourite = "false";
+                }
+                else if (knowledge.is_favourite == "false")
+                {
+                    knowledge.is_favourite = "true";
+                }
+                Item = knowledge;
             });
         }
 
-        public KnowledgeBase Item
+        public KnowledgeBaseBinding Item
         {
             get { return item; }
             set
@@ -40,13 +49,25 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
             }
         }
 
-        public KnowledgeBase FetchKnowledgeBaseItemDetail(string id)
+        public KnowledgeBaseBinding FetchKnowledgeBaseItemDetail(string id)
         {
             var allKnowledgeBase = databaseHelper.GetKnowledgeBase();
-            if (allKnowledgeBase != null)
+            var allKnowledgeBaseFavourites = databaseHelper.GetKnowledgeBaseFavourite();
+
+            if (allKnowledgeBase != null && allKnowledgeBaseFavourites != null)
             {
                 KnowledgeBase itemDetail = allKnowledgeBase.First(x => x.id == id);
-                return itemDetail;
+                FavouriteKnowledgeBase favourite = allKnowledgeBaseFavourites.First(x => x.id == id);
+
+                KnowledgeBaseBinding kbb = new KnowledgeBaseBinding();
+
+                kbb.id = itemDetail.id;
+                kbb.title = itemDetail.title;
+                kbb.text = itemDetail.text;
+                kbb.category = itemDetail.category;
+                kbb.is_favourite = favourite.is_favourite;
+
+                return kbb;
             }
             else
             {

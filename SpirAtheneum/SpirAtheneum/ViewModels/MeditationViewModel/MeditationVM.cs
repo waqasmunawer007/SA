@@ -39,7 +39,6 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
             {
                 var appActivityService = new AppActivityService();
                 var activity = await appActivityService.FetchAppActivityAsync();
-
                 if (Settings.Meditation_LastUpdate != activity.First().meditations_lastupdated.last_updated)
                 {
                     List<MeditationModel> items = await FetchAllMeditationData();
@@ -71,7 +70,6 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
             {
                 Debug.WriteLine("Meditation data is empty on Meditation Category page");
                 return null;
-
             }
         }
 

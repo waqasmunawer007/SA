@@ -35,12 +35,10 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
         /// <returns></returns>
         public async Task<List<Category>> DatabaseOperation()
         {
-
             if (CrossConnectivity.Current.IsConnected)
             {
                 var appActivityService = new AppActivityService();
                 var activity = await appActivityService.FetchAppActivityAsync();
-
                 if (Settings.KnowledgeBase_LastUpdate != activity.First().knowledge_lastupdated.last_updated)
                 {
                     List<KnowledgeBaseModel> items = await FetchAllKnowledgeBaseData();
@@ -72,7 +70,6 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
             {
                 Debug.WriteLine("KnowledgeBase data is empty on KnowledgeBase Category page");
                 return null;
-
             }
         }
 
