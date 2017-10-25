@@ -1,4 +1,6 @@
-﻿using SpirAtheneum.Database;
+﻿using Plugin.Share;
+using Plugin.Share.Abstractions;
+using SpirAtheneum.Database;
 using SpirAtheneum.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -39,8 +41,11 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
             selectedCategoryType = type;
 
             ShareButtonCommand = new Command((e) => {
-
-                //todo
+                var a = (e as KnowledgeBaseBinding);
+                ShareMessage m = new ShareMessage();
+                m.Text = a.text;
+                m.Title = a.title;
+                CrossShare.Current.Share(m);
             });
             FavouriteButtonCommand = new Command((e) => {
                 var knowledge = (e as KnowledgeBaseBinding);

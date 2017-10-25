@@ -60,7 +60,7 @@
                     HeightRequest="40"  
                     HorizontalOptions="FillAndExpand" 
                     VerticalOptions="Center" 
-                    Text="SignUp" 
+                    Text="Sign up" 
                      Style="{StaticResource ButtonStyle}"
                     Command="{Binding AddButtonCommand}"
                     CommandParameter="{Binding Source={x:Reference main_container}, Path=BindingContext}"/>

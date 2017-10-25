@@ -1,4 +1,6 @@
 ﻿using Plugin.Connectivity;
+using Plugin.Share;
+using Plugin.Share.Abstractions;
 using Services.Models.DailyDigest;
 using Services.Models.Meditation;
 using Services.Services.AppActivity;
@@ -25,7 +27,6 @@ namespace SpirAtheneum.ViewModels.DailyDigestViewModel
         public ObservableCollection<DailyDigest> dailyDigestItems;
         public DatabaseHelper databaseHelper;
         public ICommand ShareButtonCommand { get; set; }
-        public ICommand FavouriteButtonCommand { get; set; }
         private bool isBusy = false;
 
         public DailyDigestItemsVM()
@@ -34,10 +35,10 @@ namespace SpirAtheneum.ViewModels.DailyDigestViewModel
             databaseHelper = new DatabaseHelper();
 
             ShareButtonCommand = new Command((e) => {
-                //todo
-            });
-            FavouriteButtonCommand = new Command((e) => {
-                //todo
+                var a = (e as DailyDigest);
+                ShareMessage m = new ShareMessage();
+                m.Text = a.text;
+                CrossShare.Current.Share(m);
             });
         }
 

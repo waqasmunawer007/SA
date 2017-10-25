@@ -67,7 +67,10 @@
                                         WidthRequest="25"
                                         HeightRequest="25">
                                         <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShareButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
+                                            <TapGestureRecognizer Command="{Binding ShareButtonCommand}" 
+                                                                  BindingContext="{Binding Source={x:Reference listView}, Path=BindingContext}"
+                                                                  CommandParameter="{Binding Source={x:Reference category_item}, Path=BindingContext}">>
+                                            </TapGestureRecognizer>
                                         </Image.GestureRecognizers>
                                     </Image>
                                 </StackLayout>

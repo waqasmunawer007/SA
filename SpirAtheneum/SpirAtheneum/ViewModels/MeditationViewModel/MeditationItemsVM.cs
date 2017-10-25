@@ -1,4 +1,6 @@
-﻿using Services.Models.Meditation;
+﻿using Plugin.Share;
+using Plugin.Share.Abstractions;
+using Services.Models.Meditation;
 using Services.Services.Meditation;
 using SpirAtheneum.Database;
 using SpirAtheneum.Models;
@@ -42,8 +44,11 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
             selectedCategoryType = type;
 
             ShareButtonCommand = new Command((e) => {
-                
-               //todo
+                var a = (e as MeditationBinding);
+                ShareMessage m = new ShareMessage();
+                m.Text = "Intro: "+a.intro+", Outro: "+a.outro;
+                m.Title = a.title;
+                CrossShare.Current.Share(m);
             });
             FavouriteButtonCommand = new Command((e) => {
                 var meditation = (e as MeditationBinding);
