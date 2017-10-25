@@ -8,7 +8,7 @@
         <!--Root Container use just to apply the same color on whole screen background -->
         <StackLayout VerticalOptions="FillAndExpand" 
                      HorizontalOptions="FillAndExpand"
-                      BackgroundColor="{StaticResource BackgroundColor}"
+                     BackgroundColor="{StaticResource BackgroundColor}"
                      Orientation="Vertical">
             <!--Button Container-->
             <StackLayout Padding="20,20,20,0"

@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SpirAtheneum.Views.Meditations.CategoryItems.CategoryItems"
+             x:Class="SpirAtheneum.Views.Favourites.MeditationFavourites"
              xmlns:local="clr-namespace:SpirAtheneum.Converters"
+             Title="Meditation"
+             Icon="icon_quill_white.png"
              BackgroundColor="{StaticResource BackgroundColor}">
 
     <ContentPage.Resources>
@@ -10,13 +12,20 @@
             <local:FavouriteImageConverter x:Key="imageconverter"></local:FavouriteImageConverter>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
 
         <StackLayout
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"  
             Margin="10,10,10,0 ">
+            <Label x:Name="NoDataLabel"
+               Text="No favourites found !" 
+               TextColor="White" 
+               FontSize="{StaticResource CellHeadingFontSize}" 
+               IsVisible="false" 
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"/>
             <ListView 
                 x:Name="listView"
                 RowHeight="70"
@@ -26,8 +35,8 @@
                 IsVisible="false">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                       <ViewCell >
-                           <!--Cell root container-->
+                        <ViewCell >
+                            <!--Cell root container-->
                             <StackLayout
                                Orientation="Horizontal" 
                                MinimumHeightRequest="70"        
@@ -43,7 +52,7 @@
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
                                     TextColor="White" />
-                                 <!--Cell button Container-->
+                                <!--Cell button Container-->
                                 <StackLayout
                                     HorizontalOptions="EndAndExpand" 
                                     Orientation="Horizontal">
@@ -60,24 +69,13 @@
                                             </TapGestureRecognizer>
                                         </Image.GestureRecognizers>
                                     </Image>
-                                    <!--Share Button image-->
-                                    <Image 
-                                        Source="icon_share.png" 
-                                        Margin="0,0,15,0"  
-                                        WidthRequest="25"
-                                        HeightRequest="25">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShareButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
-                                        </Image.GestureRecognizers>
-                                    </Image>
                                 </StackLayout>
-                             </StackLayout>
+                            </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-        
+
     </ContentPage.Content>
-    
 </ContentPage>

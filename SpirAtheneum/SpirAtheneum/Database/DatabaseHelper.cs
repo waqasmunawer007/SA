@@ -263,6 +263,10 @@ namespace SpirAtheneum.Database
 
         #region FavouriteMeditation
 
+        /// <summary>
+        /// Update favouritmeditation table in database
+        /// </summary>
+        /// <param name="id"></param>
         public void UpdateFavouriteMeditation(string id)
         {
             lock (collisionLock)
@@ -280,6 +284,10 @@ namespace SpirAtheneum.Database
             }
         }
 
+        /// <summary>
+        /// Get data from MeditationFavourite database table
+        /// </summary>
+        /// <returns></returns>
         public List<FavouriteMeditation> GetMeditationFavourite()
         {
             lock(collisionLock)
@@ -293,6 +301,10 @@ namespace SpirAtheneum.Database
 
         #region FavouriteKnowledge
 
+        /// <summary>
+        /// Update FavouriteKnowledgeBase table in the database
+        /// </summary>
+        /// <param name="id"></param>
         public void UpdateFavouriteKnowledgeBase(string id)
         {
             lock (collisionLock)
@@ -310,6 +322,10 @@ namespace SpirAtheneum.Database
             }
         }
 
+        /// <summary>
+        /// Get data from database table KnowledgeBase
+        /// </summary>
+        /// <returns></returns>
         public List<FavouriteKnowledgeBase> GetKnowledgeBaseFavourite()
         {
             lock (collisionLock)

@@ -1,43 +1,45 @@
-﻿using Services.Models.Meditation;
-using SpirAtheneum.Models;
-using SpirAtheneum.ViewModels.MeditationViewModel;
+﻿using SpirAtheneum.Models;
+using SpirAtheneum.ViewModels.FavouriteViewModel;
+using SpirAtheneum.Views.Meditations;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SpirAtheneum.Views.Meditations.CategoryItems
+namespace SpirAtheneum.Views.Favourites
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CategoryItems : ContentPage
+    public partial class MeditationFavourites : ContentPage
     {
-        MeditationItemsVM meditationVM;
-        string selectCategory;
+        MeditationFavouritesViewModel meditationVM;
 
-        public CategoryItems(string category)
+        public MeditationFavourites()
         {
             InitializeComponent();
-            NavigationPage.SetBackButtonTitle(this, "");
-            meditationVM = new MeditationItemsVM(category);
+            meditationVM = new MeditationFavouritesViewModel();
             BindingContext = meditationVM;
             listView.ItemsSource = meditationVM.MeditationBinding;
-            selectCategory = category;
-            Title = category;
         }
 
-       public void FetchAllItems()
-       {
-            List<MeditationBinding> categoryItems = meditationVM.FetchAllCategoryItems();
-            if (categoryItems != null && categoryItems.Count > 0)
-             {
-                    listView.IsVisible = true;
-                    UpdatePage(categoryItems);
-             }
+        public void FetchAllItems()
+        {
+            List<MeditationBinding> items = meditationVM.FetchAllFavourites();
+            if (items != null && items.Count >0)
+            {
+                listView.IsVisible = true;
+                UpdatePage(items);
+            }
             else
-             {
-                    listView.IsVisible = false;
-                    Debug.WriteLine("Category list item is empty");
-             }
+            {
+                listView.IsVisible = false;
+                NoDataLabel.IsVisible = true;
+                Debug.WriteLine("List in MeditationFavourites page is empty");
+            }
         }
 
         private void UpdatePage(List<MeditationBinding> data)
@@ -58,13 +60,14 @@ namespace SpirAtheneum.Views.Meditations.CategoryItems
         {
             meditationVM.MeditationBinding.Clear();
             listView.IsVisible = false;
+            NoDataLabel.IsVisible = false;
             base.OnDisappearing();
         }
 
         private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var selectedCategory = ((ListView)sender).SelectedItem;
-            MeditationBinding item = (MeditationBinding)selectedCategory;
+            var select = ((ListView)sender).SelectedItem;
+            MeditationBinding item = (MeditationBinding)select;
             MedItemDetail medItemDetail = new MedItemDetail();
             medItemDetail.meditationItem = item;
             await Navigation.PushAsync(medItemDetail);

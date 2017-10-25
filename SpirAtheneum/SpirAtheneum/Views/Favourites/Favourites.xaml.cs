@@ -10,11 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace SpirAtheneum.Views.Favourites
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Favourites : ContentPage
+	public partial class Favourites : TabbedPage
 	{
 		public Favourites ()
 		{
 			InitializeComponent ();
-		}
-	}
+        }
+    }
 }

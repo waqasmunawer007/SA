@@ -54,7 +54,7 @@ namespace SpirAtheneum.Views.KnowledgeBase
 
         protected override void OnDisappearing()
         {
-            knowledgeBaseVM.knowledgeBaseList.Clear();
+            knowledgeBaseVM.KnowledgeBaseBinding.Clear();
             listView.IsVisible = false;
             base.OnDisappearing();
         }
