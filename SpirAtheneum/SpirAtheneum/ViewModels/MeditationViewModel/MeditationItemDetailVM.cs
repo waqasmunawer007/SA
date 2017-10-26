@@ -30,8 +30,7 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
             ShareButtonCommand = new Command((e) => {
                 var a = (e as MeditationBinding);
                 ShareMessage m = new ShareMessage();
-                m.Text = "Intro: " + a.intro + ", Outro: " + a.outro;
-                m.Title = a.title;
+                m.Text = "Titlte:\n" + a.title + "\nIntro:\n" + a.intro + "\nOutro:\n" + a.outro;
                 CrossShare.Current.Share(m);
             });
             FavouriteButtonCommand = new Command((e) => {

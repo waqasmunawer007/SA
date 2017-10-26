@@ -1,6 +1,7 @@
 ﻿using Plugin.Share;
 using Plugin.Share.Abstractions;
 using SpirAtheneum.Database;
+using SpirAtheneum.Helpers;
 using SpirAtheneum.Models;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -25,8 +26,8 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
             ShareButtonCommand = new Command((e) => {
                 var a = (e as KnowledgeBaseBinding);
                 ShareMessage m = new ShareMessage();
-                m.Text = a.text;
-                m.Title = a.title;
+                HtmlParser htmlParser = new HtmlParser();
+                m.Text = a.title + ":\n" + htmlParser.GetFormattedTextFromHtml(a.text);
                 CrossShare.Current.Share(m);
             });
             FavouriteButtonCommand = new Command((e) => {

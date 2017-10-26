@@ -37,12 +37,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppUtils\CategoryUtil.cs" />
+    <Compile Include="Behaviors\EmailValidatorBehavior.cs" />
     <Compile Include="Constants\APIsConstant.cs" />
     <Compile Include="Converters\CustomDateFormateChangeConverter.cs" />
     <Compile Include="Converters\FavouriteImageConverter.cs" />
     <Compile Include="Converters\HTMLSourceConverter.cs" />
     <Compile Include="Customization\LoginButton.cs" />
     <Compile Include="Database\DatabaseHelper.cs" />
+    <Compile Include="Helpers\HtmlParser.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Interfaces\IDatabaseConnection.cs" />
     <Compile Include="Models\Category.cs" />
@@ -283,6 +285,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\Services\Services.projitems" Label="Shared" Condition="Exists('..\Services\Services.projitems')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.4.0.282\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.4.0.282\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />

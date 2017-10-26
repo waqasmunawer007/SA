@@ -15,6 +15,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using SpirAtheneum.Constants;
 using SpirAtheneum.Database;
+using System.Text.RegularExpressions;
 
 namespace SpirAtheneum.ViewModels
 {
@@ -113,15 +114,33 @@ namespace SpirAtheneum.ViewModels
         /// <param name="u"></param>
         public void LoginUser(User u)
         {
-            if (databaseHelper.GetUser(u))
+            var emailPattern = "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
+
+            if(u.Email != null && u.Email != "" && u.Password != null && u.Password != "")
             {
-                Settings.IsLogin = true;
-                App.Current.MainPage = new Views.Menu.MainPage();
+                if (Regex.IsMatch(u.Email, emailPattern))
+                {
+                    if (databaseHelper.GetUser(u))
+                    {
+                        Settings.IsLogin = true;
+                        App.Current.MainPage = new Views.Menu.MainPage();
+                    }
+                    else
+                    {
+                        ShowError = true;
+                        Message = AppConstant.LoginError;
+                    }
+                }
+                else
+                {
+                    ShowError = true;
+                    Message = "Please enter a valid email !";
+                }
             }
             else
             {
                 ShowError = true;
-                Message = AppConstant.LoginError;
+                Message = "Email and Password cannot be empty !";
             }
         }
 
@@ -131,13 +150,31 @@ namespace SpirAtheneum.ViewModels
         /// <param name="u"></param>
         public void SignupUser(User u)
         {
-            if (databaseHelper.AddUser(u))
+            var emailPattern = "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
+
+            if (u.Email != null && u.Email != "" && u.Password != null && u.Password != "")
             {
-                LoginUser(u);
+                if (Regex.IsMatch(u.Email, emailPattern))
+                {
+                    if (databaseHelper.AddUser(u))
+                    {
+                        LoginUser(u);
+                    }
+                    else
+                    {
+                        Application.Current.MainPage.DisplayAlert(AppConstant.Sorry, AppConstant.RegistrarionError, AppConstant.Done);
+                    }
+                }
+                else
+                {
+                    ShowError = true;
+                    Message = "Please enter a valid email !";
+                }
             }
             else
             {
-                Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.RegistrarionError, AppConstant.Done);
+                ShowError = true;
+                Message = "Email and Password cannot be empty !";
             }
         }
 
