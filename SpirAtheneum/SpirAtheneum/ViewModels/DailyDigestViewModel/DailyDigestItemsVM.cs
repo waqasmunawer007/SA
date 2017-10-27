@@ -67,12 +67,12 @@ namespace SpirAtheneum.ViewModels.DailyDigestViewModel
                 var appActivityService = new AppActivityService();
                 var activity =  await appActivityService.FetchAppActivityAsync();
 
-                if (Settings.DailyDigest_LastUpdate != activity.First().dailydigest_lastupdated.last_updated)
+                if (Settings.DailyDigest_LastUpdate != activity.First().digest_activity.last_updated)
                 {
                     List<DailyDigestModel> items = await FetchAllDigestItems();
                     databaseHelper.AddDailyDigest(items);
                     var dailyDigestLocalData = databaseHelper.GetDailyDigest();
-                    Settings.DailyDigest_LastUpdate = activity.First().dailydigest_lastupdated.last_updated;
+                    Settings.DailyDigest_LastUpdate = activity.First().digest_activity.last_updated;
                     return dailyDigestLocalData;
                 }
                 else

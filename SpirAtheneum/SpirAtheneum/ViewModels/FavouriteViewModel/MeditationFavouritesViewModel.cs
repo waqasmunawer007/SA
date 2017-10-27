@@ -74,8 +74,7 @@ namespace SpirAtheneum.ViewModels.FavouriteViewModel
                         MeditationBinding mb = new MeditationBinding();
 
                         mb.id = meditation.id;
-                        mb.intro = meditation.intro;
-                        mb.outro = meditation.outro;
+                        mb.html_string = meditation.html_string;
                         mb.title = meditation.title;
                         mb.category = meditation.category;
                         mb.is_favourite = f.is_favourite;

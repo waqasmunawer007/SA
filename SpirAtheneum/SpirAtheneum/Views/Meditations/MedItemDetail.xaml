@@ -8,6 +8,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:FavouriteImageConverter x:Key="imageconverter"></local:FavouriteImageConverter>
+            <local:HTMLSourceConverter x:Key="htmlSource"></local:HTMLSourceConverter>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -47,67 +48,8 @@
             </StackLayout>
 
             <!--Item detail container -->
-            <StackLayout  
-                  HorizontalOptions="StartAndExpand" 
-                  Margin="10,5,10,0"
-                  Orientation="Vertical">
-                <!--intro's detail label -->
-                <Label 
-                     HorizontalOptions="StartAndExpand" 
-                     VerticalOptions="StartAndExpand" 
-                     Text="{Binding  Item.intro}" 
-                      Margin="0,3,0,0"
-                     FontSize="{StaticResource LittleBitBigThanSmallFontSize}"
-                     TextColor="White"></Label>
-                <!--Steps container-->
-                <!--<StackLayout 
-                            HorizontalOptions="StartAndExpand"
-                            VerticalOptions="Start"
-                            Margin="0,5,0,0">
-                        
-                --><!--List showing the steps--><!--
-                
-                        <ListView 
-                                x:Name="stepsList" 
-                                SeparatorVisibility="None"  
-                                ItemsSource="{Binding Item.steps}"
-                                HorizontalOptions="Start"
-                                RowHeight="40"
-                                HeightRequest="150"
-                                BackgroundColor="{StaticResource BackgroundColor}"
-                                ItemTapped="stepsList_ItemTapped"
-                                VerticalOptions="Start" >
-                                 <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                     <ViewCell >
-                                        <StackLayout 
-                                           HorizontalOptions="StartAndExpand"
-                                           VerticalOptions="StartAndExpand"
-                                           Margin="0,5,0,0"
-                                           Orientation="Horizontal">
-                                            <Image 
-                                                Source="icon_filled_circle.png"
-                                                Margin="0,0,10,0"  
-                                                WidthRequest="15"
-                                                HeightRequest="15"/>
-                                           
-                 <Label Text="O"  TextColor="White" Margin="0,3,5,0"></Label>
-                
-                                                <Label Text="{Binding .}" Margin="0,0,0,2" VerticalTextAlignment="Center" FontSize="{StaticResource LittleBitBigThanSmallFontSize}"  TextColor="White" />
-                                            </StackLayout>
-                                    </ViewCell>
-                                    </DataTemplate>
-                                 </ListView.ItemTemplate>
-                            </ListView>
-                    </StackLayout>-->
-                <!--outro's detail label -->
-                <Label 
-                         HorizontalOptions="StartAndExpand" 
-                         VerticalOptions="StartAndExpand" 
-                         Text= "{Binding  Item.outro}" 
-                         FontSize="{StaticResource LittleBitBigThanSmallFontSize}"   
-                         Margin="0,3,0,0"
-                         TextColor="White"></Label>
+            <StackLayout Orientation = "Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,10,0,10" >
+                <WebView VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" Source="{Binding Item.html_string, Converter={StaticResource htmlSource}}" />
             </StackLayout>
             
         </StackLayout>

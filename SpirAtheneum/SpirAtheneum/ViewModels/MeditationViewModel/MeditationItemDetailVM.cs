@@ -3,6 +3,7 @@ using Plugin.Share.Abstractions;
 using Services.Models.Meditation;
 using Services.Services.Meditation;
 using SpirAtheneum.Database;
+using SpirAtheneum.Helpers;
 using SpirAtheneum.Models;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -30,7 +31,8 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
             ShareButtonCommand = new Command((e) => {
                 var a = (e as MeditationBinding);
                 ShareMessage m = new ShareMessage();
-                m.Text = "Titlte:\n" + a.title + "\nIntro:\n" + a.intro + "\nOutro:\n" + a.outro;
+                HtmlParser htmlParser = new HtmlParser();
+                m.Text = htmlParser.GetFormattedTextFromHtml(a.html_string);
                 CrossShare.Current.Share(m);
             });
             FavouriteButtonCommand = new Command((e) => {
@@ -83,8 +85,7 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
                 MeditationBinding mb = new MeditationBinding();
 
                 mb.id = itemDetail.id;
-                mb.intro = itemDetail.intro;
-                mb.outro = itemDetail.outro;
+                mb.html_string = itemDetail.html_string;
                 mb.title = itemDetail.title;
                 mb.category = itemDetail.category;
                 mb.is_favourite = favourite.is_favourite;

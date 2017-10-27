@@ -7,21 +7,21 @@ namespace Services.Models.AppActivity
     public class AppActivityModel
     {
         public string id { get; set; }
-        public DailydigestLastupdated dailydigest_lastupdated { get; set; }
-        public MeditationsLastupdated meditations_lastupdated { get; set; }
-        public KnowledgeLastupdated knowledge_lastupdated { get; set; }
+        public DigestActivity digest_activity { get; set; }
+        public MeditationsActivity meditation_activity { get; set; }
+        public KnowledgeActivity knowledge_activity { get; set; }
     }
-    public class DailydigestLastupdated
+    public class DigestActivity
     {
         public string last_updated { get; set; }
     }
 
-    public class MeditationsLastupdated
+    public class MeditationsActivity
     {
         public string last_updated { get; set; }
     }
 
-    public class KnowledgeLastupdated
+    public class KnowledgeActivity
     {
         public string last_updated { get; set; }
     }

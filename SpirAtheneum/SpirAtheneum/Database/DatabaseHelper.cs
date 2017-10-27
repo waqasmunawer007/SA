@@ -198,30 +198,16 @@ namespace SpirAtheneum.Database
                 database.Query<Meditation>("Delete from Meditation");
                 database.Query<Meditation>("DELETE FROM SQLITE_SEQUENCE WHERE name = 'Meditation'");
 
-                database.Query<Step>("Delete from Step");
-                database.Query<Step>("DELETE FROM SQLITE_SEQUENCE WHERE name = 'Step'");
-
                 foreach (var m in meditationList)
                 {
                     Meditation meditation = new Meditation();
 
                     meditation.id = m.id;
                     meditation.title = m.title;
-                    meditation.intro = m.intro;
-                    meditation.outro = m.outro;
+                    meditation.html_string = m.html_string;
                     meditation.category = m.category;
 
                     database.Insert(meditation);
-
-                    foreach (var s in m.steps)
-                    {
-                        Step step = new Step();
-
-                        step.step = s;
-                        step.meditation_id = m.id;
-
-                        database.Insert(step);
-                    }
                 }
 
                 foreach (var f in meditationList)
