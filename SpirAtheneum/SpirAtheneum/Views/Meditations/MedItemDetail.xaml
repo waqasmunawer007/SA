@@ -2,117 +2,57 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpirAtheneum.Views.Meditations.MedItemDetail"
-              BackgroundColor="{StaticResource BackgroundColor}">
-    <ContentPage.Content>
-      <!--  <ScrollView VerticalOptions = "StartAndExpand" HorizontalOptions="FillAndExpand">-->
-       
-        <StackLayout Margin = "10,5,10,0" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Orientation="Vertical">
-            <ActivityIndicator 
-                IsVisible="{Binding IsBusy}"
-                IsRunning="{Binding IsBusy}"
-                Color="White"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="CenterAndExpand"/>
-            <Label x:Name="NoDataLabel"
-               Text="No Data Found!" 
-               TextColor="White" 
-               FontSize="{StaticResource CellHeadingFontSize}" 
-               IsVisible="false" 
-               VerticalOptions="CenterAndExpand"
-               HorizontalOptions="Center"/>
-            <!--Container  for share and favourit button-->
-            <StackLayout 
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="StartAndExpand"
-                Orientation="Vertical" 
-                x:Name="needToShowHideLayout"
-                IsVisible="False">
-                <StackLayout
-                     HorizontalOptions="EndAndExpand" 
-                     Margin="0,8,0,0"
-                     Orientation="Horizontal">
-                    <!--Favourit button image-->
-                     <Image 
-                        Source="icon_heart_empty.png"  
-                        WidthRequest="30"
-                        HeightRequest="30">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding FavouritButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
-                        </Image.GestureRecognizers>
+             xmlns:local="clr-namespace:SpirAtheneum.Converters"
+             BackgroundColor="{StaticResource BackgroundColor}">
 
-                     </Image>
-                    <!--Share button image-->
-                    <Image 
-                        Source="icon_share.png"
-                        Margin="0,0,10,0"  
-                        WidthRequest="30"
-                        HeightRequest="30">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:FavouriteImageConverter x:Key="imageconverter"></local:FavouriteImageConverter>
+            <local:HTMLSourceConverter x:Key="htmlSource"></local:HTMLSourceConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" Spacing="-6">
+
+            <StackLayout Padding="10,10,10,10"  HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Orientation="Vertical" BackgroundColor="{StaticResource BurgundyColor}">
+
+                <StackLayout HorizontalOptions="EndAndExpand"
+                     VerticalOptions="CenterAndExpand"
+                     Orientation="Horizontal">
+                    <!--Favourite button image-->
+                    <Image Source="{Binding Item.is_favourite,Converter={StaticResource imageconverter}}" 
+                           Margin="0,0,10,0" 
+                           WidthRequest="25"
+                           HeightRequest="25">
                         <Image.GestureRecognizers>
-                           <TapGestureRecognizer Command="{Binding ShareButtonCommand}" CommandParameter="dummy"></TapGestureRecognizer>
+                            <TapGestureRecognizer Command="{Binding FavouriteButtonCommand}" 
+                                                  CommandParameter="{Binding Item}">
+                            </TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <!--Share button image-->
+                    <Image Source="icon_share.png" 
+                           Margin="0,0,15,0"  
+                           WidthRequest="25"
+                           HeightRequest="25">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShareButtonCommand}" 
+                                                  CommandParameter="{Binding Item}">
+                            </TapGestureRecognizer>
                         </Image.GestureRecognizers>
                     </Image>
                 </StackLayout>
-                <!--Item detail container -->
-                <StackLayout  
-                  HorizontalOptions="StartAndExpand" 
-                  Margin="5,5,0,0"
-                  Orientation="Vertical">
-                    <!--intro's detail label -->
-                    <Label 
-                     HorizontalOptions="StartAndExpand" 
-                     VerticalOptions="StartAndExpand" 
-                     Text="{Binding  MedItem.intro}" 
-                      Margin="0,3,0,0"
-                     FontSize="{StaticResource LittleBitBigThanSmallFontSize}"
-                     TextColor="White"></Label>
-                    <!--Steps container-->
-                    <StackLayout 
-                            HorizontalOptions="StartAndExpand"
-                            VerticalOptions="Start"
-                            Margin="0,5,0,0">
-                        <!--List showing the steps-->
-                        <ListView 
-                                x:Name="stepsList" 
-                                SeparatorVisibility="None"  
-                                ItemsSource="{Binding MedItem.steps}"
-                                HorizontalOptions="Start"
-                                RowHeight="40"
-                                HeightRequest="150"
-                                BackgroundColor="{StaticResource BackgroundColor}"
-                                ItemTapped="stepsList_ItemTapped"
-                                VerticalOptions="Start" >
-                                 <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                     <ViewCell >
-                                        <StackLayout 
-                                           HorizontalOptions="StartAndExpand"
-                                           VerticalOptions="StartAndExpand"
-                                           Margin="0,5,0,0"
-                                           Orientation="Horizontal">
-                                            <Image 
-                                                Source="icon_filled_circle.png"
-                                                Margin="0,0,10,0"  
-                                                WidthRequest="15"
-                                                HeightRequest="15"/>
-                                           <!-- <Label Text="O"  TextColor="White" Margin="0,3,5,0"></Label>-->
-                                                <Label Text="{Binding .}" Margin="0,0,0,2" VerticalTextAlignment="Center" FontSize="{StaticResource LittleBitBigThanSmallFontSize}"  TextColor="White" />
-                                            </StackLayout>
-                                    </ViewCell>
-                                    </DataTemplate>
-                                 </ListView.ItemTemplate>
-                            </ListView>
-                    </StackLayout>
-                        <!--outro's detail label -->
-                    <Label 
-                         HorizontalOptions="StartAndExpand" 
-                         VerticalOptions="StartAndExpand" 
-                         Text= "{Binding  MedItem.outro}" 
-                         FontSize="{StaticResource LittleBitBigThanSmallFontSize}"   
-                         Margin="0,3,0,0"
-                         TextColor="White"></Label>
-                </StackLayout>
+
             </StackLayout>
-       </StackLayout>
+
+            <!--Item detail container -->
+            <StackLayout Orientation = "Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,10,0,10" >
+                <WebView VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" Source="{Binding Item.html_string, Converter={StaticResource htmlSource}}" />
+            </StackLayout>
+            
+        </StackLayout>
      <!--</ScrollView>-->
     </ContentPage.Content>
 </ContentPage>

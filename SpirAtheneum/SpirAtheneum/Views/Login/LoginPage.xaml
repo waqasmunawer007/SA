@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpirAtheneum.Views.Login.LoginPage"
              xmlns:local="clr-namespace:SpirAtheneum.Renderers;assembly=SpirAtheneum"
+             xmlns:behavior="clr-namespace:SpirAtheneum.Behaviors"
              Title="Spiritual Atheneum">
     <ContentPage.Content>
         <StackLayout 
@@ -28,8 +29,7 @@
                 TextColor="{ DynamicResource ErrorColor }"
                 FontSize = "14"
                 Text="{Binding Message}"
-                HorizontalTextAlignment="Center"
-                    />
+                HorizontalTextAlignment="Center"/>
             <!-- Login Forms -->
             <StackLayout 
                  Margin="16,15,16,0"
@@ -46,12 +46,12 @@
                    TextColor="{StaticResource NormalTextColor}"
                    Margin="0,45,0,0"/>
 
-                <local:LoginEntry 
-                    VerticalOptions="Center"
+                <local:LoginEntry VerticalOptions="Center"
                     HorizontalOptions="FillAndExpand"
-                    Text="{Binding  DBUser.Email}"
+                    Text="{Binding  User.Email}"
                     BackgroundColor="{StaticResource BackgroundColor}" 
-                    TextColor="{StaticResource NormalTextColor}"/>
+                    TextColor="{StaticResource NormalTextColor}">
+                </local:LoginEntry>
 
                 <Label 
                     Margin="0,5,0,0"
@@ -64,20 +64,21 @@
                 <local:LoginEntry
                     VerticalOptions="Center"
                     HorizontalOptions="FillAndExpand"
-                    Text="{Binding  DBUser.Password}"
+                    Text="{Binding  User.Password}"
                     BackgroundColor="{StaticResource BackgroundColor}" 
                     TextColor="{StaticResource NormalTextColor}"
                     IsPassword="True"/>
-                   
-               <local:GeneralButton 
+
+                <local:GeneralButton 
                     Margin="0,25,0,20"
                     HeightRequest="40"  
                     HorizontalOptions="FillAndExpand" 
                     VerticalOptions="Center" 
                     Text="Login" 
-                     Style="{StaticResource ButtonStyle}"
+                    Style="{StaticResource ButtonStyle}"
                     Command="{Binding LoginButtonCommand}"
                     CommandParameter="{Binding Source={x:Reference main_container}, Path=BindingContext}"/>
+                
                 <Label 
                     Text="Create Account" 
                     HorizontalOptions="FillAndExpand" 

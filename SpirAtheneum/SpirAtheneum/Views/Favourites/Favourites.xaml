@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SpirAtheneum.Views.Favourites.Favourites">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:SpirAtheneum.Views.Favourites"
+            x:Class="SpirAtheneum.Views.Favourites.Favourites"
+            Title="Favourites"
+            BarBackgroundColor="#2B2B2B">
+
+    <local:MeditationFavourites/>
+    <local:KnowledgeBaseFavourites/>
+
+</TabbedPage>

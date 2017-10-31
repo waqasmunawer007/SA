@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpirAtheneum.Views.DailyDigest.DailyDigestItemsPage"
+             xmlns:local="clr-namespace:SpirAtheneum.Converters"
+             Title="Daily Digest"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CustomDateFormateChangeConverter x:Key="CustomDateFormate"></local:CustomDateFormateChangeConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"  
+            Margin="10,10,10,0 ">
+            <ActivityIndicator 
+                IsVisible="{Binding IsBusy}"
+                IsRunning="{Binding IsBusy}"
+                HorizontalOptions="CenterAndExpand"
+                Color="White"
+                VerticalOptions="CenterAndExpand"/>
+            <Label x:Name="NoDataLabel"
+               Text="No Data Found!" 
+               TextColor="White" 
+               FontSize="{StaticResource CellHeadingFontSize}" 
+               IsVisible="false" 
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"/>
+            <ListView 
+                x:Name="listView"
+                RowHeight="100"
+                HasUnevenRows="True"
+                SeparatorVisibility="None"
+                ItemTapped = "listView_ItemTappedAsync"
+                BackgroundColor="{StaticResource BackgroundColor}"
+                IsVisible="false">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell >
+                            <!--Root Layout for list Cell--> 
+                            <StackLayout 
+                               VerticalOptions="FillAndExpand" 
+                               Margin="0,10,0,5"
+                               x:Name="category_item"
+                               Orientation="Vertical">
+                                <!--Date Label-->
+                                <Label
+                                    Text="{Binding publish_date , StringFormat='{}{0:dddd MMMM dd, yyyy}'}"
+                                    HorizontalOptions="EndAndExpand"
+                                    FontSize="{StaticResource NormalFontSize}"
+                                    HorizontalTextAlignment="End"
+                                    VerticalTextAlignment="Center"
+                                    TextColor="White" />
+                                <!--Cell body container-->
+                                <StackLayout
+                                    Orientation="Vertical" 
+                                    MinimumHeightRequest="60" 
+                                    BackgroundColor="{StaticResource BurgundyColor}">
+                                    <!--text label-->
+                                     <Label
+                                        Text="{Binding text}"
+                                        HorizontalOptions="StartAndExpand"
+                                        Margin="10,10,0,0"
+                                        FontSize="{StaticResource LittleBitBigThanSmallFontSize}"
+                                        HorizontalTextAlignment="Start"
+                                        VerticalTextAlignment="Center"
+                                        TextColor="White" />
+                                        <!--Image will use as Share Button-->
+                                     <StackLayout
+                                           HorizontalOptions="EndAndExpand" 
+                                           Margin="0,0,0,10"
+                                           Orientation="Horizontal">
+                                           <Image 
+                                              Source="icon_share.png" 
+                                              Margin="0,0,15,0"  
+                                              WidthRequest="25"
+                                              HeightRequest="25">
+                                                <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ShareButtonCommand}" 
+                                                                      BindingContext="{Binding Source={x:Reference listView}, Path=BindingContext}"
+                                                                      CommandParameter="{Binding Source={x:Reference category_item}, Path=BindingContext}">
+                                                </TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                          </Image>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

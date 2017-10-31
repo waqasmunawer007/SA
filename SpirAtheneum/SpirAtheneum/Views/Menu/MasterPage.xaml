@@ -30,11 +30,7 @@
                                 FontSize="18"
                                 TextColor="Black"
                                VerticalOptions="CenterAndExpand"
-                               HorizontalOptions="StartAndExpand"
-                              
-         />
-                    <!--<Label Text="Name: " VerticalOptions="Center" FontSize="{StaticResource NormalFontSize}" HorizontalOptions="StartAndExpand" TextColor="Black"/>
-                <Label Text="XYZ " x:Name="UserName" VerticalOptions="Center" FontSize="{StaticResource NormalFontSize}" HorizontalOptions="StartAndExpand" />-->
+                               HorizontalOptions="StartAndExpand"/>
             </StackLayout>
             <!-- Menu Items -->
             <ListView x:Name="listView" Margin="0,20,0,0" SeparatorVisibility="None">

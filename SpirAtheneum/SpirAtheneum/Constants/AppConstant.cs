@@ -7,6 +7,7 @@ namespace SpirAtheneum.Constants
 		// Meditation Api's  
         public static string Done = "OK";
 		public static string Congratulation = "Congratulation!";
+        public static string Sorry = "Sorry!";
         public static string Error = "Error!";
 		public static string RegistrarionSuccess = "Your account has been registered.";
 		public static string RegistrarionError = "Email already exist.Please try again.";

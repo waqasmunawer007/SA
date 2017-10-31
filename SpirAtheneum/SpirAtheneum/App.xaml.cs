@@ -1,4 +1,5 @@
-﻿using SpirAtheneum.Helpers;
+﻿using SpirAtheneum.Database;
+using SpirAtheneum.Helpers;
 using SpirAtheneum.Views.Login;
 using SpirAtheneum.Views.Meditations;
 using Xamarin.Forms;
@@ -10,6 +11,10 @@ namespace SpirAtheneum
         public App()
         {
             InitializeComponent();
+
+            DatabaseHelper databaseHelper = new DatabaseHelper();
+            databaseHelper.CreateDatabase();
+
             if (Settings.IsLogin)
             {
                  MainPage = new Views.Menu.MainPage();  

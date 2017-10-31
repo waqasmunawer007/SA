@@ -19,7 +19,18 @@
                     Text="Create Account" 
                     FontSize="{StaticResource HeadingFontSize}" 
                     TextColor="{StaticResource NormalTextColor}"/>
-             
+
+            <!-- Error Message Label -->
+            <Label
+                 Margin="0,10,0,0"
+                IsEnabled="{Binding ShowError}"
+                IsVisible="{Binding ShowError}"
+                HorizontalOptions="CenterAndExpand"
+                TextColor="{ DynamicResource ErrorColor }"
+                FontSize = "14"
+                Text="{Binding Message}"
+                HorizontalTextAlignment="Center"/>
+
             <!-- Sign Up Forms -->
             <StackLayout 
                  Margin="16,15,16,0"
@@ -36,7 +47,7 @@
                 <local:LoginEntry 
                     VerticalOptions="Center"
                     HorizontalOptions="FillAndExpand"
-                    Text="{Binding  DBUser.Email}"
+                    Text="{Binding  User.Email}"
                     BackgroundColor="{StaticResource BackgroundColor}" 
                     TextColor="{StaticResource NormalTextColor}"/>
                    
@@ -51,7 +62,7 @@
                 <local:LoginEntry
                     VerticalOptions="Center"
                     HorizontalOptions="FillAndExpand"
-                    Text="{Binding  DBUser.Password}"
+                    Text="{Binding  User.Password}"
                     IsPassword="True"
                     BackgroundColor="{StaticResource BackgroundColor}" 
                     TextColor="{StaticResource NormalTextColor}" />
@@ -60,7 +71,7 @@
                     HeightRequest="40"  
                     HorizontalOptions="FillAndExpand" 
                     VerticalOptions="Center" 
-                    Text="SignUp" 
+                    Text="Sign up" 
                      Style="{StaticResource ButtonStyle}"
                     Command="{Binding AddButtonCommand}"
                     CommandParameter="{Binding Source={x:Reference main_container}, Path=BindingContext}"/>

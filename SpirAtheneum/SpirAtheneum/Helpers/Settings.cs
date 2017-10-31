@@ -22,11 +22,14 @@ namespace SpirAtheneum.Helpers
 		#region Setting Constants
 
 		private const string SettingsKey = "settings_key";
-        private const string LoginKey = "login"; 
-
+        private const string LoginKey = "login";
 
 		private static readonly string SettingsDefault = string.Empty;
         private static readonly bool LoginDefault = false;
+
+        private const string DailyDigestKey = "DailyDigest";
+        private const string MeditationKey = "Meditation";
+        private const string KnowledgeBaseKey = "KnowledgeBase";
 
         #endregion
 
@@ -53,6 +56,38 @@ namespace SpirAtheneum.Helpers
                 AppSettings.AddOrUpdateValue(LoginKey, value);
             }
         }
-
+        public static string DailyDigest_LastUpdate 
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(DailyDigestKey, "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(DailyDigestKey, value);
+            }
+        }
+        public static string Meditation_LastUpdate
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(MeditationKey, "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(MeditationKey, value);
+            }
+        }
+        public static string KnowledgeBase_LastUpdate
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(KnowledgeBaseKey, "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(KnowledgeBaseKey, value);
+            }
+        }
     }
 }

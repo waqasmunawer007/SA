@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace SpirAtheneum.Interfaces
 {
    public interface IDatabaseConnection
     {
-        SQLite.SQLiteConnection DbConnection();
+        SQLiteConnection DbConnection();
     }
 }

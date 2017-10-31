@@ -15,7 +15,6 @@ namespace SpirAtheneum.Converters
             if (value != null)
             {
                 string date = (string)value;
-                int a = 0;
                 return DateTimeCustmization(date);
             }
 

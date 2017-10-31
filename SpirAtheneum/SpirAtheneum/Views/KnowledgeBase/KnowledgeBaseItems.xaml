@@ -1,10 +1,86 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SpirAtheneum.Views.KnowledgeBase.KnowledgeBaseItems">
+             x:Class="SpirAtheneum.Views.KnowledgeBase.KnowledgeBaseItems"
+             xmlns:local="clr-namespace:SpirAtheneum.Converters"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:FavouriteImageConverter x:Key="imageconverter"></local:FavouriteImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
+
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"  
+            Margin="10,10,10,0 ">
+            <ListView 
+                x:Name="listView"
+                RowHeight="70"
+                SeparatorVisibility="None"
+                ItemTapped="listView_ItemTapped"
+                BackgroundColor="{StaticResource BackgroundColor}"
+                IsVisible="false">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell >
+                            <!--Cell root container-->
+                            <StackLayout
+                               Orientation="Horizontal" 
+                               MinimumHeightRequest="70"        
+                               Margin="0,0,0,5"
+                               x:Name="category_item"
+                               BackgroundColor="{StaticResource BurgundyColor}">
+                                <!--Meditation Item Title label-->
+                                <Label
+                                    Text="{Binding title}"
+                                    HorizontalOptions="StartAndExpand"
+                                    Margin="10,0,0,0"
+                                    FontSize="{StaticResource LittleBitBigThanSmallFontSize}"
+                                    HorizontalTextAlignment="Start"
+                                    VerticalTextAlignment="Center"
+                                    TextColor="White" />
+                                <!--Cell button Container-->
+                                <StackLayout
+                                    HorizontalOptions="EndAndExpand" 
+                                    Orientation="Horizontal">
+                                    <!--Favourite Button image-->
+                                    <Image 
+                                         Source="{Binding is_favourite,Converter={StaticResource imageconverter}}" 
+                                         Margin="0,0,10,0" 
+                                         WidthRequest="25"
+                                         HeightRequest="25">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding FavouriteButtonCommand}" 
+                                                                  BindingContext="{Binding Source={x:Reference listView}, Path=BindingContext}"
+                                                                  CommandParameter="{Binding Source={x:Reference category_item}, Path=BindingContext}">
+                                            </TapGestureRecognizer>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <!--Share Button image-->
+                                    <Image 
+                                        Source="icon_share.png" 
+                                        Margin="0,0,15,0"  
+                                        WidthRequest="25"
+                                        HeightRequest="25">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ShareButtonCommand}" 
+                                                                  BindingContext="{Binding Source={x:Reference listView}, Path=BindingContext}"
+                                                                  CommandParameter="{Binding Source={x:Reference category_item}, Path=BindingContext}">>
+                                            </TapGestureRecognizer>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
+        
     </ContentPage.Content>
+
 </ContentPage>

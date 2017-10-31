@@ -1,11 +1,13 @@
-﻿using Services.Models.Meditation;
+﻿using Plugin.Share;
+using Plugin.Share.Abstractions;
+using Services.Models.Meditation;
 using Services.Services.Meditation;
-using System;
-using System.Collections.Generic;
+using SpirAtheneum.Database;
+using SpirAtheneum.Helpers;
+using SpirAtheneum.Models;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -14,61 +16,89 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
 {
     class MeditationItemDetailVM : INotifyPropertyChanged
     {
-        private bool isBusy = false;
         public event PropertyChangedEventHandler PropertyChanged;
-        MeditationModel medItem;
+        public DatabaseHelper databaseHelper;
+        MeditationBinding item;
+        //Step stepitems;
         public ICommand ShareButtonCommand { get; set; }
-        public ICommand FavouritButtonCommand { get; set; }
+        public ICommand FavouriteButtonCommand { get; set; }
+
         public MeditationItemDetailVM()
         {
-             medItem = new MeditationModel();
+            item = new MeditationBinding();
+            databaseHelper = new DatabaseHelper();
+
             ShareButtonCommand = new Command((e) => {
-
-                //todo
+                var a = (e as MeditationBinding);
+                ShareMessage m = new ShareMessage();
+                HtmlParser htmlParser = new HtmlParser();
+                m.Text = htmlParser.GetFormattedTextFromHtml(a.html_string);
+                CrossShare.Current.Share(m);
             });
-            FavouritButtonCommand = new Command((e) => {
-
-                //todo
+            FavouriteButtonCommand = new Command((e) => {
+                var meditation = (e as MeditationBinding);
+                databaseHelper.UpdateFavouriteMeditation(meditation.id);
+                if (meditation.is_favourite == "true")
+                {
+                    meditation.is_favourite = "false";
+                }
+                else if (meditation.is_favourite == "false")
+                {
+                    meditation.is_favourite = "true";
+                }
+                Item = meditation;
             });
         }
 
-        public MeditationModel MedItem
+        public MeditationBinding Item
          {
-            get { return medItem; }
+            get { return item; }
             set
             {
-                medItem = value;
-                OnPropertyChanged("MedItem");
+                item = value;
+                OnPropertyChanged("Item");
             }
          }
 
-        public async Task<MeditationModel> FetchAllMeditationDetailItem(string id)
-        {
-            var meditationService = new MeditationService();
-            MeditationModel med = await meditationService.fetchMeditationBaseOnIdAsync(id);
-            if (med != null) 
-             {
-                return med;
-             }
-            else
-             {
-                Debug.WriteLine("Meditaion empty return");
-                return null;
-             }
-        }
+        //public Step Steps
+        //{
+        //    get { return stepitems; }
+        //    set
+        //    {
+        //        stepitems = value;
+        //        OnPropertyChanged("Steps");
+        //    }
+        //}
 
-        public bool IsBusy
+
+        public MeditationBinding FetchMeditationItemDetail(string id)
         {
-            get { return isBusy; }
-            set
+            var allMeditation = databaseHelper.GetMeditation();
+            var allMeditationFavourites = databaseHelper.GetMeditationFavourite();
+            //var allSteps = databaseHelper.GetMeditationSteps();
+
+            if (allMeditation != null && allMeditationFavourites != null)
             {
-                if (isBusy != value)
-                {
-                    isBusy = value;
-                    OnPropertyChanged("IsBusy");
-                }
+                Meditation itemDetail = allMeditation.First(x => x.id == id);
+                FavouriteMeditation favourite = allMeditationFavourites.First(x => x.id == id);
+
+                MeditationBinding mb = new MeditationBinding();
+
+                mb.id = itemDetail.id;
+                mb.html_string = itemDetail.html_string;
+                mb.title = itemDetail.title;
+                mb.category = itemDetail.category;
+                mb.is_favourite = favourite.is_favourite;
+
+                return mb;
+            }
+            else
+            {
+                Debug.WriteLine("Meditation item detail in MeditationItemDetail page is empty");
+                return null;
             }
         }
+
         protected virtual void OnPropertyChanged(string propertyName)
          {
             var changed = PropertyChanged;

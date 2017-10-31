@@ -10,6 +10,5 @@ namespace Services.Services.DailyDigestService
     {
        Task<DailyDigestModel[]> FetchAllDigestAsync();
        Task<DailyDigestModel> FetchDigestBaseOnIdAsync(string id);
-
     }
 }

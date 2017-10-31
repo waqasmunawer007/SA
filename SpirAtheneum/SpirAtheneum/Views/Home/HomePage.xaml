@@ -8,7 +8,7 @@
         <!--Root Container use just to apply the same color on whole screen background -->
         <StackLayout VerticalOptions="FillAndExpand" 
                      HorizontalOptions="FillAndExpand"
-                      BackgroundColor="{StaticResource BackgroundColor}"
+                     BackgroundColor="{StaticResource BackgroundColor}"
                      Orientation="Vertical">
             <!--Button Container-->
             <StackLayout Padding="20,20,20,0"
@@ -83,7 +83,7 @@
                     <Image
                             VerticalOptions="CenterAndExpand"
                             HorizontalOptions="Start"
-                            Source="icon_quill_white.png"
+                            Source="icon_book_menu_white.png"
                             WidthRequest="25"
                             HeightRequest="25"/>
                     <Label Margin="10,5,0,0"
