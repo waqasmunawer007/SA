@@ -114,11 +114,11 @@ namespace SpirAtheneum.ViewModels
         /// <param name="u"></param>
         public void LoginUser(User u)
         {
-            var emailPattern = "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
+           
 
             if(u.Email != null && u.Email != "" && u.Password != null && u.Password != "")
             {
-                if (Regex.IsMatch(u.Email, emailPattern))
+                if (Regex.IsMatch(u.Email, AppConstant.EmailPatteren))
                 {
                     if (databaseHelper.GetUser(u))
                     {
@@ -150,15 +150,15 @@ namespace SpirAtheneum.ViewModels
         /// <param name="u"></param>
         public void SignupUser(User u)
         {
-            var emailPattern = "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
-
             if (u.Email != null && u.Email != "" && u.Password != null && u.Password != "")
             {
-                if (Regex.IsMatch(u.Email, emailPattern))
+                if (Regex.IsMatch(u.Email, AppConstant.EmailPatteren))
                 {
                     if (databaseHelper.AddUser(u))
                     {
-                        LoginUser(u);
+						//LoginUser(u);
+						Settings.IsLogin = true;
+						App.Current.MainPage = new Views.Menu.MainPage();
                     }
                     else
                     {
