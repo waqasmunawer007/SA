@@ -1,9 +1,8 @@
-﻿using Plugin.Share;
-using Plugin.Share.Abstractions;
-using Services.Models.Meditation;
+﻿using Services.Models.Meditation;
 using Services.Services.Meditation;
 using SpirAtheneum.Database;
 using SpirAtheneum.Helpers;
+using SpirAtheneum.Interfaces;
 using SpirAtheneum.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,10 +45,14 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
 
             ShareButtonCommand = new Command((e) => {
                 var a = (e as MeditationBinding);
-                ShareMessage m = new ShareMessage();
+
                 HtmlParser htmlParser = new HtmlParser();
-                m.Text = htmlParser.GetFormattedTextFromHtml(a.html_string);
-                CrossShare.Current.Share(m);
+
+                var text = htmlParser.GetFormattedTextFromHtml(a.html_string);
+                var shareMessage = a.title + ":\n" + a.share_message;
+
+                var share = DependencyService.Get<IShare>();
+                share.Show(text, shareMessage);
             });
             FavouriteButtonCommand = new Command((e) => {
                 var meditation = (e as MeditationBinding);
@@ -93,6 +96,7 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
                     mb.html_string = meditation.html_string;
                     mb.title = meditation.title;
                     mb.category = meditation.category;
+                    mb.share_message = meditation.share_message;
                     mb.is_favourite = favourite.is_favourite;
 
                     combinedList.Add(mb);

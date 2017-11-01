@@ -59,7 +59,7 @@ namespace SpirAtheneum.Platform
 					}
 					else if (packageName.Contains("mms"))
 					{
-						intent.PutExtra(Intent.ExtraText, "mms text");
+						intent.PutExtra(Intent.ExtraText, TextContents);
 					}
 					else if (packageName.Contains("android.gm"))
 					{ // If Gmail shows up twice, try removing this else-if clause and the reference to "android.gm" above

@@ -49,7 +49,7 @@
             </StackLayout>
 
             <StackLayout Orientation = "Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,10,0,10" >
-                <WebView VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" Source="{Binding Item.text, Converter={StaticResource htmlSource}}" />
+                <WebView VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource BackgroundColor}" Source="{Binding Item.text, Converter={StaticResource htmlSource}}" />
             </StackLayout>
 
         </StackLayout>

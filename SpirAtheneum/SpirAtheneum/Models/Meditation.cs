@@ -13,6 +13,7 @@ namespace SpirAtheneum.Models
         public string id { get; set; }
         public string title { get; set; }
         public string html_string { get; set; }
+        public string share_message { get; set; }
         public string category { get; set; }
     }
 }

@@ -151,6 +151,7 @@ namespace SpirAtheneum.Database
                     knowledgeBase.id = k.id;
                     knowledgeBase.title = k.title;
                     knowledgeBase.text = k.text;
+                    knowledgeBase.share_message = k.share_message;
                     knowledgeBase.category = k.category;
 
                     database.Insert(knowledgeBase);
@@ -205,6 +206,7 @@ namespace SpirAtheneum.Database
                     meditation.id = m.id;
                     meditation.title = m.title;
                     meditation.html_string = m.html_string;
+                    meditation.share_message = m.share_message;
                     meditation.category = m.category;
 
                     database.Insert(meditation);

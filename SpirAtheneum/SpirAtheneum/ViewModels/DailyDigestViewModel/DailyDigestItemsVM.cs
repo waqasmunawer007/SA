@@ -1,12 +1,11 @@
 ﻿using Plugin.Connectivity;
-using Plugin.Share;
-using Plugin.Share.Abstractions;
 using Services.Models.DailyDigest;
 using Services.Models.Meditation;
 using Services.Services.AppActivity;
 using Services.Services.DailyDigest;
 using SpirAtheneum.Database;
 using SpirAtheneum.Helpers;
+using SpirAtheneum.Interfaces;
 using SpirAtheneum.Models;
 using System;
 using System.Collections.Generic;
@@ -36,9 +35,8 @@ namespace SpirAtheneum.ViewModels.DailyDigestViewModel
 
             ShareButtonCommand = new Command((e) => {
                 var a = (e as DailyDigest);
-                ShareMessage m = new ShareMessage();
-                m.Text = a.text;
-                CrossShare.Current.Share(m);
+                var share = DependencyService.Get<IShare>();
+                share.Show(a.text, a.text);
             });
         }
 
