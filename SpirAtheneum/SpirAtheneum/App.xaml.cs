@@ -1,5 +1,6 @@
 ﻿using SpirAtheneum.Database;
 using SpirAtheneum.Helpers;
+using SpirAtheneum.Interfaces;
 using SpirAtheneum.Views.Login;
 using SpirAtheneum.Views.Meditations;
 using Xamarin.Forms;
@@ -23,7 +24,7 @@ namespace SpirAtheneum
             {
                 MainPage = new NavigationPage(new LoginPage());
             }
-           
+		
         }
 
         protected override void OnStart()
