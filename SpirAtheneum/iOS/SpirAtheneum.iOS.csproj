@@ -170,6 +170,8 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="CustomRenderer\LoginEntryRenderer.cs" />
+    <Compile Include="Platform\Share.cs" />
+    <Compile Include="Platform\MyActivityItemProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\About.png" />
@@ -256,6 +258,9 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icon_book_menu_white%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Platform\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
