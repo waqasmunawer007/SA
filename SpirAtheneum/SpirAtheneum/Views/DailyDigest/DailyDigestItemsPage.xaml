@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpirAtheneum.Views.DailyDigest.DailyDigestItemsPage"
              xmlns:local="clr-namespace:SpirAtheneum.Converters"
+             xmlns:control="clr-namespace:SpirAtheneum.Renderers"
              Title="Daily Digest"
              BackgroundColor="{StaticResource BackgroundColor}">
     <ContentPage.Resources>
@@ -91,6 +92,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <control:AdMob VerticalOptions="End" WidthRequest="320" HeightRequest="50"/>
+            
         </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

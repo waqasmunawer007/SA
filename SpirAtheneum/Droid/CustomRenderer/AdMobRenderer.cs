@@ -28,7 +28,7 @@ namespace SpirAtheneum.Droid.CustomRenderer
             {
                 var ad = new AdView(Forms.Context);
                 ad.AdSize = AdSize.Banner;
-                ad.AdUnitId = "ca-app-pub-3940256099942544/6300978111";
+                ad.AdUnitId = "ca-app-pub-5129849535433603/2834914773";
 
                 var requestbuilder = new AdRequest.Builder();
                 ad.LoadAd(requestbuilder.Build());

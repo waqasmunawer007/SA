@@ -16,7 +16,7 @@ namespace SpirAtheneum.iOS.CustomRenderer
 {
     public class AdMobRenderer : ViewRenderer
     {
-        const string AdmobID = "ca-app-pub-3940256099942544/6300978111";
+        const string AdmobID = "ca-app-pub-5129849535433603/2834914773";
 
         BannerView adView;
         bool viewOnScreen;
