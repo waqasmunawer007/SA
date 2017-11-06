@@ -34,10 +34,10 @@ namespace SpirAtheneum.Views.Home
             Navigation.PushAsync(new Views.KnowledgeBase.Categories());
         }
 
-        void ContentClick_Handler(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new Views.Content.Content());
-        }
+        //void ContentClick_Handler(object sender, EventArgs e)
+        //{
+        //    Navigation.PushAsync(new Views.Content.Content());
+        //}
 
         void FavouritesClick_Handler(object sender, EventArgs e)
         {

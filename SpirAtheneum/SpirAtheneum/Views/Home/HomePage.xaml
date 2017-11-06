@@ -96,7 +96,7 @@
                     </Label>
                 </StackLayout>
                 <!-- Content Button-->
-                <StackLayout
+                <!--<StackLayout
                    Padding="20,0,0,0"
                    Margin="0,4,0,0"
                    HorizontalOptions="FillAndExpand" 
@@ -122,7 +122,7 @@
                                     VerticalTextAlignment="Center"
                                    FontSize="{StaticResource HeadingFontSize}"/>
 
-                </StackLayout>
+                </StackLayout>-->
                 <!-- Favourites Button-->
                 <StackLayout
                    Padding="20,0,0,0"

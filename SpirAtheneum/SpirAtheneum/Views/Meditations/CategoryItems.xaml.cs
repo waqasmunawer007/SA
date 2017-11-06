@@ -18,6 +18,11 @@ namespace SpirAtheneum.Views.Meditations.CategoryItems
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
+			ToolbarItems.Add(new ToolbarItem("", "icon_home_white.png", () =>
+			{
+				//logic code goes here
+				Application.Current.MainPage = new Views.Menu.MainPage();
+			}));
             meditationVM = new MeditationItemsVM(category);
             BindingContext = meditationVM;
             listView.ItemsSource = meditationVM.MeditationBinding;

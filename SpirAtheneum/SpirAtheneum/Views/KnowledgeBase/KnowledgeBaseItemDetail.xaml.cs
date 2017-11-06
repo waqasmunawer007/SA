@@ -14,6 +14,11 @@ namespace SpirAtheneum.Views.KnowledgeBase
         public KnowledgeBaseItemDetail()
         {
             InitializeComponent();
+			ToolbarItems.Add(new ToolbarItem("", "icon_home_white.png", () =>
+			{
+				//logic code goes here
+				Application.Current.MainPage = new Views.Menu.MainPage();
+			}));
             knowledgeBaseVM = new KnowledgeBaseItemDetailVM();
             BindingContext = knowledgeBaseVM;
         }

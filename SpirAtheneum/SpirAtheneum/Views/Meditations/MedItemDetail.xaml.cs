@@ -16,6 +16,10 @@ namespace SpirAtheneum.Views.Meditations
         public MedItemDetail()
         {
             InitializeComponent();
+			ToolbarItems.Add(new ToolbarItem("", "icon_home_white.png", () =>
+			{
+				Application.Current.MainPage = new Views.Menu.MainPage();
+			}));
             meditationVM = new MeditationItemDetailVM();
             BindingContext = meditationVM;
         }

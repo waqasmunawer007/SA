@@ -16,6 +16,11 @@ namespace SpirAtheneum.Views.KnowledgeBase
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
+			ToolbarItems.Add(new ToolbarItem("", "icon_home_white.png", () =>
+			{
+				//logic code goes here
+				Application.Current.MainPage = new Views.Menu.MainPage();
+			}));
             knowledgeBaseVM = new KnowledgeBaseItemsVM(category);
             BindingContext = knowledgeBaseVM;
             listView.ItemsSource = knowledgeBaseVM.KnowledgeBaseBinding;

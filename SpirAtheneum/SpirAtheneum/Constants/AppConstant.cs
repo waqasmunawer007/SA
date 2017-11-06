@@ -3,6 +3,8 @@ namespace SpirAtheneum.Constants
 {
     public class AppConstant
     {
+        public static string AdminEmail = "sovereignsunempire@protonmail.com";
+        public static string AppName = "Spiritual Atheneum";
 		#region Sign Up & Sign In
 		// Meditation Api's  
         public static string EmailPatteren = "^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$";

@@ -145,6 +145,18 @@
     <Reference Include="Google.MobileAds">
       <HintPath>..\packages\Xamarin.Google.iOS.MobileAds.7.24.1\lib\Xamarin.iOS10\Google.MobileAds.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.Messaging.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Messaging.4.0.0\lib\Xamarin.iOS10\Plugin.Messaging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Messaging">
+      <HintPath>..\packages\Xam.Plugins.Messaging.4.0.0\lib\Xamarin.iOS10\Plugin.Messaging.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.DeviceInfo.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.DeviceInfo.3.0.2\lib\Xamarin.iOS10\Plugin.DeviceInfo.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.DeviceInfo">
+      <HintPath>..\packages\Xam.Plugin.DeviceInfo.3.0.2\lib\Xamarin.iOS10\Plugin.DeviceInfo.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpirAtheneum\SpirAtheneum.csproj">
@@ -162,6 +174,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icon_book_menu_white.png" />
+    <BundleResource Include="Resources\icon_home_white.png" />
+    <BundleResource Include="Resources\icon_home_white%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
