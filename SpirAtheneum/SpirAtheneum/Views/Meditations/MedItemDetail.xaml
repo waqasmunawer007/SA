@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpirAtheneum.Views.Meditations.MedItemDetail"
              xmlns:local="clr-namespace:SpirAtheneum.Converters"
+             xmlns:control="clr-namespace:SpirAtheneum.Renderers"
              BackgroundColor="{StaticResource BackgroundColor}">
 
     <ContentPage.Resources>
@@ -51,7 +52,7 @@
             <StackLayout Orientation = "Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,10,0,10" >
                 <WebView VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource BackgroundColor}" Source="{Binding Item.html_string, Converter={StaticResource htmlSource}}" />
             </StackLayout>
-            
+            <control:AdMob VerticalOptions="End" WidthRequest="320" HeightRequest="50"/>
         </StackLayout>
      <!--</ScrollView>-->
     </ContentPage.Content>

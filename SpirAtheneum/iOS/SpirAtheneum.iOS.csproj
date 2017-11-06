@@ -186,6 +186,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomRenderer\AdMobRenderer.cs" />
     <Compile Include="DependencyService\DatabaseConnection_iOS .cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Main.cs" />
