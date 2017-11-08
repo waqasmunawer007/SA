@@ -12,6 +12,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System;
+using SpirAtheneum.Constants;
 
 namespace SpirAtheneum.ViewModels.MeditationViewModel
 {
@@ -73,7 +75,27 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
                         break;
                     }
                 }
+                UpdateServerFavouriteList(meditation);
             });
+        }
+
+        private async void UpdateServerFavouriteList(MeditationBinding meditation) //todo
+        {
+            var meditationService = new MeditationService();
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add(APIsConstant.Meditation_id, meditation.id);
+            parameters.Add(APIsConstant.User_Id, ""); 
+            parameters.Add(APIsConstant.ListOfMeditations, meditation);
+            parameters.Add(APIsConstant.ListOfKnowledge, "");
+            var updatefavouritelistresponse = await meditationService.UpdateFavourites(parameters);
+            if(updatefavouritelistresponse != null)
+            {
+
+            }
+            else
+            {
+
+            }
         }
 
         public List<MeditationBinding> FetchAllCategoryItems()

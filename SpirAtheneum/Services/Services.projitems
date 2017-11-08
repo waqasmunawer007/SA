@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)BaseService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\AppActivity\AppActivityModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\BaseResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DailyDigest\DailyDigestModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\KnowledgeBase\KnowledgeBaseModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Login\LoginModel.cs" />
@@ -26,5 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Login\LoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Meditation\IMeditationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Meditation\MeditationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Signup\ISignupService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Signup\SignupService.cs" />
   </ItemGroup>
 </Project>

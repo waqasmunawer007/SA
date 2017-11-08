@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Services.Models.DailyDigest
 {
-   public class DailyDigestModel
+   public class DailyDigestModel : BaseResponse
     {
         public string id { get; set; }
         public string title { get; set; }

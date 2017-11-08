@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Services.Models.Meditation
 {
-    public class MeditationModel
+    public class MeditationModel : BaseResponse
     {
         public string id { get; set; }
         public string title { get; set; }

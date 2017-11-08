@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Services.Models.KnowledgeBase
 {
-    public class KnowledgeBaseModel
+    public class KnowledgeBaseModel : BaseResponse
     {
         public string id { get; set; }
         public string title { get; set; }

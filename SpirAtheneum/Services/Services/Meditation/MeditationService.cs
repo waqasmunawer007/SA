@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Services.Models.Meditation;
+using SpirAtheneum.Constants;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,9 +15,8 @@ namespace Services.Services.Meditation
         public async Task<MeditationModel[]> FetchAllMeditationAsync()
         {
             try
-            {
-               
-                 var responseJson = await client.GetAsync(SpirAtheneum.Constants.APIsConstant.AllMeditation);
+            { 
+                var responseJson = await client.GetAsync(SpirAtheneum.Constants.APIsConstant.AllMeditation);
                 string json = await responseJson.Content.ReadAsStringAsync();
                 if (!json.Equals("[]")) //only parse json if it contains data
                 {
@@ -49,7 +49,31 @@ namespace Services.Services.Meditation
             {
                 Debug.WriteLine("FetchMeditationBaseOn Id", ex.Message);
             }
+            return null;
+        }
 
+        public async Task<string> UpdateFavourites(Dictionary<string, object> parameters) //todo
+        {
+            try
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(parameters), Encoding.UTF8, "application/json");
+                HttpResponseMessage responseJson = await client.PostAsync(APIsConstant.UpdateFavourites, content);
+                var json = await responseJson.Content.ReadAsStringAsync();
+                if (json != null)
+                {
+                    return "true";
+                }
+                else if (json == null)
+                {
+                    return "false";
+                }
+                //var empResponse = JsonConvert.DeserializeObject<string>(json);
+                //return empResponse;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
             return null;
         }
     }

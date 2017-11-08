@@ -16,6 +16,7 @@ using Xamarin.Forms;
 using SpirAtheneum.Constants;
 using SpirAtheneum.Database;
 using System.Text.RegularExpressions;
+using Services.Services.Signup;
 
 namespace SpirAtheneum.ViewModels
 {
@@ -35,6 +36,7 @@ namespace SpirAtheneum.ViewModels
         public ICommand tapCommand;
         INavigation navigation;
         public DatabaseHelper databaseHelper;
+        public bool subscription = true; //if app is subscribe
 
         public UserVM(INavigation nav)
         {
@@ -47,7 +49,15 @@ namespace SpirAtheneum.ViewModels
             AddButtonCommand = new Command((e) => {
                 UserVM userViewModel = e as UserVM;
                 User u = userViewModel.User;
-                SignupUser(u);
+                if(subscription == true)
+                {
+                    SignupUserForLocally(u);
+                    SignupUserForServer(u);
+                }
+                else
+                {
+                    SignupUserForLocally(u);
+                }
             });
 
             LoginButtonCommand = new Command((e) => {
@@ -145,10 +155,10 @@ namespace SpirAtheneum.ViewModels
         }
 
         /// <summary>
-        /// This function is used to signup user
+        /// This function is used to signup user for local DB
         /// </summary>
         /// <param name="u"></param>
-        public void SignupUser(User u)
+        public void SignupUserForLocally(User u)
         {
             if (u.Email != null && u.Email != "" && u.Password != null && u.Password != "")
             {
@@ -156,9 +166,9 @@ namespace SpirAtheneum.ViewModels
                 {
                     if (databaseHelper.AddUser(u))
                     {
-						//LoginUser(u);
-						Settings.IsLogin = true;
-						App.Current.MainPage = new Views.Menu.MainPage();
+                        //LoginUser(u);
+                        Settings.IsLogin = true;
+                        App.Current.MainPage = new Views.Menu.MainPage();
                     }
                     else
                     {
@@ -168,13 +178,54 @@ namespace SpirAtheneum.ViewModels
                 else
                 {
                     ShowError = true;
-                    Message = "Please enter a valid email !";
+                    Message = APIsConstant.InvalidEmail;
                 }
             }
             else
             {
                 ShowError = true;
-                Message = "Email and Password cannot be empty !";
+                Message = APIsConstant.EmptyEmailAndPassword;
+            }
+        }
+
+        /// <summary>
+        /// This function is used to signup user for Server DB
+        /// </summary>
+        /// <param name="u"></param>
+        public async void SignupUserForServer(User u)
+        {
+            if (u.Email != null && u.Email != "" && u.Password != null && u.Password != "")
+            {
+                if (Regex.IsMatch(u.Email, AppConstant.EmailPatteren))
+                {
+                    Dictionary<string, object> parameters = new Dictionary<string, object>();
+                    parameters.Add(APIsConstant.Email, u.Email);
+                    parameters.Add(APIsConstant.Password, u.Password);
+                    var sigupService = new SignupService();
+                    var signupResponse = await sigupService.Signup(parameters);
+                    if (signupResponse != null)
+                    {
+                        if (signupResponse == "true")
+                        {
+                            Settings.IsLogin = true;
+                            App.Current.MainPage = new Views.Menu.MainPage();
+                        }
+                        else if (signupResponse == "false")
+                        {
+                            await App.Current.MainPage.DisplayAlert(APIsConstant.SignupNullResponseTitle,APIsConstant.SignupNullResponse,APIsConstant.OK);
+                        }
+                    }
+                }
+                else
+                {
+                    ShowError = true;
+                    Message = APIsConstant.InvalidEmail;
+                }
+            }
+            else
+            {
+                ShowError = true;
+                Message = APIsConstant.EmptyEmailAndPassword;
             }
         }
 

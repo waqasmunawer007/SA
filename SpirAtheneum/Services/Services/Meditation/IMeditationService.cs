@@ -10,5 +10,6 @@ namespace Services.Services.Meditation
     {
         Task<MeditationModel[]> FetchAllMeditationAsync();
         Task<MeditationModel> FetchMeditationBaseOnIdAsync(string id);
+        Task<string> UpdateFavourites(Dictionary<string, object> parameters);
     }
 }

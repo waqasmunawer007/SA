@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Services.Models.AppActivity
 {
-    public class AppActivityModel
+    public class AppActivityModel : BaseResponse
     {
         public string id { get; set; }
         public DigestActivity digest_activity { get; set; }
