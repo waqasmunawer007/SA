@@ -76,7 +76,7 @@
                     Command="{Binding AddButtonCommand}"
                     CommandParameter="{Binding Source={x:Reference main_container}, Path=BindingContext}"/>
             </StackLayout>
-            <local:AdMob VerticalOptions="End" WidthRequest="320" HeightRequest="50" />
+            <local:AdMob IsVisible="false" x:Name="ADMob" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SpirAtheneum.Helpers;
 
 namespace SpirAtheneum.Views
 {
@@ -21,9 +22,23 @@ namespace SpirAtheneum.Views
             BindingContext = uv;
 
         }
-        //public void loginButtonClicked(object sender, EventArgs e)
-        //{
-        //    App.Current.MainPage = new Menu.MainPage();
-        //}
-    }
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			if (Settings.IsSubscriped)
+			{
+				ADMob.IsVisible = false;
+			}
+			else
+			{
+				ADMob.IsVisible = true;
+			}
+
+		}
+
+		//public void loginButtonClicked(object sender, EventArgs e)
+		//{
+		//    App.Current.MainPage = new Menu.MainPage();
+		//}
+	}
 }

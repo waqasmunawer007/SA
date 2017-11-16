@@ -19,7 +19,7 @@
                     <!--Daiy Digest Button-->
                   <StackLayout Padding="20,0,0,0"
                       HorizontalOptions="FillAndExpand" 
-                      VerticalOptions="FillAndExpand"
+                      VerticalOptions="StartAndExpand"
                       Orientation="Horizontal"
                       HeightRequest="72" 
                       BackgroundColor="{StaticResource BurgundyColor}">
@@ -45,7 +45,7 @@
                       Padding="20,0,0,0"
                       Margin="0,4,0,0"
                       HorizontalOptions="FillAndExpand" 
-                      VerticalOptions="FillAndExpand"
+                      VerticalOptions="StartAndExpand"
                       Orientation="Horizontal"
                       HeightRequest="72" 
                       BackgroundColor="{StaticResource BurgundyColor}">
@@ -73,7 +73,7 @@
                       Padding="20,0,0,0"
                       Margin="0,4,0,0"
                       HorizontalOptions="FillAndExpand" 
-                      VerticalOptions="FillAndExpand"
+                      VerticalOptions="StartAndExpand"
                       Orientation="Horizontal"
                       HeightRequest="72" 
                       BackgroundColor="{StaticResource BurgundyColor}">
@@ -95,40 +95,13 @@
                             FontSize="{StaticResource HeadingFontSize}">
                     </Label>
                 </StackLayout>
-                <!-- Content Button-->
-                <!--<StackLayout
-                   Padding="20,0,0,0"
-                   Margin="0,4,0,0"
-                   HorizontalOptions="FillAndExpand" 
-                   VerticalOptions="FillAndExpand"
-                   Orientation="Horizontal"
-                   HeightRequest="72" 
-                   BackgroundColor="{StaticResource BurgundyColor}">
-                   <StackLayout.GestureRecognizers>
-                      <TapGestureRecognizer Tapped="ContentClick_Handler" />
-                   </StackLayout.GestureRecognizers>
-                        
-                            <Image VerticalOptions="CenterAndExpand"
-                                   HorizontalOptions="Start"
-                                   Source="icon_envlope_white.png"
-                                    WidthRequest="25"
-                                   HeightRequest="25"/>
-
-                            <Label Margin="10,0,0,0"
-                                   Text="Content"
-                                   VerticalOptions="CenterAndExpand"
-                                   HorizontalOptions="Start"
-                                   TextColor="White"
-                                    VerticalTextAlignment="Center"
-                                   FontSize="{StaticResource HeadingFontSize}"/>
-
-                </StackLayout>-->
+              
                 <!-- Favourites Button-->
                 <StackLayout
                    Padding="20,0,0,0"
                    Margin="0,4,0,0"
                    HorizontalOptions="FillAndExpand" 
-                   VerticalOptions="FillAndExpand"
+                   VerticalOptions="StartAndExpand"
                    Orientation="Horizontal"
                    HeightRequest="72" 
                    BackgroundColor="{StaticResource BurgundyColor}">
@@ -150,10 +123,10 @@
                          FontSize="{StaticResource HeadingFontSize}">
                     </Label>
                     
-                </StackLayout>
-
+                    </StackLayout>
+              
             </StackLayout>
-            <local:AdMob VerticalOptions="End" WidthRequest="320" HeightRequest="50" />
+              <local:AdMob x:Name="ADMob" IsVisible="false" VerticalOptions="End" WidthRequest="320" HeightRequest="50" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

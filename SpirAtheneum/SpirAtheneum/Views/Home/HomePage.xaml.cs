@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SpirAtheneum.Helpers;
 
 namespace SpirAtheneum.Views.Home
 {
@@ -18,6 +19,20 @@ namespace SpirAtheneum.Views.Home
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
         }
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			if (Settings.IsSubscriped)
+			{
+				ADMob.IsVisible = false;
+			}
+			else
+			{
+				ADMob.IsVisible = true;
+			}
+
+		}
 
         void DailyDigestClick_Handler(object sender, EventArgs e)
         {

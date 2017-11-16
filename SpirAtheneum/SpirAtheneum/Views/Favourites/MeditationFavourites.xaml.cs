@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SpirAtheneum.Helpers;
 
 namespace SpirAtheneum.Views.Favourites
 {
@@ -52,6 +53,14 @@ namespace SpirAtheneum.Views.Favourites
 
         protected override void OnAppearing()
         {
+			if (Settings.IsSubscriped)
+			{
+				ADMob.IsVisible = false;
+			}
+			else
+			{
+				ADMob.IsVisible = true;
+			}
             FetchAllItems();
             base.OnAppearing();
         }

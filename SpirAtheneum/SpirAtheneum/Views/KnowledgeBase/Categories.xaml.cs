@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SpirAtheneum.Helpers;
 
 namespace SpirAtheneum.Views.KnowledgeBase
 {
@@ -51,6 +52,14 @@ namespace SpirAtheneum.Views.KnowledgeBase
         }
         protected override void OnAppearing()
         {
+			if (Settings.IsSubscriped)
+			{
+				ADMob.IsVisible = false;
+			}
+			else
+			{
+				ADMob.IsVisible = true;
+			}
             FetchAllKnowledgeBaseAsync();
             base.OnAppearing();
         }

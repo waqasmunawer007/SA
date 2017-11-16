@@ -4,6 +4,7 @@ using SpirAtheneum.ViewModels.MeditationViewModel;
 using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SpirAtheneum.Helpers;
 
 namespace SpirAtheneum.Views.Meditations
 {
@@ -46,6 +47,14 @@ namespace SpirAtheneum.Views.Meditations
 
         protected override void OnAppearing()
         {
+			if (Settings.IsSubscriped)
+			{
+				ADMob.IsVisible = false;
+			}
+			else
+			{
+				ADMob.IsVisible = true;
+			}
             FetchItemDetail();
             base.OnAppearing();
         }

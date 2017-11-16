@@ -80,7 +80,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <control:AdMob VerticalOptions="End" WidthRequest="320" HeightRequest="50"/>
+            <control:AdMob IsVisible="false" x:Name="ADMob" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50"/>
         </StackLayout>
         
     </ContentPage.Content>

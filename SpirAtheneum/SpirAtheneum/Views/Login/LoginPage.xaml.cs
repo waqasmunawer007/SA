@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SpirAtheneum.Helpers;
 
 namespace SpirAtheneum.Views.Login
 {
@@ -23,7 +24,19 @@ namespace SpirAtheneum.Views.Login
             uv = new UserVM(Navigation);
             BindingContext = uv;
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+			if (Settings.IsSubscriped)
+			{
+				ADMob.IsVisible = false;
+			}
+			else
+			{
+				ADMob.IsVisible = true;
+			}
 
+        }
         //public void LoginClicked(Object sender, EventArgs e)
         //{
         //    var email = Email_Entry.ToString();

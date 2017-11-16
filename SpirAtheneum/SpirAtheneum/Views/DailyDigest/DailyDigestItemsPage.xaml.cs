@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SpirAtheneum.Helpers;
 
 namespace SpirAtheneum.Views.DailyDigest
 {
@@ -24,8 +25,8 @@ namespace SpirAtheneum.Views.DailyDigest
             listView.ItemsSource = dailyDigestItemsVM.dailyDigestItems;
            
         }
-
-        public async void FetchAllDigest()
+		
+		public async void FetchAllDigest()
         {
             dailyDigestItemsVM.IsBusy = true;
             List<Models.DailyDigest> items = await dailyDigestItemsVM.DatabaseOperation();
@@ -54,6 +55,14 @@ namespace SpirAtheneum.Views.DailyDigest
 
         protected override void OnAppearing()
         {
+			if (Settings.IsSubscriped)
+			{
+				ADMob.IsVisible = false;
+			}
+			else
+			{
+				ADMob.IsVisible = true;
+			}
             FetchAllDigest();
 
             base.OnAppearing();

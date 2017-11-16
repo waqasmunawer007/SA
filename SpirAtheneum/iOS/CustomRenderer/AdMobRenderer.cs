@@ -10,6 +10,7 @@ using SpirAtheneum.Renderers;
 using SpirAtheneum.iOS.CustomRenderer;
 using Xamarin.Forms.Platform.iOS;
 using Google.MobileAds;
+using CoreGraphics;
 
 [assembly: ExportRenderer(typeof(AdMob), typeof(AdMobRenderer))]
 namespace SpirAtheneum.iOS.CustomRenderer
@@ -30,19 +31,16 @@ namespace SpirAtheneum.iOS.CustomRenderer
 
             if (e.OldElement == null)
             {
-                adView = new BannerView(AdSizeCons.SmartBannerPortrait)
+                adView = new BannerView(size: AdSizeCons.Banner,origin: new CGPoint(-10, 0))
                 {
                     AdUnitID = AdmobID,
                     RootViewController = UIApplication.SharedApplication.Windows[0].RootViewController
                 };
-
                 adView.AdReceived += (sender, args) => {
 
                     if (!viewOnScreen) this.AddSubview(adView);
                     viewOnScreen = true;
                 };
-
-
                 adView.LoadRequest(Request.GetDefaultRequest());
                 base.SetNativeControl(adView);
             }

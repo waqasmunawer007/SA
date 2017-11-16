@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SpirAtheneum.Helpers;
 
 namespace SpirAtheneum.Views.Meditations.CategoryItems
 {
@@ -55,6 +56,14 @@ namespace SpirAtheneum.Views.Meditations.CategoryItems
 
         protected override void OnAppearing()
         {
+			if (Settings.IsSubscriped)
+			{
+				ADMob.IsVisible = false;
+			}
+			else
+			{
+				ADMob.IsVisible = true;
+			}
             FetchAllItems();
             base.OnAppearing();
         }

@@ -30,6 +30,7 @@ namespace SpirAtheneum.Helpers
         private const string DailyDigestKey = "DailyDigest";
         private const string MeditationKey = "Meditation";
         private const string KnowledgeBaseKey = "KnowledgeBase";
+        private const string SubscriptionKey = "SubscriptionKey";
 
         #endregion
 
@@ -43,6 +44,17 @@ namespace SpirAtheneum.Helpers
 			set
 			{
 				AppSettings.AddOrUpdateValue(SettingsKey, value);
+			}
+		}
+		public static bool IsSubscriped
+		{
+			get
+			{
+                return AppSettings.GetValueOrDefault(SubscriptionKey, false);
+			}
+			set
+			{
+				AppSettings.AddOrUpdateValue(SubscriptionKey, value);
 			}
 		}
         public static bool IsLogin
