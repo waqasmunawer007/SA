@@ -8,23 +8,31 @@
         <StackLayout VerticalOptions="FillAndExpand" 
                      HorizontalOptions="FillAndExpand" 
                      Orientation="Vertical">
-
+                    
+            
             <StackLayout Padding="20,0,20,0"
                          BackgroundColor="{StaticResource BackgroundColor}"
                          VerticalOptions="FillAndExpand" 
                          HorizontalOptions="FillAndExpand">
-
+                           <ActivityIndicator 
+                            IsVisible="{Binding IsBusy}"
+                            IsRunning="{Binding IsBusy}"
+                            HorizontalOptions="CenterAndExpand"
+                            Color="White"
+                            VerticalOptions="CenterAndExpand"/>
+                
                 <StackLayout VerticalOptions="CenterAndExpand" 
+                              IsVisible = "{Binding IsConatinerVisible}"
                              HorizontalOptions="FillAndExpand">
 
                     <Image VerticalOptions="Center"
                        HorizontalOptions="Center"
-                       Source="crown1.png"/>
+
+                       Source="icon_crown.png"/>
 
                     <Label VerticalOptions="Center"
                        HorizontalOptions="Center" 
                        Text="Upgrade to Premium" 
- 
                        FontSize="18" 
                        TextColor="{StaticResource NormalTextColor}"/>
 
@@ -32,55 +40,46 @@
                         HeightRequest="60" 
                         HorizontalOptions="FillAndExpand" 
                         VerticalOptions="Center" 
-                        Text="$0.00/Month"
+                        Text="{Binding MonthlySubscription} "
+                        BorderRadius="30"
+                        BackgroundColor="#FFDB3E"
                         TextColor="White"/>
 
                     <Local:UpgradeBurgundyButton Margin="0,15,0,0"
                         HeightRequest="60" 
                         HorizontalOptions="FillAndExpand" 
                         VerticalOptions="Center" 
-                        Text="$0.00/Year"
+                        Text="{Binding YearlySubscription}"
+                        BorderRadius="30"
+                         BackgroundColor="#7E313B"
                         TextColor="White"/>
 
                     <Label Margin="0,20,0,0"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"
                        Text="What you get" 
- 
                        FontSize="14" 
                        TextColor="{StaticResource NormalTextColor}" />
 
                     <Label Margin="25,10,25,0"
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
-                       Text=". This is some list item" 
- 
+                       Text="{Binding MonthlyDesc}" 
                        FontSize="12" 
                        TextColor="{StaticResource NormalTextColor}" />
 
                     <Label Margin="25,0,25,0" 
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
-                       Text=". This is some list item" 
- 
+                       Text="{Binding YearlyDesc}" 
                        FontSize="12" 
                        TextColor="{StaticResource NormalTextColor}" />
-
-                    <Label Margin="25,0,25,25"  
-                       VerticalOptions="Center"
-                       HorizontalOptions="Start"
-                       Text=". This is some list item" 
- 
-                       FontSize="12" 
-                       TextColor="{StaticResource NormalTextColor}" />
-
+                      
                 </StackLayout>
-
-                
 
             </StackLayout>
 
-            <control:AdMob VerticalOptions="End" WidthRequest="320" HeightRequest="50"/>
+            <control:AdMob IsVisible="false" x:Name="ADMob" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50"/>
 
         </StackLayout>
     </ContentPage.Content>

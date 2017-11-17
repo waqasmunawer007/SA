@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>SpirAtheneum.Droid</RootNamespace>
     <AssemblyName>SpirAtheneum.Droid</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -233,6 +233,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\icon_home_white.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\icon_home_white.png" />
     <AndroidResource Include="Resources\xml\file_paths.xml" />
+    <AndroidResource Include="Resources\drawable\icon_crown.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\About.png" />

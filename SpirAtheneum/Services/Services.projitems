@@ -26,5 +26,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Login\LoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Meditation\IMeditationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Meditation\MeditationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Subscription\AppSubscription.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SubScription\ISubscription.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SubScription\SubscriptionService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Models\Subscription\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Services\SubScription\" />
   </ItemGroup>
 </Project>

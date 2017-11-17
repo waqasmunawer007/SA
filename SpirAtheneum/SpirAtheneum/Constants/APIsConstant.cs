@@ -31,5 +31,7 @@ namespace SpirAtheneum.Constants
 
         #endregion
 
+        public static string AppSubscription = "api/Subscription";
+
     }
 }

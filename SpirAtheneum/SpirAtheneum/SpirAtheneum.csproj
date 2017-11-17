@@ -131,6 +131,7 @@
     <Compile Include="Constants\AppConstant.cs" />
     <Compile Include="Interfaces\IShare.cs" />
     <Compile Include="Interfaces\ISendEmail.cs" />
+    <Compile Include="ViewModels\Subscription\SubscriptionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -294,6 +295,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\Subscription\" />
+  </ItemGroup>
   <Import Project="..\Services\Services.projitems" Label="Shared" Condition="Exists('..\Services\Services.projitems')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.4.0.282\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.4.0.282\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />
