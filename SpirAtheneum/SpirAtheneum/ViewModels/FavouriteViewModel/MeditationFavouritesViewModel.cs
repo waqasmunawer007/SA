@@ -36,7 +36,7 @@ namespace SpirAtheneum.ViewModels.FavouriteViewModel
         public MeditationFavouritesViewModel()
         {
             meditationList = new ObservableCollection<MeditationBinding>();
-            databaseHelper = new DatabaseHelper();
+            databaseHelper = DatabaseHelper.GetInstance();
 
             FavouriteButtonCommand = new Command((e) => {
                 var meditation = (e as MeditationBinding);

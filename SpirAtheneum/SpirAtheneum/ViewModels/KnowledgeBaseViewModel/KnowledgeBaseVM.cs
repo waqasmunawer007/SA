@@ -26,7 +26,7 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
         public KnowledgeBaseVM()
         {
             knowledgeBaseList = new ObservableCollection<Category>();
-            databaseHelper = new DatabaseHelper();
+            databaseHelper = DatabaseHelper.GetInstance();
         }
 
         /// <summary>

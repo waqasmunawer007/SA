@@ -22,9 +22,8 @@ namespace SpirAtheneum.Views.Favourites
         public MeditationFavourites()
         {
             InitializeComponent();
-            meditationVM = new MeditationFavouritesViewModel();
-            BindingContext = meditationVM;
-            listView.ItemsSource = meditationVM.MeditationBinding;
+         
+           
         }
 
         public void FetchAllItems()
@@ -53,6 +52,10 @@ namespace SpirAtheneum.Views.Favourites
 
         protected override void OnAppearing()
         {
+            meditationVM = new MeditationFavouritesViewModel();
+            BindingContext = meditationVM;
+            listView.ItemsSource = meditationVM.MeditationBinding;
+
 			if (Settings.IsSubscriped)
 			{
 				ADMob.IsVisible = false;

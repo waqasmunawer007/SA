@@ -31,7 +31,7 @@ namespace SpirAtheneum.ViewModels.DailyDigestViewModel
         public DailyDigestItemsVM()
         {
             dailyDigestItems = new ObservableCollection<DailyDigest>();
-            databaseHelper = new DatabaseHelper();
+            databaseHelper = DatabaseHelper.GetInstance();
 
             ShareButtonCommand = new Command((e) => {
                 var a = (e as DailyDigest);

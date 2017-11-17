@@ -54,15 +54,16 @@ namespace SpirAtheneum.Views.KnowledgeBase
 
         protected override void OnAppearing()
         {
-			if (Settings.IsSubscriped)
-			{
-				ADMob.IsVisible = false;
-			}
-			else
-			{
-				ADMob.IsVisible = true;
-			}
+			
             FetchAllItems();
+            if (Settings.IsSubscriped)
+            {
+                ADMob.IsVisible = false;
+            }
+            else
+            {
+                ADMob.IsVisible = true;
+            }
             base.OnAppearing();
         }
 
@@ -70,6 +71,7 @@ namespace SpirAtheneum.Views.KnowledgeBase
         {
             knowledgeBaseVM.KnowledgeBaseBinding.Clear();
             listView.IsVisible = false;
+            ADMob.IsVisible = false;
             base.OnDisappearing();
         }
 

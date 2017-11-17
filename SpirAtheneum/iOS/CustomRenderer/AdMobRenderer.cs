@@ -26,8 +26,8 @@ namespace SpirAtheneum.iOS.CustomRenderer
         {
             base.OnElementChanged(e);
 
-            if (e.NewElement == null)
-                return;
+            //if (e.NewElement == null)
+                //return;
 
             if (e.OldElement == null)
             {

@@ -17,11 +17,21 @@ namespace SpirAtheneum.Database
     class DatabaseHelper
     {
         private SQLiteConnection database;
+        private static DatabaseHelper databaseHelper;
         private static object collisionLock = new object();
 
-        public DatabaseHelper()
+        private DatabaseHelper()
         {
             database = DependencyService.Get<IDatabaseConnection>().DbConnection();
+        }
+
+        public static DatabaseHelper GetInstance()
+        {
+            if (databaseHelper == null)
+            {
+                databaseHelper = new DatabaseHelper();
+            }
+            return databaseHelper;
         }
 
         /// <summary>

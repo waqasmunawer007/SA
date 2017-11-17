@@ -23,6 +23,7 @@ namespace SpirAtheneum.Helpers
 
 		private const string SettingsKey = "settings_key";
         private const string LoginKey = "login";
+        private const string EmailKey = "email";
 
 		private static readonly string SettingsDefault = string.Empty;
         private static readonly bool LoginDefault = false;
@@ -31,6 +32,7 @@ namespace SpirAtheneum.Helpers
         private const string MeditationKey = "Meditation";
         private const string KnowledgeBaseKey = "KnowledgeBase";
         private const string SubscriptionKey = "SubscriptionKey";
+
 
         #endregion
 
@@ -46,6 +48,17 @@ namespace SpirAtheneum.Helpers
 				AppSettings.AddOrUpdateValue(SettingsKey, value);
 			}
 		}
+        public static string Email
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(EmailKey, "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(EmailKey, value);
+            }
+        }
 		public static bool IsSubscriped
 		{
 			get

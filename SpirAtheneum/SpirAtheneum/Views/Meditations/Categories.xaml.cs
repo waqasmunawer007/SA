@@ -52,15 +52,15 @@ namespace SpirAtheneum.Views.Meditations
         }
         protected override void OnAppearing()
         {
-			if (Settings.IsSubscriped)
-			{
-				ADMob.IsVisible = false;
-			}
-			else
-			{
-				ADMob.IsVisible = true;
-			}
             FetchAllMeditationAsync();
+            if (Settings.IsSubscriped)
+            {
+                ADMob.IsVisible = false;
+            }
+            else
+            {
+                ADMob.IsVisible = true;
+            }
             base.OnAppearing();
         }
 
@@ -78,6 +78,7 @@ namespace SpirAtheneum.Views.Meditations
             NoDataLabel.IsVisible = false;
             meditationVM.IsBusy = false;
             listView.IsVisible = false;
+            ADMob.IsVisible = false;
             base.OnDisappearing();
         }
     }

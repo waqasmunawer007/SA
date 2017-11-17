@@ -21,7 +21,7 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
         public KnowledgeBaseItemDetailVM()
         {
             Item = new KnowledgeBaseBinding();
-            databaseHelper = new DatabaseHelper();
+            databaseHelper = DatabaseHelper.GetInstance();
             ShareButtonCommand = new Command((e) => {
                 var a = (e as KnowledgeBaseBinding);
                 HtmlParser htmlParser = new HtmlParser();

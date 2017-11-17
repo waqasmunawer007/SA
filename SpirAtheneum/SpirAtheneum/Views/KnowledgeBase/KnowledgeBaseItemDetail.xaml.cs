@@ -46,21 +46,23 @@ namespace SpirAtheneum.Views.KnowledgeBase
 
         protected override void OnAppearing()
         {
-			if (Settings.IsSubscriped)
-			{
-				ADMob.IsVisible = false;
-			}
-			else
-			{
-				ADMob.IsVisible = true;
-			}
+			
             FetchItemDetail();
+            if (Settings.IsSubscriped)
+            {
+                ADMob.IsVisible = false;
+            }
+            else
+            {
+                ADMob.IsVisible = true;
+            }
             base.OnAppearing();
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
+            ADMob.IsVisible = false;
         }
     }
 }

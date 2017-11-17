@@ -37,7 +37,7 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
         public KnowledgeBaseItemsVM(string type)
         {
             knowledgeBaseList = new ObservableCollection<KnowledgeBaseBinding>();
-            databaseHelper = new DatabaseHelper();
+            databaseHelper = DatabaseHelper.GetInstance();
             selectedCategoryType = type;
 
             ShareButtonCommand = new Command((e) => {

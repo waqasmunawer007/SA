@@ -39,7 +39,7 @@ namespace SpirAtheneum.ViewModels
         public UserVM(INavigation nav)
         {
             navigation = nav;
-            databaseHelper = new DatabaseHelper();
+            databaseHelper = DatabaseHelper.GetInstance();
             database = DependencyService.Get<IDatabaseConnection>().DbConnection();
 
             user = new User();
@@ -158,6 +158,7 @@ namespace SpirAtheneum.ViewModels
                     {
 						//LoginUser(u);
 						Settings.IsLogin = true;
+                        Settings.Email = u.Email;
 						App.Current.MainPage = new Views.Menu.MainPage();
                     }
                     else

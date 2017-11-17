@@ -36,7 +36,7 @@ namespace SpirAtheneum.ViewModels.FavouriteViewModel
         public KnowledgeBaseFavouritesViewModel()
         {
             knowledgeList = new ObservableCollection<KnowledgeBaseBinding>();
-            databaseHelper = new DatabaseHelper();
+            databaseHelper = DatabaseHelper.GetInstance();
 
             FavouriteButtonCommand = new Command((e) => {
                 var knowledge = (e as KnowledgeBaseBinding);

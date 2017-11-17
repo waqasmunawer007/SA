@@ -126,7 +126,7 @@
                     </StackLayout>
               
             </StackLayout>
-              <local:AdMob x:Name="ADMob" IsVisible="false" VerticalOptions="End" WidthRequest="320" HeightRequest="50" />
+              <local:AdMob IsVisible="false" x:Name="ADMob"  VerticalOptions="End" WidthRequest="320" HeightRequest="50" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

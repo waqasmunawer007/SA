@@ -12,9 +12,7 @@ namespace SpirAtheneum
         public App()
         {
             InitializeComponent();
-
-            DatabaseHelper databaseHelper = new DatabaseHelper();
-            databaseHelper.CreateDatabase();
+            DatabaseHelper.GetInstance().CreateDatabase();
 
             if (Settings.IsLogin)
             {

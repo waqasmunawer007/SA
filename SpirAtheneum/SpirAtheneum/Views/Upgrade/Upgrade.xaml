@@ -42,6 +42,7 @@
                         VerticalOptions="Center" 
                         Text="{Binding MonthlySubscription} "
                         BorderRadius="30"
+                        Command="{Binding MonthlySubscriptionCommand}"
                         BackgroundColor="#FFDB3E"
                         TextColor="White"/>
 
@@ -51,6 +52,7 @@
                         VerticalOptions="Center" 
                         Text="{Binding YearlySubscription}"
                         BorderRadius="30"
+                        Command="{Binding YearlySubscriptionCommand}"
                          BackgroundColor="#7E313B"
                         TextColor="White"/>
 

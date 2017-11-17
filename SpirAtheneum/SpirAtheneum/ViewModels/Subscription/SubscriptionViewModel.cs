@@ -5,8 +5,15 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Services.Models.Favourite;
+using Services.Models.MobileUser;
 using Services.Models.Subscription;
+using Services.Services.MobileUser;
 using Services.Services.SubScription;
+using SpirAtheneum.Constants;
+using SpirAtheneum.Database;
+using SpirAtheneum.Helpers;
+using SpirAtheneum.Models;
 using Xamarin.Forms;
 
 namespace SpirAtheneum.ViewModels.Subscription
@@ -14,9 +21,10 @@ namespace SpirAtheneum.ViewModels.Subscription
 	public class SubscriptionViewModel : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
-		public ObservableCollection<AppSubscription> subscriptionItems;
+        public AppSubscription[] subscriptionList;
 		
-		public ICommand ShareButtonCommand { get; set; }
+		public ICommand MonthlySubscriptionCommand { get; set; }
+        public ICommand YearlySubscriptionCommand { get; set; }
         private bool isBusy,isConatinerVisible = false;
         private string monthlySubscription = "";
         private string yearlySubscription = "";
@@ -25,12 +33,45 @@ namespace SpirAtheneum.ViewModels.Subscription
 
 		public SubscriptionViewModel()
 		{
-			subscriptionItems = new ObservableCollection<AppSubscription>();
-			
-			ShareButtonCommand = new Command((e) => {
-			
-			});
-		}
+            SetupCommands();
+        }
+
+        private void SetupCommands()
+        {
+            MonthlySubscriptionCommand = new Command((e) => {
+                Settings.IsSubscriped = true;
+                CreateMobileUser(subscriptionList[0].id);
+                Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionSuccess, AppConstant.Done);
+
+            });
+            YearlySubscriptionCommand = new Command((e) => {
+                Settings.IsSubscriped = true;
+                CreateMobileUser(subscriptionList[1].id);
+                Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionSuccess, AppConstant.Done);
+            }); 
+        }
+
+        private async void CreateMobileUser(string subscriptionId)
+        {
+            var mobileService = new MobileUserService();
+            Dictionary < string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("email",Settings.Email);
+            parameters.Add("is_active", false);
+            parameters.Add("subscription_type_id", subscriptionId);
+            parameters.Add("created_at", DateTime.Now);
+            AppMobileUser user =   await mobileService.CreateMobileUser(parameters);
+           
+            Debug.WriteLine("User",user.email);
+
+        }
+        private void PostUserFevorite()
+        {
+            List<FavouriteMeditation> fevMeditations = DatabaseHelper.GetInstance().GetMeditationFavourite();
+            List<FavouriteKnowledgeBase> fevKB = DatabaseHelper.GetInstance().GetKnowledgeBaseFavourite();
+            FevouriteRequest fevRequest = new FevouriteRequest();
+
+        }
+
         #region Bindable Properties
         public string MonthlyDesc
         {
@@ -112,7 +153,7 @@ namespace SpirAtheneum.ViewModels.Subscription
 		{
             IsBusy = true;
 			var subscriptionService = new SubscriptionService();
-            AppSubscription[] subscriptionList = await subscriptionService.GetAppSubscriptionList();
+            subscriptionList = await subscriptionService.GetAppSubscriptionList();
             if (subscriptionList != null && subscriptionList.Length > 0)
 			{
 

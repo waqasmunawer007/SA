@@ -24,7 +24,7 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
         public MeditationItemDetailVM()
         {
             item = new MeditationBinding();
-            databaseHelper = new DatabaseHelper();
+            databaseHelper = DatabaseHelper.GetInstance();
 
             ShareButtonCommand = new Command((e) => {
                 var a = (e as MeditationBinding);

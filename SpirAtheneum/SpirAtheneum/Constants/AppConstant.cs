@@ -5,6 +5,7 @@ namespace SpirAtheneum.Constants
     {
         public static string AdminEmail = "sovereignsunempire@protonmail.com";
         public static string AppName = "Spiritual Atheneum";
+
 		#region Sign Up & Sign In
 		// Meditation Api's  
         public static string EmailPatteren = "^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$";
@@ -16,6 +17,8 @@ namespace SpirAtheneum.Constants
 		public static string RegistrarionError = "Email already exist.Please try again.";
 
         public static string LoginError = "Invalid email or password. Please try again.";
+        public static string SubscriptionSuccess = "You subscription has been completed.";
+        public static string SubscriptionError = "You subscription request has been failed. Please try again.";
 		#endregion
 	}
 }

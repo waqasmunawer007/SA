@@ -32,6 +32,8 @@ namespace SpirAtheneum.Constants
         #endregion
 
         public static string AppSubscription = "api/Subscription";
+        public static string MobileUser = "api/MobileUser";
+        public static string UploadFevApi = "api/Favorite";
 
     }
 }

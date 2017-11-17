@@ -29,9 +29,19 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Subscription\AppSubscription.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SubScription\ISubscription.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SubScription\SubscriptionService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\MobileUser\IMobileUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\MobileUser\AppMobileUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\MobileUser\MobileUserService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Favourite\FevouriteRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Favourite\IFevourite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Favourite\FevouriteService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\Subscription\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\SubScription\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\MobileUser\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Services\MobileUser\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\Favourite\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Services\Favourite\" />
   </ItemGroup>
 </Project>

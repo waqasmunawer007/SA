@@ -40,7 +40,7 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
         public MeditationItemsVM(string type)
         {
             meditationList = new ObservableCollection<MeditationBinding>();
-            databaseHelper = new DatabaseHelper();
+            databaseHelper  = DatabaseHelper.GetInstance();
             selectedCategoryType = type;
 
             ShareButtonCommand = new Command((e) => {

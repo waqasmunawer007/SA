@@ -26,7 +26,7 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
         public MeditationVM()
         {
             meditationList = new ObservableCollection<Category>();
-            databaseHelper = new DatabaseHelper();
+            databaseHelper = DatabaseHelper.GetInstance();
         }
 
         /// <summary>
