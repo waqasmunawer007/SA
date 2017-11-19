@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+     xmlns:control="clr-namespace:SpirAtheneum.Renderers"
+     xmlns:Local="clr-namespace:SpirAtheneum.Renderers"
+    x:Class="SpirAtheneum.ViewModels.Account.ChangeSubscriptionPage">
+	 <ContentPage.Content>
+        <StackLayout 
+             VerticalOptions="FillAndExpand" 
+             HorizontalOptions="FillAndExpand" 
+             Orientation="Vertical">
+            <StackLayout Padding="20,20,20,0"
+                 BackgroundColor="{StaticResource BackgroundColor}"
+                 VerticalOptions="FillAndExpand" 
+                 HorizontalOptions="FillAndExpand">
+                   <ActivityIndicator 
+                        IsVisible="{Binding IsBusy}"
+                        IsRunning="{Binding IsBusy}"
+                        HorizontalOptions="CenterAndExpand"
+                        Color="White"
+                        VerticalOptions="CenterAndExpand"/>
+            
+                        <StackLayout 
+                            VerticalOptions="StartAndExpand" 
+                            IsVisible = "{Binding IsConatinerVisible}"
+                            HorizontalOptions="FillAndExpand">
+                             <Image VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                Source="icon_crown.png"/>
+                            <Label 
+                                Margin="0,15,0,0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center" 
+                                Text="Change Subscription" 
+                                FontSize="{StaticResource HeadingFontSize}" 
+                                TextColor="{StaticResource NormalTextColor}"/>
+
+                            <Local:UpgradeYellowButton Margin="0,30,0,0"
+                                HeightRequest="60" 
+                                HorizontalOptions="FillAndExpand" 
+                                VerticalOptions="Center" 
+                                Text="{Binding MonthlySubscription} "
+                                BorderRadius="30"
+                                Command="{Binding ChangeMonthlySubscriptionCommand}"
+                                BackgroundColor="#FFDB3E"
+                                TextColor="White"/>
+
+                            <Local:UpgradeBurgundyButton Margin="0,15,0,0"
+                                HeightRequest="60" 
+                                HorizontalOptions="FillAndExpand" 
+                                VerticalOptions="Center" 
+                                Text="{Binding YearlySubscription}"
+                                BorderRadius="30"
+                                Command="{Binding ChangeYearlySubscriptionCommand}"
+                                 BackgroundColor="#7E313B"
+                                TextColor="White"/>
+
+                             <Local:UpgradeBurgundyButton Margin="0,15,0,0"
+                                HeightRequest="60" 
+                                HorizontalOptions="FillAndExpand" 
+                                VerticalOptions="Center" 
+                                Text="Cancel"
+                                BorderRadius="30"
+                                Command="{Binding CancelSubscriptionCommand}"
+                                BackgroundColor="#7E313B"
+                                TextColor="White"/>
+                      
+                            </StackLayout>
+            </StackLayout>
+
+            <control:AdMob IsVisible="false" x:Name="ADMob" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

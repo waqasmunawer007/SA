@@ -28,6 +28,11 @@ namespace SpirAtheneum.ViewModels.Subscription
 		
 		public ICommand MonthlySubscriptionCommand { get; set; }
         public ICommand YearlySubscriptionCommand { get; set; }
+
+        public ICommand ChangeMonthlySubscriptionCommand { get; set; }
+        public ICommand ChangeYearlySubscriptionCommand { get; set; }
+
+        public ICommand CancelSubscriptionCommand { get; set; }
         private bool isBusy,isConatinerVisible = false;
         private string monthlySubscription = "";
         private string yearlySubscription = "";
@@ -54,6 +59,60 @@ namespace SpirAtheneum.ViewModels.Subscription
                 await CreateMobileUser(subscriptionList[1].id);
                 await Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionSuccess, AppConstant.Done);
             }); 
+
+
+            ChangeMonthlySubscriptionCommand = new Command(async (e) => {
+              
+                Settings.SubscriptionPrice = subscriptionList[0].cost;
+                await ChangeSubscription(subscriptionList[0].id);
+                await Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionChangeSuccess, AppConstant.Done);
+
+            });
+            ChangeYearlySubscriptionCommand = new Command(async (e) => {
+                Settings.SubscriptionPrice = subscriptionList[1].cost;
+                await ChangeSubscription(subscriptionList[1].id);
+                await Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionChangeSuccess, AppConstant.Done);
+            }); 
+            CancelSubscriptionCommand = new Command(async (e) => {
+                bool answer= await Application.Current.MainPage.DisplayAlert("", AppConstant.CancelSubscriptionAlert, "Yes","Cancel");
+                if (answer)
+                {
+                    Settings.IsSubscriped = false;
+                    Settings.SubscriptionPrice = 0.0;
+                    await ChangeSubscription("");
+                }
+               
+               
+            }); 
+        }
+
+        /// <summary>
+        /// Changes the subscription.
+        /// </summary>
+        /// <returns>The subscription.</returns>
+        /// <param name="subscriptionId">Subscription identifier.</param>
+        private async Task ChangeSubscription(string subscriptionId)
+        {
+            IsBusy = true;
+            var mobileService = new MobileUserService();
+            AppMobileUser mobileUser = new AppMobileUser();
+            mobileUser.id = Settings.MobileUserId;
+            mobileUser.email = Settings.Email;
+            mobileUser.password = Settings.Password;
+            mobileUser.favorites_id = Settings.FevouriteId;
+            mobileUser.is_active = "false";
+            mobileUser.subscription_type_id = subscriptionId;
+            mobileUser.created_at = DateTime.Now.ToString();
+
+            Services.Models.Subscription.Meta meta = new Services.Models.Subscription.Meta();
+            meta.author = AppConstant.AppAuther;
+            meta.date_added = DateTime.Now.ToString();
+            meta.last_edited = DateTime.Now.ToString();
+            mobileUser.meta = meta;
+
+            AppMobileUser user = await mobileService.UpdateMobileUser(mobileUser);
+
+            IsBusy = false;
         }
 
         /// <summary>

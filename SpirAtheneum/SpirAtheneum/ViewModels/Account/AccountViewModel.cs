@@ -30,11 +30,7 @@ namespace SpirAtheneum.ViewModels.Account
         private void SetupCommands()
         {
             ChangeSubscriptionCommand = new Command(async (e) => {
-                Settings.IsSubscriped = true;
-               
-                //await CreateMobileUser(subscriptionList[0].id);
-                await Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionSuccess, AppConstant.Done);
-
+                await navigation.PushAsync(new ChangeSubscriptionPage());
             });
             ChangePasswordCommand = new Command( (e) => {
                 ChangePasswordPage changePasswordPage = new ChangePasswordPage();
@@ -42,22 +38,6 @@ namespace SpirAtheneum.ViewModels.Account
                 //await Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionSuccess, AppConstant.Done);
             });
         }
-
-
-        /// <summary>
-        /// Creates the new mobile user on the server
-        /// </summary>
-        /// <param name="subscriptionId">Subscription identifier.</param>
-        private async Task CreateMobileUser(string subscriptionId)
-        {
-            IsBusy = true;
-          
-            //await PostUserFevorite(); //Post users fevourites if available
-            IsBusy = false;
-
-
-        }
-       
         #region Bindable Properties
         public string Email
         {

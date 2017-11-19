@@ -18,7 +18,9 @@ namespace SpirAtheneum.Constants
 		public static string RegistrarionError = "Email already exist.Please try again.";
 
         public static string LoginError = "Invalid email or password. Please try again.";
+        public static string CancelSubscriptionAlert = "Do you really want to cancel your subscription?";
         public static string SubscriptionSuccess = "You subscription has been completed.";
+        public static string SubscriptionChangeSuccess = "You subscription has been changed.";
         public static string SubscriptionError = "You subscription request has been failed. Please try again.";
         public static string PasswordUnmatchedError = "Password is unmatched.Please try again.";
         public static string SuccessPasswordChange = "Your password has been changed.";
