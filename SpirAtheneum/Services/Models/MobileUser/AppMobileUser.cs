@@ -7,6 +7,7 @@ namespace Services.Models.MobileUser
     {
         public string id { get; set; }
         public string email { get; set; }
+        public string password { get; set; }
         public string favorites_id { get; set; }
         public string subscription_type_id { get; set; }
         public string is_active { get; set; }

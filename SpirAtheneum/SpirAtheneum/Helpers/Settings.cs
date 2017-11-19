@@ -24,6 +24,11 @@ namespace SpirAtheneum.Helpers
 		private const string SettingsKey = "settings_key";
         private const string LoginKey = "login";
         private const string EmailKey = "email";
+        private const string PasswordKey = "password";
+        private const string MobileUserIdKey = "mobile_user_id";
+        private const string FevouriteIdKey = "fev_id";
+        private const string SubscriptionPriceKey = "sub_price";
+
 
 		private static readonly string SettingsDefault = string.Empty;
         private static readonly bool LoginDefault = false;
@@ -33,12 +38,9 @@ namespace SpirAtheneum.Helpers
         private const string KnowledgeBaseKey = "KnowledgeBase";
         private const string SubscriptionKey = "SubscriptionKey";
 
-
         #endregion
-
-
         public static string GeneralSettings
-		{
+		{ 
 			get
 			{
 				return AppSettings.GetValueOrDefault(SettingsKey, SettingsDefault);
@@ -48,6 +50,51 @@ namespace SpirAtheneum.Helpers
 				AppSettings.AddOrUpdateValue(SettingsKey, value);
 			}
 		}
+        public static string MobileUserId
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(MobileUserIdKey, "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(MobileUserIdKey, value);
+            }
+        }
+        public static double SubscriptionPrice
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(SubscriptionPriceKey, 0.0);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(SubscriptionPriceKey, value);
+            }
+        }
+        public static string FevouriteId
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(FevouriteIdKey, "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(FevouriteIdKey, value);
+            }
+        }
+        public static string Password
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(PasswordKey, "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(PasswordKey, value);
+            }
+        }
+      
         public static string Email
         {
             get

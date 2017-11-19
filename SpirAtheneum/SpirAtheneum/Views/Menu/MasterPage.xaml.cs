@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SpirAtheneum.Views.Account;
 
 namespace SpirAtheneum.Views.Menu
 {
@@ -30,6 +31,7 @@ namespace SpirAtheneum.Views.Menu
             masterpageitems.Add(new MasterPageItem { Title = "Favourites", IconSource = "icon_heart_menu.png", TargetType = typeof(Favourites.Favourites) });
             masterpageitems.Add(new MasterPageItem { Title = "Upgrade", IconSource = "icon_upgrade_menu.png", TargetType = typeof(Upgrade.Upgrade) });
             masterpageitems.Add(new MasterPageItem { Title = "Contact Us", IconSource = "icon_envlope_menu.png", TargetType = typeof(ContactUs.ContactUs) });
+            masterpageitems.Add(new MasterPageItem { Title = "Account", IconSource = "icon_account.png", TargetType = typeof(AccountPage) });
             masterpageitems.Add(new MasterPageItem { Title = "Sign Out", IconSource = "icon_signout_menu.png", TargetType = typeof(Login.LoginPage) });
 
             listView.ItemsSource = masterpageitems;

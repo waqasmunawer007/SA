@@ -7,6 +7,7 @@ namespace Services.Services.MobileUser
 {
     public interface IMobileUser
     {
-        Task<AppMobileUser> CreateMobileUser(Dictionary<string, object> parameters);
+        Task<AppMobileUser> CreateMobileUser(AppMobileUser mobileUser);
+        Task<AppMobileUser> UpdateMobileUser(AppMobileUser mobileUser);
     }
 }

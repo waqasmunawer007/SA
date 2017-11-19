@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using SpirAtheneum.Helpers;
 
 namespace SpirAtheneum.Database
 {
@@ -98,6 +99,19 @@ namespace SpirAtheneum.Database
             }
         }
 
+        /// <summary>
+        /// Changes the password.
+        /// </summary>
+        /// <param name="password">Password.</param>
+        public void ChangePassword(string password)
+        {
+            lock (collisionLock)
+            {
+                var u = database.Table<User>().First(x => x.Email == Settings.Email);
+                u.Password = password;
+                database.Update(u);
+            }
+        }
         #endregion
 
         #region DailyDigest

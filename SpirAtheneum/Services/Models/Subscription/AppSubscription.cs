@@ -14,7 +14,7 @@ namespace Services.Models.Subscription
 	public class Meta
 	{
 		public string author { get; set; }
-		public DateTime date_added { get; set; }
-		public DateTime last_edited { get; set; }
+		public string date_added { get; set; }
+        public string last_edited { get; set; }
 	}
 }

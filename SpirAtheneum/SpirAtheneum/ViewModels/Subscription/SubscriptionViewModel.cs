@@ -6,8 +6,11 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Services.Models.Favourite;
+using Services.Models.KnowledgeBase;
+using Services.Models.Meditation;
 using Services.Models.MobileUser;
 using Services.Models.Subscription;
+using Services.Services.Favourite;
 using Services.Services.MobileUser;
 using Services.Services.SubScription;
 using SpirAtheneum.Constants;
@@ -38,38 +41,109 @@ namespace SpirAtheneum.ViewModels.Subscription
 
         private void SetupCommands()
         {
-            MonthlySubscriptionCommand = new Command((e) => {
+            MonthlySubscriptionCommand = new Command(async (e) => {
                 Settings.IsSubscriped = true;
-                CreateMobileUser(subscriptionList[0].id);
-                Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionSuccess, AppConstant.Done);
+                Settings.SubscriptionPrice = subscriptionList[0].cost;
+                await CreateMobileUser(subscriptionList[0].id);
+                await Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionSuccess, AppConstant.Done);
 
             });
-            YearlySubscriptionCommand = new Command((e) => {
+            YearlySubscriptionCommand = new Command(async (e) => {
                 Settings.IsSubscriped = true;
-                CreateMobileUser(subscriptionList[1].id);
-                Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionSuccess, AppConstant.Done);
+                Settings.SubscriptionPrice = subscriptionList[1].cost;
+                await CreateMobileUser(subscriptionList[1].id);
+                await Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionSuccess, AppConstant.Done);
             }); 
         }
 
-        private async void CreateMobileUser(string subscriptionId)
+        /// <summary>
+        /// Creates the new mobile user on the server
+        /// </summary>
+        /// <param name="subscriptionId">Subscription identifier.</param>
+        private async Task CreateMobileUser(string subscriptionId)
         {
+            IsBusy = true;
             var mobileService = new MobileUserService();
-            Dictionary < string, object> parameters = new Dictionary<string, object>();
-            parameters.Add("email",Settings.Email);
-            parameters.Add("is_active", false);
-            parameters.Add("subscription_type_id", subscriptionId);
-            parameters.Add("created_at", DateTime.Now);
-            AppMobileUser user =   await mobileService.CreateMobileUser(parameters);
-           
-            Debug.WriteLine("User",user.email);
+            AppMobileUser mobileUser = new AppMobileUser();
+            mobileUser.id = Guid.NewGuid().ToString();
+            mobileUser.email = Settings.Email;
+            mobileUser.password = Settings.Password;
+            mobileUser.favorites_id = Guid.NewGuid().ToString();
+            mobileUser.is_active = "false";
+            mobileUser.subscription_type_id = subscriptionId;
+            mobileUser.created_at = DateTime.Now.ToString();
+
+            Services.Models.Subscription.Meta meta = new Services.Models.Subscription.Meta();
+            meta.author = AppConstant.AppAuther;
+            meta.date_added = DateTime.Now.ToString();
+            meta.last_edited = DateTime.Now.ToString();
+            mobileUser.meta = meta;
+
+            AppMobileUser user = await mobileService.CreateMobileUser(mobileUser);
+            Settings.MobileUserId = user.id;
+            await PostUserFevorite(); //Post users fevourites if available
+            IsBusy = false;
+
 
         }
-        private void PostUserFevorite()
+        /// <summary>
+        /// Posts the user fevorites to the server
+        /// </summary>
+        private async Task PostUserFevorite()
         {
+            List<MeditationModel> fevMeditationList = new List<MeditationModel>();
+            List<KnowledgeBaseModel> fevKnowledgeList = new List<KnowledgeBaseModel>();
+
             List<FavouriteMeditation> fevMeditations = DatabaseHelper.GetInstance().GetMeditationFavourite();
             List<FavouriteKnowledgeBase> fevKB = DatabaseHelper.GetInstance().GetKnowledgeBaseFavourite();
-            FevouriteRequest fevRequest = new FevouriteRequest();
 
+            if (fevMeditations != null && fevMeditations.Count > 0)
+            {
+                foreach (FavouriteMeditation fevMedi in fevMeditations)
+                {
+                    if (fevMedi.is_favourite.Equals("true"))
+                    {
+                        MeditationModel meditation = new MeditationModel();
+                        meditation.id = fevMedi.id;
+                        fevMeditationList.Add(meditation);
+                    }
+                }
+            }
+            if (fevKB != null && fevKB.Count > 0)
+            {
+                foreach (FavouriteKnowledgeBase fevkb in fevKB)
+                {
+                    if (fevkb.is_favourite.Equals("true"))
+                    {
+                        KnowledgeBaseModel kb = new KnowledgeBaseModel();
+                        kb.id = fevkb.id;
+                        fevKnowledgeList.Add(kb);
+                    }
+                }
+            }
+            bool ShouldPostData = false;
+            FevouriteRequest fevRequest = new FevouriteRequest();
+            if (fevMeditationList.Count > 0)
+            {
+                fevRequest.meditations = fevMeditationList;
+                ShouldPostData = true;
+            } 
+            if (fevKnowledgeList.Count > 0)
+            {
+                fevRequest.knowledge = fevKnowledgeList;
+                ShouldPostData = true;
+            }
+
+            if (ShouldPostData)
+            {
+                fevRequest.id = Guid.NewGuid().ToString();
+                fevRequest.mobile_user_id = Settings.MobileUserId;
+                var fevService = new FevouriteService();
+                FevouriteRequest fevResponse  = await fevService.UploadFevouriteList(fevRequest);
+                Settings.FevouriteId = fevResponse.id;
+                ShouldPostData = false;
+
+            }
         }
 
         #region Bindable Properties

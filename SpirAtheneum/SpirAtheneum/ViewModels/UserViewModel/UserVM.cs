@@ -16,6 +16,8 @@ using Xamarin.Forms;
 using SpirAtheneum.Constants;
 using SpirAtheneum.Database;
 using System.Text.RegularExpressions;
+using PCLCrypto;
+using SpirAtheneum.AppUtils;
 
 namespace SpirAtheneum.ViewModels
 {
@@ -159,6 +161,9 @@ namespace SpirAtheneum.ViewModels
 						//LoginUser(u);
 						Settings.IsLogin = true;
                         Settings.Email = u.Email;
+                        var bytes = Util.EncryptAes(u.Password);
+                        string encryptedPassword = BitConverter.ToString(bytes);
+                        Settings.Password = encryptedPassword;
 						App.Current.MainPage = new Views.Menu.MainPage();
                     }
                     else
