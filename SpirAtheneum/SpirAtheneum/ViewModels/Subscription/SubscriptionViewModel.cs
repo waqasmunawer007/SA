@@ -99,7 +99,7 @@ namespace SpirAtheneum.ViewModels.Subscription
             AppMobileUser mobileUser = new AppMobileUser();
             mobileUser.id = Settings.MobileUserId;
             mobileUser.email = Settings.Email;
-            mobileUser.password = Settings.Password;
+            mobileUser.pass_hash = Settings.Password;
             mobileUser.favorites_id = Settings.FevouriteId;
             mobileUser.is_active = "false";
             mobileUser.subscription_type_id = subscriptionId;
@@ -127,7 +127,7 @@ namespace SpirAtheneum.ViewModels.Subscription
             AppMobileUser mobileUser = new AppMobileUser();
             mobileUser.id = Guid.NewGuid().ToString();
             mobileUser.email = Settings.Email;
-            mobileUser.password = Settings.Password;
+            mobileUser.pass_hash = Settings.Password;
             mobileUser.favorites_id = Guid.NewGuid().ToString();
             mobileUser.is_active = "false";
             mobileUser.subscription_type_id = subscriptionId;
@@ -141,6 +141,7 @@ namespace SpirAtheneum.ViewModels.Subscription
 
             AppMobileUser user = await mobileService.CreateMobileUser(mobileUser);
             Settings.MobileUserId = user.id;
+            Settings.FevouriteId = user.favorites_id;
             await PostUserFevorite(); //Post users fevourites if available
             IsBusy = false;
 
@@ -196,7 +197,14 @@ namespace SpirAtheneum.ViewModels.Subscription
 
             if (ShouldPostData)
             {
-                fevRequest.id = Guid.NewGuid().ToString();
+                if (String.IsNullOrEmpty(Settings.FevouriteId))
+                {
+                    fevRequest.id = Guid.NewGuid().ToString();
+                }
+                else
+                {
+                    fevRequest.id = Settings.FevouriteId;
+                }
                 fevRequest.mobile_user_id = Settings.MobileUserId;
                 var fevService = new FevouriteService();
                 FevouriteRequest fevResponse  = await fevService.UploadFevouriteList(fevRequest);
