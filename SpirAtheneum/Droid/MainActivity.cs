@@ -7,6 +7,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Gms.Ads;
+using SpirAtheneum.Constants;
 
 namespace SpirAtheneum.Droid
 {
@@ -23,7 +25,7 @@ namespace SpirAtheneum.Droid
             base.OnCreate(bundle);
             //mContext = this;
             global::Xamarin.Forms.Forms.Init(this, bundle);
-
+            MobileAds.Initialize(this, AppConstant.AdmobAppId);
             LoadApplication(new App());
         }
         public static MainActivity ShareInstance ()

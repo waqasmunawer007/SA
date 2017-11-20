@@ -80,6 +80,7 @@ namespace SpirAtheneum.ViewModels.Subscription
                     Settings.IsSubscriped = false;
                     Settings.SubscriptionPrice = 0.0;
                     await ChangeSubscription("");
+                    await Application.Current.MainPage.DisplayAlert("", AppConstant.CancelSubscription, AppConstant.Done);
                 }
                
                

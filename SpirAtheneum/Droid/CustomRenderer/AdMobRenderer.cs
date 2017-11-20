@@ -14,6 +14,7 @@ using SpirAtheneum.Renderers;
 using SpirAtheneum.Droid.CustomRenderer;
 using Xamarin.Forms.Platform.Android;
 using Android.Gms.Ads;
+using SpirAtheneum.Constants;
 
 [assembly: ExportRenderer(typeof(AdMob), typeof(AdMobRenderer))]
 namespace SpirAtheneum.Droid.CustomRenderer
@@ -28,7 +29,8 @@ namespace SpirAtheneum.Droid.CustomRenderer
             {
                 var ad = new AdView(Forms.Context);
                 ad.AdSize = AdSize.Banner;
-                ad.AdUnitId = "ca-app-pub-5129849535433603/2834914773";
+                //ad.AdUnitId = "ca-app-pub-5129849535433603/2834914773";
+                ad.AdUnitId = AppConstant.AdmobUnitIdForAndroid;
 
                 var requestbuilder = new AdRequest.Builder();
                 ad.LoadAd(requestbuilder.Build());

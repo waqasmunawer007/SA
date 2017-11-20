@@ -6,6 +6,7 @@
              xmlns:Local="clr-namespace:SpirAtheneum.Renderers">
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" 
+                       BackgroundColor="{StaticResource BackgroundColor}"
                      HorizontalOptions="FillAndExpand" 
                      Orientation="Vertical">
                     
