@@ -4,6 +4,7 @@ using Android.App;
 using Android.OS;
 using Android.Runtime;
 using Plugin.CurrentActivity;
+using Plugin.FirebasePushNotification;
 
 namespace SpirAtheneum.Droid
 {
@@ -21,6 +22,23 @@ namespace SpirAtheneum.Droid
             base.OnCreate();
             RegisterActivityLifecycleCallbacks(this);
             //A great place to initialize Xamarin.Insights and Dependency Services!
+          
+            #region push notification
+
+            //If debug you should reset the token each time.
+#if DEBUG
+            FirebasePushNotificationManager.Initialize(this, true);
+#else
+              FirebasePushNotificationManager.Initialize(this,false);
+
+#endif
+           //Handle notification when app is closed here
+            CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
+            {
+               
+
+            }; 
+            #endregion
         }
 
         public override void OnTerminate()

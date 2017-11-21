@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1033949059163",
+    "firebase_url": "https://spirtual-athenium.firebaseio.com",
+    "project_id": "spirtual-athenium",
+    "storage_bucket": "spirtual-athenium.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033949059163:android:47c91cfaf52cd9ae",
+        "android_client_info": {
+          "package_name": "com.uvsoft.SpirAtheneum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1033949059163-td2fk48uf408fnhrtub8a0kf98ck5g6d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo7M3tR-jdqw95JE_mJ0WKwdjIu-DKpCE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

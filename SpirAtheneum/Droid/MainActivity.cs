@@ -9,6 +9,7 @@ using Android.Widget;
 using Android.OS;
 using Android.Gms.Ads;
 using SpirAtheneum.Constants;
+using Plugin.FirebasePushNotification;
 
 namespace SpirAtheneum.Droid
 {
@@ -27,6 +28,7 @@ namespace SpirAtheneum.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
             MobileAds.Initialize(this, AppConstant.AdmobAppId);
             LoadApplication(new App());
+            FirebasePushNotificationManager.ProcessIntent(Intent);
         }
         public static MainActivity ShareInstance ()
         {
