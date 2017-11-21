@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Runtime;
 using Plugin.CurrentActivity;
 using Plugin.FirebasePushNotification;
+using Plugin.LocalNotifications;
 
 namespace SpirAtheneum.Droid
 {
@@ -26,16 +27,16 @@ namespace SpirAtheneum.Droid
             #region push notification
 
             //If debug you should reset the token each time.
-#if DEBUG
+            #if DEBUG
             FirebasePushNotificationManager.Initialize(this, true);
-#else
+             #else
               FirebasePushNotificationManager.Initialize(this,false);
 
-#endif
+            #endif
            //Handle notification when app is closed here
             CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
             {
-               
+                CrossLocalNotifications.Current.Show("title", "Received");
 
             }; 
             #endregion

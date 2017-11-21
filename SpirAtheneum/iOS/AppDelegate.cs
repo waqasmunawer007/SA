@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Firebase.Analytics;
+using Firebase.InstanceID;
 using Foundation;
 using Google.MobileAds;
 using SpirAtheneum.Constants;
 using UIKit;
 using Plugin.FirebasePushNotification;
+using Plugin.FirebasePushNotification.Abstractions;
 
 namespace SpirAtheneum.iOS
 {
@@ -17,8 +19,25 @@ namespace SpirAtheneum.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
+           
+
             LoadApplication(new App());
-            FirebasePushNotificationManager.Initialize(options, true);
+
+            //Firebase.Analytics.Loader loader1 = new Firebase.Analytics.Loader();
+            //Firebase.InstanceID.Loader loader2 = new Firebase.InstanceID.Loader();
+
+            //FirebasePushNotificationManager.Initialize(options, false);
+            FirebasePushNotificationManager.Initialize(options, new NotificationUserCategory[]
+        {
+                new NotificationUserCategory("message",new List<NotificationUserAction> {
+                    new NotificationUserAction("Reply","Reply",NotificationActionType.Foreground)
+                }),
+                new NotificationUserCategory("request",new List<NotificationUserAction> {
+                    new NotificationUserAction("Accept","Accept"),
+                    new NotificationUserAction("Reject","Reject",NotificationActionType.Destructive)
+                })
+
+        });
             MobileAds.Configure(AppConstant.AdmobAppId);
             return base.FinishedLaunching(app, options);
         }
@@ -26,12 +45,12 @@ namespace SpirAtheneum.iOS
         #region Push notifications logic
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
         {
-#if DEBUG
+             #if DEBUG
             FirebasePushNotificationManager.DidRegisterRemoteNotifications(deviceToken, FirebaseTokenType.Sandbox);
-#endif
-#if RELEASE
+            #endif
+            #if RELEASE
                     FirebasePushNotificationManager.DidRegisterRemoteNotifications(deviceToken,FirebaseTokenType.Production);
-#endif
+            #endif
 
         }
 
