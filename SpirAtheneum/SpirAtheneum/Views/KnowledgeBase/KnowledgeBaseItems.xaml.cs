@@ -4,6 +4,7 @@ using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using SpirAtheneum.Helpers;
+using SpirAtheneum.Constants;
 
 namespace SpirAtheneum.Views.KnowledgeBase
 {
@@ -27,6 +28,7 @@ namespace SpirAtheneum.Views.KnowledgeBase
             listView.ItemsSource = knowledgeBaseVM.KnowledgeBaseBinding;
             selectCategory = category;
             Title = category;
+
         }
 
         public void FetchAllItems()
@@ -77,12 +79,21 @@ namespace SpirAtheneum.Views.KnowledgeBase
 
         private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var selectedCategory = ((ListView)sender).SelectedItem;
-            Models.KnowledgeBaseBinding item = (Models.KnowledgeBaseBinding)selectedCategory;
-            KnowledgeBaseItemDetail knowledgeBaseItemDetail = new KnowledgeBaseItemDetail();
-            knowledgeBaseItemDetail.knowledgeBaseItem = item;
-            await Navigation.PushAsync(knowledgeBaseItemDetail);
-            ((ListView)sender).SelectedItem = null;
+            if (Settings.IsSubscriped)
+            {
+                var selectedCategory = ((ListView)sender).SelectedItem;
+                Models.KnowledgeBaseBinding item = (Models.KnowledgeBaseBinding)selectedCategory;
+                KnowledgeBaseItemDetail knowledgeBaseItemDetail = new KnowledgeBaseItemDetail();
+                knowledgeBaseItemDetail.knowledgeBaseItem = item;
+                await Navigation.PushAsync(knowledgeBaseItemDetail);
+                ((ListView)sender).SelectedItem = null;
+            }
+            else
+            {
+                await DisplayAlert("", AppConstant.UpgradeMessage, AppConstant.Done); 
+            }
+          
+
         }
     }
 }

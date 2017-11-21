@@ -9,6 +9,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:FavouriteImageConverter x:Key="imageconverter"></local:FavouriteImageConverter>
+            <local:GreyOutCellConvertor x:Key="geryoutCellConverter"></local:GreyOutCellConvertor>
         </ResourceDictionary>
     </ContentPage.Resources>
     
@@ -27,14 +28,15 @@
                 IsVisible="false">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell >
+                        <ViewCell x:Name="cell" >
                             <!--Cell root container-->
                             <StackLayout
                                Orientation="Horizontal" 
                                MinimumHeightRequest="70"        
                                Margin="0,0,0,5"
+
                                x:Name="category_item"
-                               BackgroundColor="{StaticResource BurgundyColor}">
+                               BackgroundColor="{Binding .,Converter={StaticResource geryoutCellConverter}}">
                                 <!--Meditation Item Title label-->
                                 <Label
                                     Text="{Binding title}"

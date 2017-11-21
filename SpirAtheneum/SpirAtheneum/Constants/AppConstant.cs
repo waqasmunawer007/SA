@@ -6,6 +6,7 @@ namespace SpirAtheneum.Constants
         public static string AdminEmail = "sovereignsunempire@protonmail.com";
         public static string AppName = "Spiritual Atheneum";
         public static string AppAuther = "SA Mobile";
+        public static string UpgradeMessage = "Upgrade to Premium to get access to this content!";
 
         public static string AdmobAppId = "ca-app-pub-4606547028021587~2308254400";
         public static string AdmobUnitIdForIOS = "ca-app-pub-3940256099942544/2934735716"; //google test ads id

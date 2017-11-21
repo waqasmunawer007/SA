@@ -40,35 +40,42 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
             databaseHelper = DatabaseHelper.GetInstance();
             selectedCategoryType = type;
 
-            ShareButtonCommand = new Command((e) => {
-                var a = (e as KnowledgeBaseBinding);
+            ShareButtonCommand = new Command((e) => { 
+                if (Settings.IsSubscriped)
+                {
+                    var a = (e as KnowledgeBaseBinding);
 
-                HtmlParser htmlParser = new HtmlParser();
+                    HtmlParser htmlParser = new HtmlParser();
 
-                var text = a.title + ":\n" + htmlParser.GetFormattedTextFromHtml(a.text);
-                var shareMessage = a.title + ":\n" + a.share_message;
+                    var text = a.title + ":\n" + htmlParser.GetFormattedTextFromHtml(a.text);
+                    var shareMessage = a.title + ":\n" + a.share_message;
 
-                var share = DependencyService.Get<IShare>();
-                share.Show(text, shareMessage);
+                    var share = DependencyService.Get<IShare>();
+                    share.Show(text, shareMessage);
+                }
+               
             });
             FavouriteButtonCommand = new Command((e) => {
-                var knowledge = (e as KnowledgeBaseBinding);
-                databaseHelper.UpdateFavouriteKnowledgeBase(knowledge.id);
-                if (knowledge.is_favourite == "true")
+                if (Settings.IsSubscriped)
                 {
-                    knowledge.is_favourite = "false";
-                }
-                else if (knowledge.is_favourite == "false")
-                {
-                    knowledge.is_favourite = "true";
-                }
-                for (int i = 0; i < KnowledgeBaseBinding.Count; i++)
-                {
-                    if (KnowledgeBaseBinding[i].id == knowledge.id)
+                    var knowledge = (e as KnowledgeBaseBinding);
+                    databaseHelper.UpdateFavouriteKnowledgeBase(knowledge.id);
+                    if (knowledge.is_favourite == "true")
                     {
-                        KnowledgeBaseBinding[i] = knowledge;
-                        break;
+                        knowledge.is_favourite = "false";
                     }
+                    else if (knowledge.is_favourite == "false")
+                    {
+                        knowledge.is_favourite = "true";
+                    }
+                    for (int i = 0; i < KnowledgeBaseBinding.Count; i++)
+                    {
+                        if (KnowledgeBaseBinding[i].id == knowledge.id)
+                        {
+                            KnowledgeBaseBinding[i] = knowledge;
+                            break;
+                        }
+                    } 
                 }
             });
         }
