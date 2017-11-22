@@ -24,22 +24,22 @@ namespace SpirAtheneum.Droid
             RegisterActivityLifecycleCallbacks(this);
             //A great place to initialize Xamarin.Insights and Dependency Services!
           
-            #region push notification
+            //#region push notification
 
-            //If debug you should reset the token each time.
-            #if DEBUG
-            FirebasePushNotificationManager.Initialize(this, true);
-             #else
-              FirebasePushNotificationManager.Initialize(this,false);
+            //If debug you should reset the token each time.//Todo uncomment once Push Notification gets ready on server
+            //#if DEBUG
+            //FirebasePushNotificationManager.Initialize(this, true);
+             //#else
+              //FirebasePushNotificationManager.Initialize(this,false);
 
-            #endif
+           // #endif
            //Handle notification when app is closed here
             //CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
             //{
             //    CrossLocalNotifications.Current.Show("title", "Received");
 
             //}; 
-            #endregion
+            //#endregion
         }
 
         public override void OnTerminate()

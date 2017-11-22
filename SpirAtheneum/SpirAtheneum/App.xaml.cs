@@ -15,7 +15,7 @@ namespace SpirAtheneum
         {
             InitializeComponent();
             DatabaseHelper.GetInstance().CreateDatabase();
-            initPushNotificationListner(); // init the push notification event listeners
+           // initPushNotificationListner(); // init the push notification event listeners
             if (Settings.IsLogin)
             {
                  MainPage = new Views.Menu.MainPage();  

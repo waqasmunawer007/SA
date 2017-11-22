@@ -28,7 +28,7 @@ namespace SpirAtheneum.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
             MobileAds.Initialize(this, AppConstant.AdmobAppId);
             LoadApplication(new App());
-            FirebasePushNotificationManager.ProcessIntent(Intent);
+            //FirebasePushNotificationManager.ProcessIntent(Intent); //Todo uncomment once Push Notification gets ready on server
            
         }
         public static MainActivity ShareInstance ()
