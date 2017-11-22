@@ -15,7 +15,7 @@ namespace SpirAtheneum.Converters
             }
             else
             {
-                return "#cdc9c2";
+                return "#807E313B";
             }
         }
 

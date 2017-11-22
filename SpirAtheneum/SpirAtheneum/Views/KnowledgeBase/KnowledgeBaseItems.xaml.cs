@@ -90,6 +90,7 @@ namespace SpirAtheneum.Views.KnowledgeBase
             }
             else
             {
+                ((ListView)sender).SelectedItem = null;
                 await DisplayAlert("", AppConstant.UpgradeMessage, AppConstant.Done); 
             }
           
