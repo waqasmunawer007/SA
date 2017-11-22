@@ -32,9 +32,8 @@ namespace SpirAtheneum.Droid.CustomRenderer
                 //ad.AdUnitId = "ca-app-pub-5129849535433603/2834914773";
                 ad.AdUnitId = AppConstant.AdmobUnitIdForAndroid;
 
-                var requestbuilder = new AdRequest.Builder();
+                var requestbuilder = new AdRequest.Builder().AddTestDevice("44A39B1CC79A349BF3D2A7412767F1D7");
                 ad.LoadAd(requestbuilder.Build());
-
                 SetNativeControl(ad);
             }
         }
