@@ -34,11 +34,11 @@ namespace SpirAtheneum.Droid
 
             #endif
            //Handle notification when app is closed here
-            CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
-            {
-                CrossLocalNotifications.Current.Show("title", "Received");
+            //CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
+            //{
+            //    CrossLocalNotifications.Current.Show("title", "Received");
 
-            }; 
+            //}; 
             #endregion
         }
 

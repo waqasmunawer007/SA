@@ -15,7 +15,6 @@ namespace SpirAtheneum
         {
             InitializeComponent();
             DatabaseHelper.GetInstance().CreateDatabase();
-
             initPushNotificationListner(); // init the push notification event listeners
             if (Settings.IsLogin)
             {
@@ -43,6 +42,7 @@ namespace SpirAtheneum
         {
             // Handle when your app resumes
         }
+       
         private void initPushNotificationListner()
         {
             /// <summary>
@@ -59,7 +59,7 @@ namespace SpirAtheneum
             CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
             {
                 CrossLocalNotifications.Current.Show("title", "Received");
-                
+
                 System.Diagnostics.Debug.WriteLine("Received");
 
             };

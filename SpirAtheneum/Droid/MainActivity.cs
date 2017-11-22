@@ -29,6 +29,7 @@ namespace SpirAtheneum.Droid
             MobileAds.Initialize(this, AppConstant.AdmobAppId);
             LoadApplication(new App());
             FirebasePushNotificationManager.ProcessIntent(Intent);
+           
         }
         public static MainActivity ShareInstance ()
         {

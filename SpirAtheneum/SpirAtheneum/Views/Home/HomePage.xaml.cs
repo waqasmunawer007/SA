@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using SpirAtheneum.Helpers;
+using Plugin.FirebasePushNotification;
+using Plugin.LocalNotifications;
 
 namespace SpirAtheneum.Views.Home
 {
@@ -18,6 +20,7 @@ namespace SpirAtheneum.Views.Home
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
+
         }
 
 		protected override void OnAppearing()
@@ -58,5 +61,6 @@ namespace SpirAtheneum.Views.Home
         {
             Navigation.PushAsync(new Views.Favourites.Favourites());
         }
+
     }
 }
