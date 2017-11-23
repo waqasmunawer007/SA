@@ -194,7 +194,7 @@ namespace SpirAtheneum.ViewModels
                 else
                 {
                     ShowError = true;
-                    Message = "Please enter a valid email !";
+                    Message = AppConstant.ValidEmail;
                 }
             }
             else

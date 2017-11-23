@@ -241,7 +241,7 @@ namespace SpirAtheneum.Database
         {
             try
             {
-                User user = database.Table<User>().First(x => x.Email == u.Email);
+                User user = database.Table<User>().First(x => x.Email.ToLower() == u.Email.ToLower());
                 return user;
             }catch(Exception)
             {

@@ -71,7 +71,7 @@ namespace SpirAtheneum.ViewModels.DailyDigestViewModel
                     List<DailyDigestModel> items = await FetchAllDigestItems();
                     databaseHelper.AddDailyDigest(items);
                     var dailyDigestLocalData = databaseHelper.GetDailyDigest();
-                    DatabaseHelper.GetInstance().SaveLastMeditationDate(activity.First().digest_activity.last_updated);
+                    DatabaseHelper.GetInstance().SaveLastUpdateDailyDigestDate(activity.First().digest_activity.last_updated);
                     return dailyDigestLocalData;
 
                 }
