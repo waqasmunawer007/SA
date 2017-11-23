@@ -65,13 +65,15 @@ namespace SpirAtheneum.ViewModels.DailyDigestViewModel
                 var appActivityService = new AppActivityService();
                 var activity =  await appActivityService.FetchAppActivityAsync();
 
-                if (Settings.DailyDigest_LastUpdate != activity.First().digest_activity.last_updated)
+                LastUpdateDailyDigest lastUpdateDailyDigestDate = DatabaseHelper.GetInstance().GetLastDailyDigestDate();
+                if (lastUpdateDailyDigestDate == null || lastUpdateDailyDigestDate.DailyDigestLastUpdateDate != activity.First().digest_activity.last_updated)
                 {
                     List<DailyDigestModel> items = await FetchAllDigestItems();
                     databaseHelper.AddDailyDigest(items);
                     var dailyDigestLocalData = databaseHelper.GetDailyDigest();
-                    Settings.DailyDigest_LastUpdate = activity.First().digest_activity.last_updated;
+                    DatabaseHelper.GetInstance().SaveLastMeditationDate(activity.First().digest_activity.last_updated);
                     return dailyDigestLocalData;
+
                 }
                 else
                 {
@@ -86,6 +88,27 @@ namespace SpirAtheneum.ViewModels.DailyDigestViewModel
                         return null;
                     }
                 }
+                //if (Settings.DailyDigest_LastUpdate != activity.First().digest_activity.last_updated)
+                //{
+                //    List<DailyDigestModel> items = await FetchAllDigestItems();
+                //    databaseHelper.AddDailyDigest(items);
+                //    var dailyDigestLocalData = databaseHelper.GetDailyDigest();
+                //    Settings.DailyDigest_LastUpdate = activity.First().digest_activity.last_updated;
+                //    return dailyDigestLocalData;
+                //}
+                //else
+                //{
+                //    var dailyDigestLocalData = databaseHelper.GetDailyDigest();
+                //    if (dailyDigestLocalData != null)
+                //    {
+                //        return dailyDigestLocalData;
+                //    }
+                //    else
+                //    {
+                //        Debug.WriteLine("DailyDigest local data is empty on DailyDigestItemPage");
+                //        return null;
+                //    }
+                //}
 
             }
             else

@@ -47,52 +47,51 @@ namespace SpirAtheneum.ViewModels.Subscription
         private void SetupCommands()
         {
             MonthlySubscriptionCommand = new Command(async (e) => {
-                Settings.IsSubscriped = true;
-                Settings.SubscriptionPrice = subscriptionList[0].cost;
-                await CreateMobileUser(subscriptionList[0].id);
+                await CreateMobileUser(subscriptionList[0].id,subscriptionList[0].cost);
                 await Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionSuccess, AppConstant.Done);
-
             });
             YearlySubscriptionCommand = new Command(async (e) => {
-                Settings.IsSubscriped = true;
-                Settings.SubscriptionPrice = subscriptionList[1].cost;
-                await CreateMobileUser(subscriptionList[1].id);
+             
+                await CreateMobileUser(subscriptionList[1].id,subscriptionList[1].cost);
                 await Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionSuccess, AppConstant.Done);
             }); 
 
-
             ChangeMonthlySubscriptionCommand = new Command(async (e) => {
-              
-                Settings.SubscriptionPrice = subscriptionList[0].cost;
-                await ChangeSubscription(subscriptionList[0].id);
+                await ChangeSubscription(subscriptionList[0].id,subscriptionList[0].cost);
                 await Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionChangeSuccess, AppConstant.Done);
 
             });
             ChangeYearlySubscriptionCommand = new Command(async (e) => {
-                Settings.SubscriptionPrice = subscriptionList[1].cost;
-                await ChangeSubscription(subscriptionList[1].id);
+               
+                await ChangeSubscription(subscriptionList[1].id,subscriptionList[1].cost);
                 await Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionChangeSuccess, AppConstant.Done);
             }); 
             CancelSubscriptionCommand = new Command(async (e) => {
                 bool answer= await Application.Current.MainPage.DisplayAlert("", AppConstant.CancelSubscriptionAlert, "Yes","Cancel");
                 if (answer)
                 {
-                    Settings.IsSubscriped = false;
-                    Settings.SubscriptionPrice = 0.0;
-                    await ChangeSubscription("");
+                    //Settings.IsSubscriped = false;
+                    //Settings.SubscriptionPrice = 0.0;
+                    await ChangeSubscription("",0.0);
                     await Application.Current.MainPage.DisplayAlert("", AppConstant.CancelSubscription, AppConstant.Done);
                 }
-               
-               
             }); 
         }
-
+        /// <summary>
+        /// Updates the subscription in local db.
+        /// </summary>
+        /// <param name="subscriptionStatus">If set to <c>true</c> subscription status.</param>
+        /// <param name="subScriptionPrice">Sub scription price.</param>
+        private void UpdateSubscriptionInLocalDB(bool subscriptionStatus, double subScriptionPrice, string mobileUserId, string fevId)
+        {
+            DatabaseHelper.GetInstance().UpdateUserSubscription(subscriptionStatus, subScriptionPrice, mobileUserId, fevId);
+        }
         /// <summary>
         /// Changes the subscription.
         /// </summary>
         /// <returns>The subscription.</returns>
         /// <param name="subscriptionId">Subscription identifier.</param>
-        private async Task ChangeSubscription(string subscriptionId)
+        private async Task ChangeSubscription(string subscriptionId,double subscriptionPrice)
         {
             IsBusy = true;
             var mobileService = new MobileUserService();
@@ -112,6 +111,20 @@ namespace SpirAtheneum.ViewModels.Subscription
             mobileUser.meta = meta;
 
             AppMobileUser user = await mobileService.UpdateMobileUser(mobileUser);
+            if (!String.IsNullOrEmpty(subscriptionId))
+            {
+                Settings.MobileUserId = user.id;
+                Settings.FevouriteId = user.favorites_id;
+                Settings.IsSubscriped = true;
+                Settings.SubscriptionPrice = subscriptionPrice;
+                UpdateSubscriptionInLocalDB(true, subscriptionPrice, user.id, user.favorites_id);
+            }
+            else
+            {
+                Settings.IsSubscriped = false;
+                Settings.SubscriptionPrice = 0.0;
+                UpdateSubscriptionInLocalDB(false, 0.0, user.id, user.favorites_id);
+            }
 
             IsBusy = false;
         }
@@ -120,7 +133,7 @@ namespace SpirAtheneum.ViewModels.Subscription
         /// Creates the new mobile user on the server
         /// </summary>
         /// <param name="subscriptionId">Subscription identifier.</param>
-        private async Task CreateMobileUser(string subscriptionId)
+        private async Task CreateMobileUser(string subscriptionId,double subscriptionPrice)
         {
             IsBusy = true;
             var mobileService = new MobileUserService();
@@ -142,6 +155,11 @@ namespace SpirAtheneum.ViewModels.Subscription
             AppMobileUser user = await mobileService.CreateMobileUser(mobileUser);
             Settings.MobileUserId = user.id;
             Settings.FevouriteId = user.favorites_id;
+            Settings.IsSubscriped = true;
+            Settings.SubscriptionPrice = subscriptionPrice;
+
+            UpdateSubscriptionInLocalDB(true, subscriptionPrice, user.id, user.favorites_id);
+
             await PostUserFevorite(); //Post users fevourites if available
             IsBusy = false;
 
@@ -158,7 +176,7 @@ namespace SpirAtheneum.ViewModels.Subscription
             List<FavouriteMeditation> fevMeditations = DatabaseHelper.GetInstance().GetMeditationFavourite();
             List<FavouriteKnowledgeBase> fevKB = DatabaseHelper.GetInstance().GetKnowledgeBaseFavourite();
 
-            if (fevMeditations != null && fevMeditations.Count > 0)
+            if (fevMeditations != null && fevMeditations.Count > 0) //prepare required server Meditation model
             {
                 foreach (FavouriteMeditation fevMedi in fevMeditations)
                 {
@@ -170,7 +188,7 @@ namespace SpirAtheneum.ViewModels.Subscription
                     }
                 }
             }
-            if (fevKB != null && fevKB.Count > 0)
+            if (fevKB != null && fevKB.Count > 0) //prepare required server KB model
             {
                 foreach (FavouriteKnowledgeBase fevkb in fevKB)
                 {
@@ -197,20 +215,19 @@ namespace SpirAtheneum.ViewModels.Subscription
 
             if (ShouldPostData)
             {
-                if (String.IsNullOrEmpty(Settings.FevouriteId))
-                {
-                    fevRequest.id = Guid.NewGuid().ToString();
-                }
-                else
-                {
-                    fevRequest.id = Settings.FevouriteId;
-                }
+                //if (String.IsNullOrEmpty(Settings.FevouriteId))
+                //{
+                //    fevRequest.id = Guid.NewGuid().ToString();
+                //}
+                //else
+                //{
+                //    fevRequest.id = Settings.FevouriteId;
+                //}
+                fevRequest.id = Settings.FevouriteId;
                 fevRequest.mobile_user_id = Settings.MobileUserId;
                 var fevService = new FevouriteService();
                 FevouriteRequest fevResponse  = await fevService.UploadFevouriteList(fevRequest);
-                Settings.FevouriteId = fevResponse.id;
-                ShouldPostData = false;
-
+                //Settings.FevouriteId = fevResponse.id;
             }
         }
 

@@ -93,7 +93,7 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
                 foreach (var knowledge in knowledgeBasedOnSelectedCategory)
                 {
                     var favourite = allKnowledgeBaseFavourites.Find(x => x.id == knowledge.id);
-
+                   
                     KnowledgeBaseBinding kbb = new KnowledgeBaseBinding();
 
                     kbb.id = knowledge.id;
@@ -101,8 +101,14 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
                     kbb.text = knowledge.text;
                     kbb.category = knowledge.category;
                     kbb.share_message = knowledge.share_message;
-                    kbb.is_favourite = favourite.is_favourite;
-
+                    if (favourite != null)
+                    {
+                        kbb.is_favourite = favourite.is_favourite;
+                    }
+                    else
+                    {
+                        kbb.is_favourite = "false";
+                    }
                     combinedList.Add(kbb);
                 }
 

@@ -39,17 +39,20 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
             {
                 var appActivityService = new AppActivityService();
                 var activity = await appActivityService.FetchAppActivityAsync();
-                if (Settings.KnowledgeBase_LastUpdate != activity.First().knowledge_activity.last_updated)
+                LastUpdateKB lastUpdateKBDate  = DatabaseHelper.GetInstance().GetLastUpdateKBDate();
+               
+                if (lastUpdateKBDate == null || lastUpdateKBDate.KnowledgBaseLastUpdateDate != activity.First().knowledge_activity.last_updated)
                 {
                     List<KnowledgeBaseModel> items = await FetchAllKnowledgeBaseData();
                     databaseHelper.AddKnowledgeBase(items);
-                    Settings.KnowledgeBase_LastUpdate = activity.First().knowledge_activity.last_updated;
+                    DatabaseHelper.GetInstance().SaveLastUpdateKBDate(activity.First().knowledge_activity.last_updated);
                     return FetchAllKnowledgeBaseCategories();
                 }
                 else
                 {
-                    return FetchAllKnowledgeBaseCategories();
+                    return FetchAllKnowledgeBaseCategories(); 
                 }
+               
             }
             else
             {

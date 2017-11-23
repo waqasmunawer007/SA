@@ -27,7 +27,63 @@ namespace SpirAtheneum.Models
         }
 
         private string _name;
-        
+        private string _fevoriteId;
+        private string _mobileUserId;
+        private double _subScriptionPrice;
+        private bool isSubScribed;
+
+
+        public string FevoriteId
+        {
+            get
+            {
+                return _fevoriteId;
+            }
+            set
+            {
+                this._fevoriteId = value;
+
+            }
+        }
+        public string MobileUserId
+        {
+            get
+            {
+                return _mobileUserId;
+            }
+            set
+            {
+                this._mobileUserId = value;
+
+            }
+        }
+
+        public bool IsSubscribed
+        {
+            get
+            {
+                return isSubScribed;
+            }
+            set
+            {
+                this.isSubScribed = value;
+
+            }
+        }
+
+        public double SubScriptionPrice
+        {
+            get
+            {
+                return _subScriptionPrice;
+            }
+            set
+            {
+                this._subScriptionPrice = value;
+
+            }
+        }
+
         public string Name
         {
             get

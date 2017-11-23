@@ -97,8 +97,14 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
                     mb.title = meditation.title;
                     mb.category = meditation.category;
                     mb.share_message = meditation.share_message;
-                    mb.is_favourite = favourite.is_favourite;
-
+                    if (favourite != null)
+                    {
+                        mb.is_favourite = favourite.is_favourite; 
+                    }
+                    else
+                    {
+                        mb.is_favourite = "false"; 
+                    }
                     combinedList.Add(mb);
                 }
 

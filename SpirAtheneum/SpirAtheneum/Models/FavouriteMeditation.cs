@@ -9,8 +9,11 @@ namespace SpirAtheneum.Models
 {
     public class FavouriteMeditation
     {
-        [PrimaryKey, Unique, NotNull]
+        [PrimaryKey, AutoIncrement, NotNull]
+        public int dbID { get; set; }
+
         public string id { get; set; }
+        public string email { get; set; }
         public string is_favourite { get; set; }
     }
 }

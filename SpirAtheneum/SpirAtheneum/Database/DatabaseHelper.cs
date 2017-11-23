@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using SpirAtheneum.Helpers;
+using System.Diagnostics;
 
 namespace SpirAtheneum.Database
 {
@@ -41,6 +42,9 @@ namespace SpirAtheneum.Database
         public void CreateDatabase()
         {
             database.CreateTable<User>();
+            database.CreateTable<LastUpdateKB>();
+            database.CreateTable<LastUpdateMeditation>();
+            database.CreateTable<LastUpdateDailyDigest>();
             database.CreateTable<DailyDigest>();
             database.CreateTable<KnowledgeBase>();
             database.CreateTable<Meditation>();
@@ -48,6 +52,150 @@ namespace SpirAtheneum.Database
             database.CreateTable<FavouriteKnowledgeBase>();
             database.CreateTable<FavouriteMeditation>();
         }
+
+
+        #region Last Update Data Handling
+
+        public LastUpdateMeditation GetLastMeditationDate()
+        {
+            try
+            {
+                lock (collisionLock)
+                {
+                    var lastUpdateDate = database.Table<LastUpdateMeditation>().First(x => x.Email == Settings.Email);
+                    return lastUpdateDate;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public void SaveLastMeditationDate(string date)
+        {
+            try
+            {
+                lock (collisionLock)
+                {
+                    bool ifDateAlreayAvailable = database.Table<LastUpdateMeditation>().Any(d => d.Email == Settings.Email);
+                    if (ifDateAlreayAvailable)
+                    {
+                        //update the date
+                        var lastUpdateDate = database.Table<LastUpdateMeditation>().First(x => x.Email == Settings.Email);
+                        lastUpdateDate.MeditationLastUpdateDate = date;
+                        database.Update(lastUpdateDate);
+                    }
+                    else
+                    {
+                        //add new date
+                        LastUpdateMeditation lastMeditationDate = new LastUpdateMeditation();
+                        lastMeditationDate.Email = Settings.Email;
+                        lastMeditationDate.MeditationLastUpdateDate = date;
+                        database.Insert(lastMeditationDate);
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("SaveLastMeditationDate " + ex.Message);
+            }
+        }
+
+        public LastUpdateDailyDigest GetLastDailyDigestDate()
+        {
+            try
+            {
+                lock (collisionLock)
+                {
+                    var lastDailyDigestUpdateDate = database.Table<LastUpdateDailyDigest>().First(x => x.Email == Settings.Email);
+                    return lastDailyDigestUpdateDate;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public void SaveLastUpdateDailyDigestDate(string date)
+        {
+            try
+            {
+                lock (collisionLock)
+                {
+                    bool ifDateAlreayAvailable = database.Table<LastUpdateDailyDigest>().Any(d => d.Email == Settings.Email);
+                    if (ifDateAlreayAvailable)
+                    {
+                        //update the date
+                        var lastUpdateDate = database.Table<LastUpdateDailyDigest>().First(x => x.Email == Settings.Email);
+                        lastUpdateDate.DailyDigestLastUpdateDate = date;
+                        database.Update(lastUpdateDate);
+                    }
+                    else
+                    {
+                        //add new date
+                        LastUpdateDailyDigest lastDailyDigestDate = new LastUpdateDailyDigest();
+                        lastDailyDigestDate.Email = Settings.Email;
+                        lastDailyDigestDate.DailyDigestLastUpdateDate = date;
+                        database.Insert(lastDailyDigestDate);
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("SaveLastUpdateDailyDigestDate " + ex.Message);
+            }
+        }
+
+        public LastUpdateKB GetLastUpdateKBDate()
+        {
+            try
+            {
+                lock (collisionLock)
+                {
+                    var lastUpdateDate = database.Table<LastUpdateKB>().First(x => x.Email == Settings.Email);
+                    return lastUpdateDate;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public void SaveLastUpdateKBDate(string date)
+        {
+            try
+            {
+                lock (collisionLock)
+                {
+                    bool ifDateAlreayAvailable = database.Table<LastUpdateKB>().Any(d => d.Email == Settings.Email);
+                    if (ifDateAlreayAvailable)
+                    {
+                        //update the date
+                        var lastUpdateDate = database.Table<LastUpdateKB>().First(x => x.Email == Settings.Email);
+                        lastUpdateDate.KnowledgBaseLastUpdateDate = date;
+                        database.Update(lastUpdateDate);
+                    }
+                    else
+                    {
+                        //add new date
+                        LastUpdateKB lastKBDate = new LastUpdateKB();
+                        lastKBDate.Email = Settings.Email;
+                        lastKBDate.KnowledgBaseLastUpdateDate = date;
+                        database.Insert(lastKBDate);
+
+                    }
+                } 
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("SaveLastUpdateKBDate " + ex.Message); 
+            }
+        }
+
+        #endregion
+
 
         #region User
 
@@ -71,19 +219,41 @@ namespace SpirAtheneum.Database
             return ifRegistered;
         }
 
+        public void UpdateUserSubscription(bool subscriptionStatus, double subscriptionPrice, string mobileUserId, string fevId)
+        {
+            lock (collisionLock)
+            {
+                var u = database.Table<User>().First(x => x.Email == Settings.Email);
+                u.SubScriptionPrice = subscriptionPrice;
+                u.IsSubscribed = subscriptionStatus;
+                u.MobileUserId = mobileUserId;
+                u.FevoriteId = fevId;
+                database.Update(u);
+            }
+        }
+
         /// <summary>
         /// Checks the credentials of user
         /// </summary>
         /// <param name="u"></param>
         /// <returns></returns>
-        public bool GetUser(User u)
+        public User GetUser(User u)
         {
-            bool check;
-            lock (collisionLock)
+            try
             {
-                check = database.Table<User>().Any(user => user.Email == u.Email && user.Password == u.Password);
+                User user = database.Table<User>().First(x => x.Email == u.Email);
+                return user;
+            }catch(Exception)
+            {
+                return null;
             }
-            return check;
+           
+            //bool check;
+            //lock (collisionLock)
+            //{
+            //    check = database.Table<User>().Any(user => user.Email == u.Email && user.Password == u.Password);
+            //}
+            //return check;
         }
 
         /// <summary>
@@ -124,8 +294,7 @@ namespace SpirAtheneum.Database
         {
             lock (collisionLock)
             {
-                database.Query<DailyDigest>("Delete from DailyDigest");
-                database.Query<DailyDigest>("DELETE FROM SQLITE_SEQUENCE WHERE name = 'DailyDigest'");
+                int status = database.Table<DailyDigest>().Delete(e => e.email == Settings.Email);
 
                 foreach (var d in dailyDigestList)
                 {
@@ -133,6 +302,7 @@ namespace SpirAtheneum.Database
 
                     dailyDigest.id = d.id;
                     dailyDigest.text = d.text;
+                    dailyDigest.email = Settings.Email;
                     dailyDigest.publish_date = d.publish_date.ToString();
 
                     database.Insert(dailyDigest);
@@ -148,7 +318,7 @@ namespace SpirAtheneum.Database
         {
             lock(collisionLock)
             {
-                var dailyDigestList = database.Table<DailyDigest>().ToList();
+                var dailyDigestList = database.Table<DailyDigest>().Where(x => x.email == Settings.Email).ToList();
                 return dailyDigestList;
             }
         }
@@ -165,8 +335,9 @@ namespace SpirAtheneum.Database
         {
             lock (collisionLock)
             {
-                database.Query<KnowledgeBase>("Delete from KnowledgeBase");
-                database.Query<KnowledgeBase>("DELETE FROM SQLITE_SEQUENCE WHERE name = 'KnowledgeBase'");
+               int status = database.Table<KnowledgeBase>().Delete(e => e.email == Settings.Email);
+                //database.Query<KnowledgeBase>("Delete from KnowledgeBase");
+                //database.Query<KnowledgeBase>("DELETE FROM SQLITE_SEQUENCE WHERE name = 'KnowledgeBase'");
 
                 foreach (var k in KnowledgeList)
                 {
@@ -175,6 +346,7 @@ namespace SpirAtheneum.Database
                     knowledgeBase.id = k.id;
                     knowledgeBase.title = k.title;
                     knowledgeBase.text = k.text;
+                    knowledgeBase.email = Settings.Email;
                     knowledgeBase.share_message = k.share_message;
                     knowledgeBase.category = k.category;
 
@@ -183,12 +355,12 @@ namespace SpirAtheneum.Database
 
                 foreach (var f in KnowledgeList)
                 {
-                    if (!(database.Table<FavouriteKnowledgeBase>().Any(x => x.id == f.id)))
+                    if (!(database.Table<FavouriteKnowledgeBase>().Any(x => x.id == f.id && x.email == Settings.Email)))
                     {
                         FavouriteKnowledgeBase favourite = new FavouriteKnowledgeBase();
                         favourite.id = f.id;
                         favourite.is_favourite = "false";
-
+                        favourite.email = Settings.Email;
                         database.Insert(favourite);
                     }
                 }
@@ -203,7 +375,7 @@ namespace SpirAtheneum.Database
         {
             lock (collisionLock)
             {
-                var knowledgeList = database.Table<KnowledgeBase>().ToList();
+                var knowledgeList = database.Table<KnowledgeBase>().Where(x => x.email == Settings.Email).ToList();
                 return knowledgeList;
             }
         }
@@ -220,9 +392,8 @@ namespace SpirAtheneum.Database
         {
             lock (collisionLock)
             {
-                database.Query<Meditation>("Delete from Meditation");
-                database.Query<Meditation>("DELETE FROM SQLITE_SEQUENCE WHERE name = 'Meditation'");
-
+                int status = database.Table<Meditation>().Delete(e => e.email == Settings.Email);
+               
                 foreach (var m in meditationList)
                 {
                     Meditation meditation = new Meditation();
@@ -231,6 +402,7 @@ namespace SpirAtheneum.Database
                     meditation.title = m.title;
                     meditation.html_string = m.html_string;
                     meditation.share_message = m.share_message;
+                    meditation.email = Settings.Email;
                     meditation.category = m.category;
 
                     database.Insert(meditation);
@@ -238,12 +410,12 @@ namespace SpirAtheneum.Database
 
                 foreach (var f in meditationList)
                 {
-                    if(!(database.Table<FavouriteMeditation>().Any(x => x.id == f.id)))
+                    if(!(database.Table<FavouriteMeditation>().Any(x => x.id == f.id && x.email == Settings.Email)))
                     {
                         FavouriteMeditation favourite = new FavouriteMeditation();
                         favourite.id = f.id;
                         favourite.is_favourite = "false";
-
+                        favourite.email = Settings.Email;
                         database.Insert(favourite);
                     }
                 }
@@ -258,7 +430,7 @@ namespace SpirAtheneum.Database
         {
             lock (collisionLock)
             {
-                var meditationList = database.Table<Meditation>().ToList();
+                var meditationList = database.Table<Meditation>().Where(x=> x.email == Settings.Email).ToList();
                 return meditationList;
             }
         }
@@ -281,18 +453,25 @@ namespace SpirAtheneum.Database
         /// <param name="id"></param>
         public void UpdateFavouriteMeditation(string id)
         {
-            lock (collisionLock)
+            try
             {
-                var f = database.Table<FavouriteMeditation>().First(x => x.id == id);
-                if (f.is_favourite == "true")
+                lock (collisionLock)
                 {
-                    f.is_favourite = "false";
+                    var f = database.Table<FavouriteMeditation>().First(x => x.id == id && x.email == Settings.Email);
+                    if (f.is_favourite == "true")
+                    {
+                        f.is_favourite = "false";
+                    }
+                    else if (f.is_favourite == "false")
+                    {
+                        f.is_favourite = "true";
+                    }
+                    database.Update(f);
                 }
-                else if (f.is_favourite == "false")
-                {
-                    f.is_favourite = "true";
-                }
-                database.Update(f);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("UpdateFavouriteMeditation " + ex.Message);
             }
         }
 
@@ -302,11 +481,19 @@ namespace SpirAtheneum.Database
         /// <returns></returns>
         public List<FavouriteMeditation> GetMeditationFavourite()
         {
-            lock(collisionLock)
+            try
             {
-                var favouriteMeditationList = database.Table<FavouriteMeditation>().ToList();
-                return favouriteMeditationList;
+                lock (collisionLock)
+                {
+                    var favouriteMeditationList = database.Table<FavouriteMeditation>().Where(x => x.email == Settings.Email).ToList();
+                    return favouriteMeditationList;
+                }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("GetMeditationFavourite " + ex.Message);
+            }
+            return null;
         }
 
         #endregion
@@ -321,7 +508,7 @@ namespace SpirAtheneum.Database
         {
             lock (collisionLock)
             {
-                var f = database.Table<FavouriteKnowledgeBase>().First(x => x.id == id);
+                var f = database.Table<FavouriteKnowledgeBase>().First(x => x.id == id && x.email == Settings.Email);
                 if (f.is_favourite == "true")
                 {
                     f.is_favourite = "false";
@@ -340,11 +527,18 @@ namespace SpirAtheneum.Database
         /// <returns></returns>
         public List<FavouriteKnowledgeBase> GetKnowledgeBaseFavourite()
         {
-            lock (collisionLock)
+            try
             {
-                var favouriteKnowledgeBaseList = database.Table<FavouriteKnowledgeBase>().ToList();
-                return favouriteKnowledgeBaseList;
+                lock (collisionLock)
+                {
+                    var favouriteKnowledgeBaseList = database.Table<FavouriteKnowledgeBase>().Where(x => x.email == Settings.Email).ToList();
+                    return favouriteKnowledgeBaseList;
+                }
+            }catch(Exception ex)
+            {
+                Debug.WriteLine("GetKnowledgeBaseFavourite " + ex.Message);
             }
+            return null;
         }
 
         #endregion

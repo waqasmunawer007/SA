@@ -116,15 +116,25 @@ namespace SpirAtheneum.ViewModels
         /// <param name="u"></param>
         public void LoginUser(User u)
         {
-           
-
             if(u.Email != null && u.Email != "" && u.Password != null && u.Password != "")
             {
                 if (Regex.IsMatch(u.Email, AppConstant.EmailPatteren))
                 {
-                    if (databaseHelper.GetUser(u))
+                    User user = databaseHelper.GetUser(u); 
+                    if (user != null)
                     {
                         Settings.IsLogin = true;
+                        Settings.Email = user.Email;
+                        var bytes = Util.EncryptAes(user.Password);
+                        string encryptedPassword = BitConverter.ToString(bytes);
+                        Settings.Password = encryptedPassword;
+
+
+                        Settings.IsSubscriped = user.IsSubscribed;
+                        Settings.SubscriptionPrice = user.SubScriptionPrice;
+                        Settings.MobileUserId = user.MobileUserId;
+                        Settings.FevouriteId = user.FevoriteId;
+
                         App.Current.MainPage = new Views.Menu.MainPage();
                     }
                     else
@@ -156,6 +166,10 @@ namespace SpirAtheneum.ViewModels
             {
                 if (Regex.IsMatch(u.Email, AppConstant.EmailPatteren))
                 {
+                    u.IsSubscribed = false;
+                    u.SubScriptionPrice = 0.0;
+                    u.MobileUserId = "";
+                    u.FevoriteId = "";
                     if (databaseHelper.AddUser(u))
                     {
 						//LoginUser(u);
@@ -164,6 +178,12 @@ namespace SpirAtheneum.ViewModels
                         var bytes = Util.EncryptAes(u.Password);
                         string encryptedPassword = BitConverter.ToString(bytes);
                         Settings.Password = encryptedPassword;
+
+                        Settings.IsSubscriped = u.IsSubscribed;
+                        Settings.SubscriptionPrice = u.SubScriptionPrice;
+                        Settings.MobileUserId = u.MobileUserId;
+                        Settings.FevouriteId = u.FevoriteId;
+
 						App.Current.MainPage = new Views.Menu.MainPage();
                     }
                     else

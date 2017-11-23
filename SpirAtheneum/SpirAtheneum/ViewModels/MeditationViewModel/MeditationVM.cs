@@ -39,17 +39,20 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
             {
                 var appActivityService = new AppActivityService();
                 var activity = await appActivityService.FetchAppActivityAsync();
-                if (Settings.Meditation_LastUpdate != activity.First().meditation_activity.last_updated)
+                LastUpdateMeditation lastUpdateMeditationDate = DatabaseHelper.GetInstance().GetLastMeditationDate();
+
+                if (lastUpdateMeditationDate == null || lastUpdateMeditationDate.MeditationLastUpdateDate != activity.First().meditation_activity.last_updated)
                 {
                     List<MeditationModel> items = await FetchAllMeditationData();
                     databaseHelper.AddMeditation(items);
-                    Settings.Meditation_LastUpdate = activity.First().meditation_activity.last_updated;
+                    DatabaseHelper.GetInstance().SaveLastMeditationDate(activity.First().meditation_activity.last_updated);
                     return FetchAllMeditationCategories();
                 }
                 else
                 {
                     return FetchAllMeditationCategories();
                 }
+
             }
             else
             {

@@ -70,7 +70,7 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
             if (allMeditation != null && allMeditationFavourites != null)
             {
                 Meditation itemDetail = allMeditation.First(x => x.id == id);
-                FavouriteMeditation favourite = allMeditationFavourites.First(x => x.id == id);
+              
 
                 MeditationBinding mb = new MeditationBinding();
 
@@ -79,8 +79,19 @@ namespace SpirAtheneum.ViewModels.MeditationViewModel
                 mb.title = itemDetail.title;
                 mb.category = itemDetail.category;
                 mb.share_message = itemDetail.share_message;
-                mb.is_favourite = favourite.is_favourite;
 
+                if (allMeditationFavourites.Count() > 0)
+                {
+                    FavouriteMeditation favourite = allMeditationFavourites.First(x => x.id == id);
+                    if (favourite != null)
+                    {
+                        mb.is_favourite = favourite.is_favourite;
+                    }
+                }
+                else
+                {
+                    mb.is_favourite = "false";
+                }
                 return mb;
             }
             else

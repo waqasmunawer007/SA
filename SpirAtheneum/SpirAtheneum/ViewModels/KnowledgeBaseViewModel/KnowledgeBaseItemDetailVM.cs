@@ -65,8 +65,6 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
             if (allKnowledgeBase != null && allKnowledgeBaseFavourites != null)
             {
                 KnowledgeBase itemDetail = allKnowledgeBase.First(x => x.id == id);
-                FavouriteKnowledgeBase favourite = allKnowledgeBaseFavourites.First(x => x.id == id);
-
                 KnowledgeBaseBinding kbb = new KnowledgeBaseBinding();
 
                 kbb.id = itemDetail.id;
@@ -74,7 +72,22 @@ namespace SpirAtheneum.ViewModels.KnowledgeBaseViewModel
                 kbb.text = itemDetail.text;
                 kbb.category = itemDetail.category;
                 kbb.share_message = itemDetail.share_message;
-                kbb.is_favourite = favourite.is_favourite;
+
+                if (allKnowledgeBaseFavourites.Count() > 0)
+                {
+                    FavouriteKnowledgeBase favourite = allKnowledgeBaseFavourites.First(x => x.id == id);
+                    if (favourite != null)
+                    {
+                        kbb.is_favourite = favourite.is_favourite;
+                    }
+                }
+                else
+                {
+                    kbb.is_favourite = "false";
+                }
+               
+
+               
 
                 return kbb;
             }

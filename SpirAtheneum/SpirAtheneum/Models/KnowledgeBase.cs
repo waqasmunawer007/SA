@@ -9,10 +9,15 @@ namespace SpirAtheneum.Models
 {
     public class KnowledgeBase
     {
-        [PrimaryKey, Unique, NotNull]
+        [PrimaryKey, AutoIncrement, NotNull]
+        public int dbID { get; set; }
+
+
         public string id { get; set; }
+
         public string title { get; set; }
         public string text { get; set; }
+        public string email { get; set; }
         public string share_message { get; set; }
         public string category { get; set; }
     }

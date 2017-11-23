@@ -157,6 +157,9 @@
       <DependentUpon>ChangeSubscriptionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\GreyOutCellConvertor.cs" />
+    <Compile Include="Models\LastUpdateKB.cs" />
+    <Compile Include="Models\LastUpdateMeditation.cs" />
+    <Compile Include="Models\LastUpdateDailyDigest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
