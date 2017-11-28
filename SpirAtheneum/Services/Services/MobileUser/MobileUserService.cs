@@ -33,6 +33,32 @@ namespace Services.Services.MobileUser
             return null; 
         }
 
+        public async Task<bool> IsMobileUserAlreadyExsit(AppMobileUser mobileUser)
+        {
+            try
+            {
+                var responseJson = await client.GetAsync(APIsConstant.CheckMobileUser+"?email="+mobileUser.email);
+                var json = await responseJson.Content.ReadAsStringAsync();
+                if (!json.Equals("[]")) //only parse json if it contains data
+                {
+                    string[] emails = JsonConvert.DeserializeObject<string[]>(json);
+                    foreach (string email in emails)
+                    {
+                        if (email.ToLower().Equals(mobileUser.email.ToLower()))
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("MobileUser", ex.Message);
+            }
+            return false; 
+        }
+
         public async Task<AppMobileUser> UpdateMobileUser(AppMobileUser mobileUser)
         {
             try

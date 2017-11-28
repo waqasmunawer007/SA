@@ -8,6 +8,7 @@ namespace Services.Services.MobileUser
     public interface IMobileUser
     {
         Task<AppMobileUser> CreateMobileUser(AppMobileUser mobileUser);
+        Task<bool> IsMobileUserAlreadyExsit(AppMobileUser mobileUser);
         Task<AppMobileUser> UpdateMobileUser(AppMobileUser mobileUser);
     }
 }

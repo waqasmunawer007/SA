@@ -75,6 +75,14 @@
                      Style="{StaticResource ButtonStyle}"
                     Command="{Binding AddButtonCommand}"
                     CommandParameter="{Binding Source={x:Reference main_container}, Path=BindingContext}"/>
+                
+                 <ActivityIndicator 
+                    Margin="0,10,0,0"
+                    IsVisible="{Binding IsBusy}"
+                    IsRunning="{Binding IsBusy}"
+                    HorizontalOptions="CenterAndExpand"
+                    Color="White"
+                    VerticalOptions="StartAndExpand"/>
             </StackLayout>
             <local:AdMob IsVisible="false" x:Name="ADMob" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50"/>
         </StackLayout>

@@ -18,6 +18,8 @@ using SpirAtheneum.Database;
 using System.Text.RegularExpressions;
 using PCLCrypto;
 using SpirAtheneum.AppUtils;
+using Services.Services.MobileUser;
+using Services.Models.MobileUser;
 
 namespace SpirAtheneum.ViewModels
 {
@@ -37,6 +39,7 @@ namespace SpirAtheneum.ViewModels
         public ICommand tapCommand;
         INavigation navigation;
         public DatabaseHelper databaseHelper;
+        private bool isBusy;
 
         public UserVM(INavigation nav)
         {
@@ -83,7 +86,18 @@ namespace SpirAtheneum.ViewModels
                 }
             }
         }
-
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                if (isBusy != value)
+                {
+                    isBusy = value;
+                    OnPropertyChanged("IsBusy");
+                }
+            }
+        }
         public bool ShowRegistrationMessage
         {
             get { return showRegistrationMessage; }
@@ -160,8 +174,9 @@ namespace SpirAtheneum.ViewModels
         /// This function is used to signup user
         /// </summary>
         /// <param name="u"></param>
-        public void SignupUser(User u)
+        public async void SignupUser(User u)
         {
+            IsBusy = true;
             if (u.Email != null && u.Email != "" && u.Password != null && u.Password != "")
             {
                 if (Regex.IsMatch(u.Email, AppConstant.EmailPatteren))
@@ -170,7 +185,11 @@ namespace SpirAtheneum.ViewModels
                     u.SubScriptionPrice = 0.0;
                     u.MobileUserId = "";
                     u.FevoriteId = "";
-                    if (databaseHelper.AddUser(u))
+                    var mobileService = new MobileUserService();
+                    AppMobileUser mobileUser = new AppMobileUser();
+                    mobileUser.email = u.Email;
+                    bool IfEmailPresent = await mobileService.IsMobileUserAlreadyExsit(mobileUser);
+                    if (!IfEmailPresent && databaseHelper.AddUser(u))
                     {
 						//LoginUser(u);
 						Settings.IsLogin = true;
@@ -190,19 +209,23 @@ namespace SpirAtheneum.ViewModels
                     {
                         Application.Current.MainPage.DisplayAlert(AppConstant.Sorry, AppConstant.RegistrarionError, AppConstant.Done);
                     }
+                    IsBusy = false;
                 }
                 else
                 {
+                    IsBusy = false;
                     ShowError = true;
                     Message = AppConstant.ValidEmail;
                 }
             }
             else
             {
+                IsBusy = false;
                 ShowError = true;
                 Message = "Email and Password cannot be empty !";
             }
-        }
+
+    }
 
         private void OnPropertyChanged(string propertyName)
         {

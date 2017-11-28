@@ -6,7 +6,7 @@ namespace SpirAtheneum.Constants
         public static string AdminEmail = "sovereignsunempire@protonmail.com";
         public static string AppName = "Spiritual Atheneum";
         public static string AppAuther = "SA Mobile";
-        public static string UpgradeMessage = "Upgrade to Premium to get access to this content!";
+
 
         public static string AdmobAppId = "ca-app-pub-4606547028021587~2308254400";
         public static string AdmobUnitIdForIOS = "ca-app-pub-3940256099942544/2934735716"; //google test ads id
@@ -18,6 +18,7 @@ namespace SpirAtheneum.Constants
         //public static string EmailPatteren = "^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$";
         public static string EmailPatteren = "^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$";
         public static string Done = "OK";
+        public static string UpgradeMessage = "Upgrade to Premium to get access to this content!";
 		public static string Congratulation = "Congratulation!";
         public static string Sorry = "Sorry!";
         public static string Error = "Error!";
@@ -31,7 +32,7 @@ namespace SpirAtheneum.Constants
         public static string SubscriptionSuccess = "You subscription has been completed.";
         public static string SubscriptionChangeSuccess = "You subscription has been changed.";
         public static string SubscriptionError = "You subscription request has been failed. Please try again.";
-        public static string PasswordUnmatchedError = "Password is unmatched.Please try again.";
+        public static string PasswordUnmatchedError = "Password is mismatched.Please try again.";
         public static string SuccessPasswordChange = "Your password has been changed.";
 		#endregion
 	}
