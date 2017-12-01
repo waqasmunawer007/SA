@@ -20,6 +20,7 @@ using PCLCrypto;
 using SpirAtheneum.AppUtils;
 using Services.Services.MobileUser;
 using Services.Models.MobileUser;
+using Plugin.Connectivity;
 
 namespace SpirAtheneum.ViewModels
 {
@@ -188,26 +189,33 @@ namespace SpirAtheneum.ViewModels
                     var mobileService = new MobileUserService();
                     AppMobileUser mobileUser = new AppMobileUser();
                     mobileUser.email = u.Email;
-                    bool IfEmailPresent = await mobileService.IsMobileUserAlreadyExsit(mobileUser);
-                    if (!IfEmailPresent && databaseHelper.AddUser(u))
-                    {
-						//LoginUser(u);
-						Settings.IsLogin = true;
-                        Settings.Email = u.Email;
-                        var bytes = Util.EncryptAes(u.Password);
-                        string encryptedPassword = BitConverter.ToString(bytes);
-                        Settings.Password = encryptedPassword;
+                    if (CrossConnectivity.Current.IsConnected)
+                    { 
+                        bool IfEmailPresent = await mobileService.IsMobileUserAlreadyExsit(mobileUser);
+                        if (!IfEmailPresent && databaseHelper.AddUser(u))
+                        {
+                            //LoginUser(u);
+                            Settings.IsLogin = true;
+                            Settings.Email = u.Email;
+                            var bytes = Util.EncryptAes(u.Password);
+                            string encryptedPassword = BitConverter.ToString(bytes);
+                            Settings.Password = encryptedPassword;
 
-                        Settings.IsSubscriped = u.IsSubscribed;
-                        Settings.SubscriptionPrice = u.SubScriptionPrice;
-                        Settings.MobileUserId = u.MobileUserId;
-                        Settings.FevouriteId = u.FevoriteId;
+                            Settings.IsSubscriped = u.IsSubscribed;
+                            Settings.SubscriptionPrice = u.SubScriptionPrice;
+                            Settings.MobileUserId = u.MobileUserId;
+                            Settings.FevouriteId = u.FevoriteId;
 
-						App.Current.MainPage = new Views.Menu.MainPage();
+                            App.Current.MainPage = new Views.Menu.MainPage();
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert(AppConstant.Sorry, AppConstant.RegistrarionError, AppConstant.Done);
+                        }
                     }
                     else
                     {
-                        Application.Current.MainPage.DisplayAlert(AppConstant.Sorry, AppConstant.RegistrarionError, AppConstant.Done);
+                        await Application.Current.MainPage.DisplayAlert(AppConstant.NoInternetAlert, AppConstant.NoInternetMessage, AppConstant.Done);
                     }
                     IsBusy = false;
                 }

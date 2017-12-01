@@ -42,10 +42,12 @@ namespace Services.Services.MobileUser
                 if (!json.Equals("[]")) //only parse json if it contains data
                 {
                     string[] emails = JsonConvert.DeserializeObject<string[]>(json);
-                    foreach (string email in emails)
+                    for (int i = 0; i < emails.Length ; i++)
                     {
+                        string email = emails[i];
                         if (email.ToLower().Equals(mobileUser.email.ToLower()))
                         {
+                            Debug.WriteLine("MobileUser", "");
                             return true;
                         }
                     }

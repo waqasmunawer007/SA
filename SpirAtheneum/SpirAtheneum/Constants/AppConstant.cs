@@ -25,7 +25,8 @@ namespace SpirAtheneum.Constants
 		public static string RegistrarionSuccess = "Your account has been registered.";
         public static string RegistrarionError = "That email is already in use. Please use a different one.";
         public static string ValidEmail = "Please enter a valid email.";
-
+        public static string NoInternetMessage = "Please check your internet setting and the try again.";
+        public static string NoInternetAlert = "No Internet!";
         public static string LoginError = "Invalid email or password. Please try again.";
         public static string CancelSubscriptionAlert = "Do you really want to cancel your subscription?";
         public static string CancelSubscription = "Your subscription has been cancelled.";
