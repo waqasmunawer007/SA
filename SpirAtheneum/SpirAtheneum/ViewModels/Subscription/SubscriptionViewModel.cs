@@ -100,16 +100,22 @@ namespace SpirAtheneum.ViewModels.Subscription
             mobileUser.email = Settings.Email;
             mobileUser.pass_hash = Settings.Password;
             mobileUser.favorites_id = Settings.FevouriteId;
-            mobileUser.is_active = "false";
             mobileUser.subscription_type_id = subscriptionId;
             mobileUser.created_at = DateTime.Now.ToString();
-
             Services.Models.Subscription.Meta meta = new Services.Models.Subscription.Meta();
             meta.author = AppConstant.AppAuther;
             meta.date_added = DateTime.Now.ToString();
             meta.last_edited = DateTime.Now.ToString();
             mobileUser.meta = meta;
 
+            if (!String.IsNullOrEmpty(subscriptionId))
+            {
+                mobileUser.is_active = "true";
+            }
+            else
+            {
+                mobileUser.is_active = "false"; //susbcription has been cancelled
+            }
             AppMobileUser user = await mobileService.UpdateMobileUser(mobileUser);
             if (!String.IsNullOrEmpty(subscriptionId))
             {
@@ -125,7 +131,6 @@ namespace SpirAtheneum.ViewModels.Subscription
                 Settings.SubscriptionPrice = 0.0;
                 UpdateSubscriptionInLocalDB(false, 0.0, user.id, user.favorites_id);
             }
-
             IsBusy = false;
         }
 
@@ -135,33 +140,42 @@ namespace SpirAtheneum.ViewModels.Subscription
         /// <param name="subscriptionId">Subscription identifier.</param>
         private async Task CreateMobileUser(string subscriptionId,double subscriptionPrice)
         {
-            IsBusy = true;
-            var mobileService = new MobileUserService();
-            AppMobileUser mobileUser = new AppMobileUser();
-            mobileUser.id = Guid.NewGuid().ToString();
-            mobileUser.email = Settings.Email;
-            mobileUser.pass_hash = Settings.Password;
-            mobileUser.favorites_id = Guid.NewGuid().ToString();
-            mobileUser.is_active = "false";
-            mobileUser.subscription_type_id = subscriptionId;
-            mobileUser.created_at = DateTime.Now.ToString();
+            if (string.IsNullOrEmpty(Settings.FevouriteId)) //indicate the subcription is going to be happened very first time 
+            {
+                IsBusy = true;
+                var mobileService = new MobileUserService();
+                AppMobileUser mobileUser = new AppMobileUser();
+                mobileUser.id = Guid.NewGuid().ToString();
+                mobileUser.email = Settings.Email;
+                mobileUser.pass_hash = Settings.Password;
+                mobileUser.favorites_id = Guid.NewGuid().ToString();
+                mobileUser.is_active = "true";
+                mobileUser.subscription_type_id = subscriptionId;
+                mobileUser.created_at = DateTime.Now.ToString();
 
-            Services.Models.Subscription.Meta meta = new Services.Models.Subscription.Meta();
-            meta.author = AppConstant.AppAuther;
-            meta.date_added = DateTime.Now.ToString();
-            meta.last_edited = DateTime.Now.ToString();
-            mobileUser.meta = meta;
+                Services.Models.Subscription.Meta meta = new Services.Models.Subscription.Meta();
+                meta.author = AppConstant.AppAuther;
+                meta.date_added = DateTime.Now.ToString();
+                meta.last_edited = DateTime.Now.ToString();
+                mobileUser.meta = meta;
 
-            AppMobileUser user = await mobileService.CreateMobileUser(mobileUser);
-            Settings.MobileUserId = user.id;
-            Settings.FevouriteId = user.favorites_id;
-            Settings.IsSubscriped = true;
-            Settings.SubscriptionPrice = subscriptionPrice;
+                AppMobileUser user = await mobileService.CreateMobileUser(mobileUser);
+                Settings.MobileUserId = user.id;
+                Settings.FevouriteId = user.favorites_id;
+                Settings.IsSubscriped = true;
+                Settings.SubscriptionPrice = subscriptionPrice;
 
-            UpdateSubscriptionInLocalDB(true, subscriptionPrice, user.id, user.favorites_id);
+                UpdateSubscriptionInLocalDB(true, subscriptionPrice, user.id, user.favorites_id);
 
-            await PostUserFevorite(); //Post users fevourites if available
-            IsBusy = false;
+                await PostUserFevorite(); //Post users fevourites if available
+                IsBusy = false;
+            }
+            else
+            {
+                //Only update subscription status. don't create new user
+                await ChangeSubscription(subscriptionId, subscriptionPrice);
+            }
+
 
 
         }
