@@ -16,8 +16,46 @@
     <ContentPage.Content>
 
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" Spacing="-6">
+           <!--toolbar container-->
+            <StackLayout
+                x:Name="toolbar"
+                HorizontalOptions="FillAndExpand"  
+                HeightRequest="60" 
+                Orientation="Horizontal"
+                BackgroundColor="Black">
+                <!--inner toolbar container-->
+                <StackLayout
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                    <!--back button image-->
+                    <Image Source="icon_left_arrow_48.png" 
+                           Margin="20,0,17,0" 
+                           WidthRequest="25"
+                           HeightRequest="25">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BackTapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <!--title tv-->
+                    <Label Text="Detail" 
+                             TextColor="White" 
+                            FontSize="{StaticResource NormalFontSize}"
+                           Margin="15,0,17,0"></Label>
+                </StackLayout>
+                <!--home button-->
+                <Image Source="icon_home_white.png" 
+                           Margin="0,0,20,0" 
+                           WidthRequest="25"
+                            HorizontalOptions="End"
+                           HeightRequest="25">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="HomeTapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
 
-            <StackLayout Padding="10,10,10,10"  HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Orientation="Vertical" BackgroundColor="{StaticResource BurgundyColor}">
+             <StackLayout Padding="10,10,10,10"  HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Orientation="Vertical" BackgroundColor="{StaticResource BurgundyColor}">
 
                 <StackLayout HorizontalOptions="EndAndExpand"
                      VerticalOptions="CenterAndExpand"

@@ -13,6 +13,20 @@ namespace SpirAtheneum.Views.KnowledgeBase
 	{
         KnowledgeBaseVM knowledgeBaseVM;
 
+        public Categories(int? i = 0)
+        {
+            InitializeComponent();
+            NavigationPage.SetBackButtonTitle(this, "");
+            knowledgeBaseVM = new KnowledgeBaseVM();
+            BindingContext = knowledgeBaseVM;
+            listView.ItemsSource = knowledgeBaseVM.knowledgeBaseList;
+            Title = "All Categories";
+            //show hide toolbar
+            if (i == 1)
+                toolbar.IsVisible = true;
+            else
+                toolbar.IsVisible = false;
+        }
         public Categories()
         {
             InitializeComponent();
@@ -21,6 +35,7 @@ namespace SpirAtheneum.Views.KnowledgeBase
             BindingContext = knowledgeBaseVM;
             listView.ItemsSource = knowledgeBaseVM.knowledgeBaseList;
             Title = "All Categories";
+            toolbar.IsVisible = false;
         }
 
         public async void FetchAllKnowledgeBaseAsync()
@@ -69,7 +84,7 @@ namespace SpirAtheneum.Views.KnowledgeBase
         {
             var selectedCategory = ((ListView)sender).SelectedItem;
             Category category = (Category)selectedCategory;
-            await Navigation.PushAsync(new KnowledgeBaseItems(category.category));
+            await Navigation.PushModalAsync(new KnowledgeBaseItems(category.category));
             ((ListView)sender).SelectedItem = null;
         }
 
@@ -81,6 +96,10 @@ namespace SpirAtheneum.Views.KnowledgeBase
             ADMob.IsVisible = false;
             listView.IsVisible = false;
             base.OnDisappearing();
+        }
+        private void BackTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Navigation.PopModalAsync();
         }
     }
 }

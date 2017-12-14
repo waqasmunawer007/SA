@@ -315,7 +315,9 @@
   <ItemGroup>
     <BundleResource Include="Resources\User.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_left_arrow_48.png" />
+  </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icon_book_menu_white%402x.png" />
   </ItemGroup>

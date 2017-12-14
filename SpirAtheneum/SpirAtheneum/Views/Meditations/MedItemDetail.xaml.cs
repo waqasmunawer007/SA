@@ -17,10 +17,10 @@ namespace SpirAtheneum.Views.Meditations
         public MedItemDetail()
         {
             InitializeComponent();
-			ToolbarItems.Add(new ToolbarItem("", "icon_home_white.png", () =>
-			{
-				Application.Current.MainPage = new Views.Menu.MainPage();
-			}));
+			//ToolbarItems.Add(new ToolbarItem("", "icon_home_white.png", () =>
+			//{
+			//	Application.Current.MainPage = new Views.Menu.MainPage();
+			//}));
             meditationVM = new MeditationItemDetailVM();
             BindingContext = meditationVM;
         }
@@ -43,11 +43,13 @@ namespace SpirAtheneum.Views.Meditations
         {
             Title = response.title;
             meditationVM.Item = response;
+           
         }
 
         protected override void OnAppearing()
         {
             FetchItemDetail();
+            toolbar.IsVisible = true;
             if (Settings.IsSubscriped)
             {
                 ADMob.IsVisible = false;
@@ -62,6 +64,14 @@ namespace SpirAtheneum.Views.Meditations
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
+        }
+        private void BackTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Navigation.PopModalAsync();
+        }
+        private void HomeTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Application.Current.MainPage = new Views.Menu.MainPage();
         }
     }
 }

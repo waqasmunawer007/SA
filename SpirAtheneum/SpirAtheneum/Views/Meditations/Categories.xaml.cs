@@ -13,6 +13,22 @@ namespace SpirAtheneum.Views.Meditations
     {
         MeditationVM meditationVM;
 
+        //overloaded constructor
+        public Categories(int? i=0)
+        {
+            InitializeComponent();
+            NavigationPage.SetBackButtonTitle(this, "");
+            meditationVM = new MeditationVM();
+            BindingContext = meditationVM;
+            listView.ItemsSource = meditationVM.meditationList;
+            Title = "All Categories";
+            //show hide toolbar
+            if (i == 1)
+                toolbar.IsVisible = true;
+            else
+                toolbar.IsVisible = false;
+        }
+        //default constructor
         public Categories()
         {
             InitializeComponent();
@@ -21,6 +37,8 @@ namespace SpirAtheneum.Views.Meditations
             BindingContext = meditationVM;
             listView.ItemsSource = meditationVM.meditationList;
             Title = "All Categories";
+            toolbar.IsVisible = false;
+
         }
 
         public async void FetchAllMeditationAsync()
@@ -68,7 +86,7 @@ namespace SpirAtheneum.Views.Meditations
         {
             var selectedCategory = ((ListView)sender).SelectedItem;
             Category category = (Category)selectedCategory;
-            await Navigation.PushAsync(new CategoryItems.CategoryItems(category.category));
+            await Navigation.PushModalAsync(new CategoryItems.CategoryItems(category.category));
             ((ListView)sender).SelectedItem = null;
         }
 
@@ -80,6 +98,11 @@ namespace SpirAtheneum.Views.Meditations
             listView.IsVisible = false;
             ADMob.IsVisible = false;
             base.OnDisappearing();
+        }
+
+        private void BackTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Navigation.PopModalAsync();
         }
     }
 }

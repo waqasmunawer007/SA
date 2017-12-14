@@ -48,6 +48,7 @@ namespace SpirAtheneum.Views.KnowledgeBase
         {
 			
             FetchItemDetail();
+            toolbar.IsVisible = true;
             if (Settings.IsSubscriped)
             {
                 ADMob.IsVisible = false;
@@ -63,6 +64,14 @@ namespace SpirAtheneum.Views.KnowledgeBase
         {
             base.OnDisappearing();
             ADMob.IsVisible = false;
+        }
+        private void BackTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Navigation.PopModalAsync();
+        }
+        private void HomeTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Application.Current.MainPage = new Views.Menu.MainPage();
         }
     }
 }

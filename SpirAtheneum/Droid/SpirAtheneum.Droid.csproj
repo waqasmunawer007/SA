@@ -464,8 +464,12 @@
   <ItemGroup>
     <BundleResource Include="Resources\drawable-hdpi\icon_heart_filled.png" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_left_arrow_48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_toolbar_home_48.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProguardConfiguration Include="proguard.cfg" />
   </ItemGroup>

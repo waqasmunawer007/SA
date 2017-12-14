@@ -18,16 +18,17 @@ namespace SpirAtheneum.Views.KnowledgeBase
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
-			ToolbarItems.Add(new ToolbarItem("", "icon_home_white.png", () =>
-			{
-				//logic code goes here
-				Application.Current.MainPage = new Views.Menu.MainPage();
-			}));
+			//ToolbarItems.Add(new ToolbarItem("", "icon_home_white.png", () =>
+			//{
+			//	//logic code goes here
+			//	Application.Current.MainPage = new Views.Menu.MainPage();
+			//}));
             knowledgeBaseVM = new KnowledgeBaseItemsVM(category);
             BindingContext = knowledgeBaseVM;
             listView.ItemsSource = knowledgeBaseVM.KnowledgeBaseBinding;
             selectCategory = category;
-            Title = category;
+            toolbar_title.Text = category.ToString();
+            toolbar.IsVisible = false;
 
         }
 
@@ -58,6 +59,7 @@ namespace SpirAtheneum.Views.KnowledgeBase
         {
 			
             FetchAllItems();
+            toolbar.IsVisible = true;
             if (Settings.IsSubscriped)
             {
                 ADMob.IsVisible = false;
@@ -85,7 +87,7 @@ namespace SpirAtheneum.Views.KnowledgeBase
                 Models.KnowledgeBaseBinding item = (Models.KnowledgeBaseBinding)selectedCategory;
                 KnowledgeBaseItemDetail knowledgeBaseItemDetail = new KnowledgeBaseItemDetail();
                 knowledgeBaseItemDetail.knowledgeBaseItem = item;
-                await Navigation.PushAsync(knowledgeBaseItemDetail);
+                await Navigation.PushModalAsync(knowledgeBaseItemDetail);
                 ((ListView)sender).SelectedItem = null;
             }
             else
@@ -93,8 +95,15 @@ namespace SpirAtheneum.Views.KnowledgeBase
                 ((ListView)sender).SelectedItem = null;
                 await DisplayAlert("", AppConstant.UpgradeMessage, AppConstant.Done); 
             }
-          
-
         }
+        private void BackTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Navigation.PopModalAsync();
+        }
+        private void HomeTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Application.Current.MainPage = new Views.Menu.MainPage();
+        }
+
     }
 }

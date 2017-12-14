@@ -5,8 +5,35 @@
              xmlns:control="clr-namespace:SpirAtheneum.Renderers"
              BackgroundColor="{StaticResource BackgroundColor}">
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                     Margin="10,10,10,0 ">
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+          <!--toolbar container-->
+            <StackLayout
+                x:Name="toolbar" 
+                HorizontalOptions="FillAndExpand"  
+                HeightRequest="60" Orientation="Horizontal"
+                BackgroundColor="Black">
+                <!--inner toolbar container-->
+                <StackLayout
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    BackgroundColor="Black"
+                    Orientation="Horizontal">
+                    <!--back button image-->
+                    <Image Source="icon_left_arrow_48.png" 
+                           Margin="20,0,17,0" 
+                           WidthRequest="25"
+                           HeightRequest="25">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BackTapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <!--title tv-->
+                    <Label Text="All Categories" 
+                             TextColor="White" 
+                            FontSize="{StaticResource NormalFontSize}"
+                           Margin="15,0,17,0"></Label>
+                </StackLayout>
+            </StackLayout>
             <ActivityIndicator 
                 IsVisible="{Binding IsBusy}"
                 IsRunning="{Binding IsBusy}"
@@ -20,53 +47,65 @@
                IsVisible="false" 
                VerticalOptions="CenterAndExpand"
                HorizontalOptions="Center"/>
-            <ListView  x:Name="listView" RowHeight="80" BackgroundColor="{StaticResource BackgroundColor}" SeparatorVisibility="None" ItemTapped="listView_ItemTapped" IsVisible="False">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <!--<ImageCell Text="{Binding category}" Detail="{Binding title}" ImageSource="Logout.png" />-->
-                        <ViewCell >
-                            <StackLayout
+            <StackLayout
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                 Margin="0,-10,0,0"
+                 BackgroundColor="{StaticResource BackgroundColor}">
+                <ListView  x:Name="listView" 
+                           RowHeight="80"
+                           Margin="10,10,10,0"
+                           BackgroundColor="{StaticResource BackgroundColor}"
+                           SeparatorVisibility="None" 
+                           ItemTapped="listView_ItemTapped" IsVisible="False">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <!--<ImageCell Text="{Binding category}" Detail="{Binding title}" ImageSource="Logout.png" />-->
+                            <ViewCell >
+                                <StackLayout
                                 Orientation="Vertical"
                                 Margin="0,0,0,5"
                                 VerticalOptions="FillAndExpand" 
                                 HorizontalOptions="FillAndExpand"
                                 BackgroundColor="{StaticResource BurgundyColor}">
-                                <StackLayout
+                                    <StackLayout
                                      Orientation="Vertical"
                                      Margin="0,0,0,5" 
                                      VerticalOptions="CenterAndExpand"
                                      BackgroundColor="{StaticResource BurgundyColor}">
-                                    <StackLayout 
+                                        <StackLayout 
                                           Orientation="Horizontal"  
                                           BackgroundColor="{StaticResource BurgundyColor}"  >
-                                        <Image 
+                                            <Image 
                                                 Source="icon.png"  
                                                 WidthRequest="20" 
                                                 HeightRequest="20"  
                                                 Margin="10,10,0,0"/>
-                                        <Label 
+                                            <Label 
                                                 Text="{Binding category}"
                                                 FontSize="{StaticResource NormalFontSize}"
                                                 TextColor="White" 
                                                 Margin="8,10,0,0"/>
-                                    </StackLayout>
-                                    <!--Label to show the cancatenation of "Number of Items in category" and "category name" -->
-                                    <Label 
+                                        </StackLayout>
+                                        <!--Label to show the cancatenation of "Number of Items in category" and "category name" -->
+                                        <Label 
                                         Text="{Binding title}"
                                         HorizontalOptions="EndAndExpand"
                                         Margin="0,0,10,10"
                                         HorizontalTextAlignment="Center"
                                         VerticalTextAlignment="Start"
                                        TextColor="White" />
-
+                                    </StackLayout>
                                 </StackLayout>
-                            </StackLayout>
-
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <control:AdMob IsVisible="false" x:Name="ADMob" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <control:AdMob IsVisible="false" x:Name="ADMob" VerticalOptions="End" HorizontalOptions="FillAndExpand" 
+                           HeightRequest="50"
+                            Margin="0,-10,0,0"
+                            BackgroundColor="{StaticResource BackgroundColor}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 using SpirAtheneum.Helpers;
 using Plugin.FirebasePushNotification;
 using Plugin.LocalNotifications;
+using SpirAtheneum.Views.Login;
 
 namespace SpirAtheneum.Views.Home
 {
@@ -39,17 +40,23 @@ namespace SpirAtheneum.Views.Home
 
         void DailyDigestClick_Handler(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Views.DailyDigest.DailyDigestItemsPage());
+            Navigation.PushModalAsync(new Views.DailyDigest.DailyDigestItemsPage(1));
         }
 
         void MeditationClick_Handler(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Views.Meditations.Categories());
+            /// <summary>
+            /// want to call overloaded constructor; purpose is to show the customize toolbar
+            /// </summary>
+            Navigation.PushModalAsync(new Views.Meditations.Categories(1),false);
         }
-
+       
         void KnowledgeBaseClick_Handler(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Views.KnowledgeBase.Categories());
+            /// <summary>
+            /// want to call overloaded constructor; purpose is to show the customize toolbar
+            /// </summary>
+            Navigation.PushModalAsync(new Views.KnowledgeBase.Categories(1));
         }
 
         //void ContentClick_Handler(object sender, EventArgs e)

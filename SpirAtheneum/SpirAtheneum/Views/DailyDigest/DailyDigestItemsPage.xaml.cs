@@ -23,10 +23,24 @@ namespace SpirAtheneum.Views.DailyDigest
             dailyDigestItemsVM = new DailyDigestItemsVM();
             BindingContext = dailyDigestItemsVM;
             listView.ItemsSource = dailyDigestItemsVM.dailyDigestItems;
-           
+            toolbar.IsVisible = false;
+
         }
-		
-		public async void FetchAllDigest()
+        public DailyDigestItemsPage(int? i = 0)
+        {
+            InitializeComponent();
+            NavigationPage.SetBackButtonTitle(this, "");
+            dailyDigestItemsVM = new DailyDigestItemsVM();
+            BindingContext = dailyDigestItemsVM;
+            listView.ItemsSource = dailyDigestItemsVM.dailyDigestItems;
+            if (i == 1)
+                toolbar.IsVisible = true;
+            else
+                toolbar.IsVisible = false;
+
+        }
+
+        public async void FetchAllDigest()
         {
             dailyDigestItemsVM.IsBusy = true;
             List<Models.DailyDigest> items = await dailyDigestItemsVM.DatabaseOperation();
@@ -82,6 +96,10 @@ namespace SpirAtheneum.Views.DailyDigest
             if (e.Item == null) return;
             var selectedCategory = ((ListView)sender).SelectedItem;
             ((ListView)sender).SelectedItem = null;
+        }
+        private void BackTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Navigation.PopModalAsync();
         }
     }
 }

@@ -19,16 +19,16 @@ namespace SpirAtheneum.Views.Meditations.CategoryItems
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
-			ToolbarItems.Add(new ToolbarItem("", "icon_home_white.png", () =>
-			{
-				//logic code goes here
-				Application.Current.MainPage = new Views.Menu.MainPage();
-			}));
+			//ToolbarItems.Add(new ToolbarItem("", "icon_home_white.png", () =>
+			//{
+			//	//logic code goes here
+			//	Application.Current.MainPage = new Views.Menu.MainPage();
+			//}));
             meditationVM = new MeditationItemsVM(category);
             BindingContext = meditationVM;
             listView.ItemsSource = meditationVM.MeditationBinding;
-            selectCategory = category;
-            Title = category;
+            toolbar_title.Text = category;
+            toolbar.IsVisible = false;
         }
 
        public void FetchAllItems()
@@ -58,6 +58,7 @@ namespace SpirAtheneum.Views.Meditations.CategoryItems
         {
 			
             FetchAllItems();
+            toolbar.IsVisible = true;
             if (Settings.IsSubscriped)
             {
                 ADMob.IsVisible = false;
@@ -83,8 +84,16 @@ namespace SpirAtheneum.Views.Meditations.CategoryItems
             MeditationBinding item = (MeditationBinding)selectedCategory;
             MedItemDetail medItemDetail = new MedItemDetail();
             medItemDetail.meditationItem = item;
-            await Navigation.PushAsync(medItemDetail);
+            await Navigation.PushModalAsync(medItemDetail,false);
             ((ListView)sender).SelectedItem = null;
+        }
+        private void BackTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Navigation.PopModalAsync();
+        }
+        private void HomeTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Application.Current.MainPage = new Views.Menu.MainPage();
         }
     }
 }

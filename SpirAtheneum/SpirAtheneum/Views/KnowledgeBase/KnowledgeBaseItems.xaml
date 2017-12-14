@@ -17,6 +17,50 @@
 
         <StackLayout
             HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            Orientation="Vertical">
+            <!--toolbar container-->
+            <StackLayout
+                x:Name="toolbar" 
+                IsVisible="False"
+                HorizontalOptions="FillAndExpand"  
+                HeightRequest="60" 
+                Orientation="Horizontal"
+                BackgroundColor="Black">
+                <!--inner toolbar container-->
+                <StackLayout
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                    <!--back button image-->
+                    <Image Source="icon_left_arrow_48.png" 
+                           Margin="20,0,17,0" 
+                           WidthRequest="25"
+                           HeightRequest="25">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BackTapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <!--title-->
+                    <Label Text="Categories Items" 
+                             TextColor="White" 
+                           x:Name="toolbar_title"
+                            FontSize="{StaticResource NormalFontSize}"
+                           Margin="15,0,17,0"></Label>
+                </StackLayout>
+                <!--home button-->
+                <Image Source="icon_home_white.png" 
+                           Margin="0,0,20,0" 
+                           WidthRequest="25"
+                           HorizontalOptions="End"
+                           HeightRequest="25">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="HomeTapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            <StackLayout
+            HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"  
             Margin="10,10,10,0 ">
             <ListView 
@@ -34,7 +78,6 @@
                                Orientation="Horizontal" 
                                MinimumHeightRequest="70"        
                                Margin="0,0,0,5"
-
                                x:Name="category_item"
                                BackgroundColor="{Binding .,Converter={StaticResource geryoutCellConverter}}">
                                 <!--Meditation Item Title label-->
@@ -82,6 +125,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+         </StackLayout>
             <control:AdMob IsVisible="false" x:Name="ADMob" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50"/>
         </StackLayout>
         
