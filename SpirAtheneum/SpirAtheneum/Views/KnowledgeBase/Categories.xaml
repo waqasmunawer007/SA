@@ -6,7 +6,7 @@
              BackgroundColor="{StaticResource BackgroundColor}">
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-          <!--toolbar container-->
+            <!--toolbar container-->
             <StackLayout
                 x:Name="toolbar" 
                 HorizontalOptions="FillAndExpand"  

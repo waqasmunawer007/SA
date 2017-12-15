@@ -5,7 +5,7 @@
             x:Class="SpirAtheneum.Views.Favourites.Favourites"
             Title="Favourites"
             BarBackgroundColor="#2B2B2B">
-    
+   
     <local:MeditationFavourites/>
     <local:KnowledgeBaseFavourites/>
 

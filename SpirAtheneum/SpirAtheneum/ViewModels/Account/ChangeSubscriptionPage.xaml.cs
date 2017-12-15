@@ -29,5 +29,9 @@ namespace SpirAtheneum.ViewModels.Account
             }
             await viewModel.FetchSubscriptionItems();
         }
+        private void BackTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Navigation.PopModalAsync();
+        }
     }
 }

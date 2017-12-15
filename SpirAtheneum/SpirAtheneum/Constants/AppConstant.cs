@@ -20,6 +20,7 @@ namespace SpirAtheneum.Constants
         public static string Done = "OK";
         public static string UpgradeMessage = "Upgrade to Premium to get access to this content!";
 		public static string Congratulation = "Congratulation!";
+        public static string PasswordEmpityFieldError = "Password cannot be empty";
         public static string Sorry = "Sorry!";
         public static string Error = "Error!";
 		public static string RegistrarionSuccess = "Your account has been registered.";

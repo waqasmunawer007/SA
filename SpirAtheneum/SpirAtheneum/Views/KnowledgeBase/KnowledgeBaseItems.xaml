@@ -12,7 +12,7 @@
             <local:GreyOutCellConvertor x:Key="geryoutCellConverter"></local:GreyOutCellConvertor>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
 
         <StackLayout
@@ -63,25 +63,25 @@
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"  
             Margin="10,10,10,0 ">
-            <ListView 
+                <ListView 
                 x:Name="listView"
                 RowHeight="70"
                 SeparatorVisibility="None"
                 ItemTapped="listView_ItemTapped"
                 BackgroundColor="{StaticResource BackgroundColor}"
                 IsVisible="false">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell x:Name="cell" >
-                            <!--Cell root container-->
-                            <StackLayout
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell x:Name="cell" >
+                                <!--Cell root container-->
+                                <StackLayout
                                Orientation="Horizontal" 
                                MinimumHeightRequest="70"        
                                Margin="0,0,0,5"
                                x:Name="category_item"
                                BackgroundColor="{Binding .,Converter={StaticResource geryoutCellConverter}}">
-                                <!--Meditation Item Title label-->
-                                <Label
+                                    <!--Meditation Item Title label-->
+                                    <Label
                                     Text="{Binding title}"
                                     HorizontalOptions="StartAndExpand"
                                     Margin="10,0,0,0"
@@ -89,46 +89,46 @@
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
                                     TextColor="White" />
-                                <!--Cell button Container-->
-                                <StackLayout
+                                    <!--Cell button Container-->
+                                    <StackLayout
                                     HorizontalOptions="EndAndExpand" 
                                     Orientation="Horizontal">
-                                    <!--Favourite Button image-->
-                                    <Image 
+                                        <!--Favourite Button image-->
+                                        <Image 
                                          Source="{Binding is_favourite,Converter={StaticResource imageconverter}}" 
                                          Margin="0,0,10,0" 
                                          WidthRequest="25"
                                          HeightRequest="25">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding FavouriteButtonCommand}" 
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding FavouriteButtonCommand}" 
                                                                   BindingContext="{Binding Source={x:Reference listView}, Path=BindingContext}"
                                                                   CommandParameter="{Binding Source={x:Reference category_item}, Path=BindingContext}">
-                                            </TapGestureRecognizer>
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                    <!--Share Button image-->
-                                    <Image 
+                                                </TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <!--Share Button image-->
+                                        <Image 
                                         Source="icon_share.png" 
                                         Margin="0,0,15,0"  
                                         WidthRequest="25"
                                         HeightRequest="25">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShareButtonCommand}" 
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ShareButtonCommand}" 
                                                                   BindingContext="{Binding Source={x:Reference listView}, Path=BindingContext}"
                                                                   CommandParameter="{Binding Source={x:Reference category_item}, Path=BindingContext}">>
-                                            </TapGestureRecognizer>
-                                        </Image.GestureRecognizers>
-                                    </Image>
+                                                </TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </StackLayout>
                                 </StackLayout>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-         </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
             <control:AdMob IsVisible="false" x:Name="ADMob" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50"/>
         </StackLayout>
-        
+
     </ContentPage.Content>
 
 </ContentPage>

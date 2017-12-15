@@ -30,11 +30,11 @@ namespace SpirAtheneum.ViewModels.Account
         private void SetupCommands()
         {
             ChangeSubscriptionCommand = new Command(async (e) => {
-                await navigation.PushAsync(new ChangeSubscriptionPage());
+                await navigation.PushModalAsync(new ChangeSubscriptionPage());
             });
             ChangePasswordCommand = new Command( (e) => {
                 ChangePasswordPage changePasswordPage = new ChangePasswordPage();
-                navigation.PushAsync(changePasswordPage);
+                navigation.PushModalAsync(changePasswordPage);
                 //await Application.Current.MainPage.DisplayAlert(AppConstant.Congratulation, AppConstant.SubscriptionSuccess, AppConstant.Done);
             });
         }

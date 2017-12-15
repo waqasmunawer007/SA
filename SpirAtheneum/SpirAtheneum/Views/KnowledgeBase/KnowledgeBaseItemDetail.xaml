@@ -92,9 +92,9 @@
                 <WebView VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource BackgroundColor}" Source="{Binding Item.text, Converter={StaticResource htmlSource}}" />
             </StackLayout>
 
-             <control:AdMob IsVisible="false" x:Name="ADMob" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50"/>
+            <control:AdMob IsVisible="false" x:Name="ADMob" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50"/>
         </StackLayout>
 
     </ContentPage.Content>
-    
+
 </ContentPage>

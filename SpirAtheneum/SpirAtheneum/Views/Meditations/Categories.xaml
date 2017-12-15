@@ -66,21 +66,21 @@
                            SeparatorVisibility="None" 
                            ItemTapped="listView_ItemTapped" IsVisible="False">
                     <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <!--<ImageCell Text="{Binding category}" Detail="{Binding title}" ImageSource="Logout.png" />-->
-                        <ViewCell >
-                            <StackLayout
+                        <DataTemplate>
+                            <!--<ImageCell Text="{Binding category}" Detail="{Binding title}" ImageSource="Logout.png" />-->
+                            <ViewCell >
+                                <StackLayout
                                 Orientation="Vertical"
                                 Margin="0,0,0,5"  
                                 VerticalOptions="FillAndExpand" 
                                 HorizontalOptions="FillAndExpand"
                                 BackgroundColor="{StaticResource BurgundyColor}">
-                                 <StackLayout
+                                    <StackLayout
                                      Orientation="Vertical"
                                      Margin="0,0,0,5" 
                                      VerticalOptions="CenterAndExpand"
                                      BackgroundColor="{StaticResource BurgundyColor}">
-                                      <StackLayout 
+                                        <StackLayout 
                                           Orientation="Horizontal"  
                                           BackgroundColor="{StaticResource BurgundyColor}"  >
                                             <Image 
@@ -93,23 +93,23 @@
                                                 FontSize="{StaticResource NormalFontSize}"
                                                 TextColor="White" 
                                                 Margin="8,10,0,0"/>
-                                     </StackLayout>
-                                    <!--Label to show the cancatenation of "Number of Items in category" and "category name" -->
-                                    <Label 
+                                        </StackLayout>
+                                        <!--Label to show the cancatenation of "Number of Items in category" and "category name" -->
+                                        <Label 
                                         Text="{Binding title}"
                                         HorizontalOptions="EndAndExpand"
                                         Margin="0,0,10,10"
                                         HorizontalTextAlignment="Center"
                                         VerticalTextAlignment="Start"
                                        TextColor="White" />
-                                 </StackLayout>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-         </StackLayout>
-         <control:AdMob 
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <control:AdMob 
                  IsVisible="false" 
                  x:Name="ADMob" 
                  Margin="0,-10,0,0"

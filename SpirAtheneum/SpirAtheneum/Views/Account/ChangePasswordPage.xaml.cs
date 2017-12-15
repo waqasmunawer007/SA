@@ -11,7 +11,7 @@ namespace SpirAtheneum.ViewModels.Account
         public ChangePasswordPage()
         {
             InitializeComponent();
-            viewModel = new ChagePasswordViewModel(Navigation);
+            viewModel = new ChagePasswordViewModel(this.Navigation);
             BindingContext = viewModel;
         }
 
@@ -26,6 +26,10 @@ namespace SpirAtheneum.ViewModels.Account
             {
                 ADMob.IsVisible = true;
             }
+        }
+        private void BackTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Navigation.PopModalAsync();
         }
     }
 }

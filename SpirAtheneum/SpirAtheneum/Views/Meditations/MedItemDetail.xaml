@@ -16,7 +16,7 @@
     <ContentPage.Content>
 
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" Spacing="-6">
-           <!--toolbar container-->
+            <!--toolbar container-->
             <StackLayout
                 x:Name="toolbar"
                 HorizontalOptions="FillAndExpand"  
@@ -55,7 +55,7 @@
                 </Image>
             </StackLayout>
 
-             <StackLayout Padding="10,10,10,10"  HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Orientation="Vertical" BackgroundColor="{StaticResource BurgundyColor}">
+            <StackLayout Padding="10,10,10,10"  HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Orientation="Vertical" BackgroundColor="{StaticResource BurgundyColor}">
 
                 <StackLayout HorizontalOptions="EndAndExpand"
                      VerticalOptions="CenterAndExpand"
@@ -90,8 +90,8 @@
             <StackLayout Orientation = "Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,10,0,10" >
                 <WebView VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource BackgroundColor}" Source="{Binding Item.html_string, Converter={StaticResource htmlSource}}" />
             </StackLayout>
-             <control:AdMob IsVisible="false" x:Name="ADMob" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50"/>
+            <control:AdMob IsVisible="false" x:Name="ADMob" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50"/>
         </StackLayout>
-     <!--</ScrollView>-->
+        <!--</ScrollView>-->
     </ContentPage.Content>
 </ContentPage>

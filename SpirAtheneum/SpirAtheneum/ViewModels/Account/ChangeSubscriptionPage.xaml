@@ -3,12 +3,38 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
      xmlns:control="clr-namespace:SpirAtheneum.Renderers"
      xmlns:Local="clr-namespace:SpirAtheneum.Renderers"
+     BackgroundColor="{StaticResource BackgroundColor}"
     x:Class="SpirAtheneum.ViewModels.Account.ChangeSubscriptionPage">
 	 <ContentPage.Content>
         <StackLayout 
              VerticalOptions="FillAndExpand" 
              HorizontalOptions="FillAndExpand" 
+              BackgroundColor="{StaticResource BackgroundColor}"
              Orientation="Vertical">
+            <!--toolbar container-->
+            <StackLayout
+                x:Name="toolbar" 
+                HorizontalOptions="FillAndExpand"  
+                HeightRequest="60" Orientation="Horizontal"
+                BackgroundColor="Black">
+                <!--inner toolbar container-->
+                <StackLayout
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    BackgroundColor="Black"
+                    Orientation="Horizontal">
+                    <!--back button image-->
+                    <Image Source="icon_left_arrow_48.png" 
+                           Margin="20,0,0,0" 
+                           WidthRequest="25"
+                           HeightRequest="25">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BackTapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+            </StackLayout>
+
             <StackLayout Padding="20,20,20,0"
                  BackgroundColor="{StaticResource BackgroundColor}"
                  VerticalOptions="FillAndExpand" 

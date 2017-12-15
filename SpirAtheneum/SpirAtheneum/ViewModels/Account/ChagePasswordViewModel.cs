@@ -35,27 +35,35 @@ namespace SpirAtheneum.ViewModels.Account
         private void SetupCommands()
         {
             ChangePasswordCommand = new Command(async(e) => {
-
-                if (NewPassword.Equals(ConfirmPassword))
+                if (!string.Equals(NewPassword, String.Empty) && !string.Equals(ConfirmPassword, String.Empty))
                 {
-                    var bytes = Util.EncryptAes(NewPassword);
-                    string encryptedNewPassword = BitConverter.ToString(bytes);
+                    if (NewPassword.Equals(ConfirmPassword))
+                    {
+                        var bytes = Util.EncryptAes(NewPassword);
+                        string encryptedNewPassword = BitConverter.ToString(bytes);
 
-                    //Todo remove once password field is added on the server side
-                    //var mobileUserService = new MobileUserService();
-                    //AppMobileUser user = new AppMobileUser();
-                    //user.password = encryptedNewPassword;
-                    //AppMobileUser updatedUser  = await mobileUserService.UpdateMobileUser(user);
+                        //Todo remove once password field is added on the server side
+                        //var mobileUserService = new MobileUserService();
+                        //AppMobileUser user = new AppMobileUser();
+                        //user.password = encryptedNewPassword;
+                        //AppMobileUser updatedUser  = await mobileUserService.UpdateMobileUser(user);
 
-                    //update password in local database
-                    DatabaseHelper.GetInstance().ChangePassword(NewPassword);
-                    await Application.Current.MainPage.DisplayAlert("", AppConstant.SuccessPasswordChange, AppConstant.Done);
-                    await navigation.PopAsync();
-                     
+                        //update password in local database
+                        DatabaseHelper.GetInstance().ChangePassword(NewPassword);
+                        await Application.Current.MainPage.DisplayAlert("", AppConstant.SuccessPasswordChange, AppConstant.Done);
+                        await navigation.PopModalAsync();
+                       
+
+
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("", AppConstant.PasswordUnmatchedError, AppConstant.Done);
+                    }
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("", AppConstant.PasswordUnmatchedError, AppConstant.Done);
+                    await Application.Current.MainPage.DisplayAlert("",AppConstant.PasswordEmpityFieldError, AppConstant.Done);
                 }
               
             });

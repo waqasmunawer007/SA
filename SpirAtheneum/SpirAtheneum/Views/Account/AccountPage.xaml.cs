@@ -31,8 +31,11 @@ namespace SpirAtheneum.Views.Account
                 ADMob.IsVisible = true;
                 SubscriptionButton.IsEnabled = false;
             }
+        }
 
-
+        private void BackTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Navigation.PopModalAsync();
         }
     }
 }

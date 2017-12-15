@@ -73,7 +73,7 @@ namespace SpirAtheneum.Views.KnowledgeBase
         {
 			
             FetchAllKnowledgeBaseAsync();
-            //to give some space between toolbar and bottom list 
+            //to give some space between (bottom side) toolbar and list 
             if (flag == 1)
             {
                 listViewStackLayout.Margin = new Thickness(0, 10, 0, 0);
