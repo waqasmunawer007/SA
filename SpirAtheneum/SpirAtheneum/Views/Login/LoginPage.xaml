@@ -37,9 +37,7 @@
                  HorizontalOptions="FillAndExpand"
                  Orientation="Vertical">
 
-                  
-                
-                <Label VerticalOptions="Center"
+                 <Label VerticalOptions="Center"
                    HorizontalOptions="Start" 
                    Text="Email:" 
                    FontSize="{StaticResource NormalFontSize}" 

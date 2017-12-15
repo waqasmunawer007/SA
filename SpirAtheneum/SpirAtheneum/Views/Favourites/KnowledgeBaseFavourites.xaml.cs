@@ -79,7 +79,7 @@ namespace SpirAtheneum.Views.Favourites
             KnowledgeBaseBinding item = (KnowledgeBaseBinding)select;
             KnowledgeBaseItemDetail knowledgeBaseItemDetail = new KnowledgeBaseItemDetail();
             knowledgeBaseItemDetail.knowledgeBaseItem = item;
-            await Navigation.PushAsync(knowledgeBaseItemDetail);
+            await Navigation.PushModalAsync(knowledgeBaseItemDetail);
             ((ListView)sender).SelectedItem = null;
         }
     }

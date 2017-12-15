@@ -12,7 +12,7 @@ namespace SpirAtheneum.Views.Meditations
     public partial class Categories : ContentPage
     {
         MeditationVM meditationVM;
-
+        int flag;
         //overloaded constructor
         public Categories(int? i=0)
         {
@@ -22,7 +22,9 @@ namespace SpirAtheneum.Views.Meditations
             BindingContext = meditationVM;
             listView.ItemsSource = meditationVM.meditationList;
             Title = "All Categories";
-            //show hide toolbar
+            listViewStackLayout.Margin = new Thickness(0, -10, 0, 0);
+            flag = 0;
+           // show hide toolbar
             if (i == 1)
                 toolbar.IsVisible = true;
             else
@@ -37,7 +39,9 @@ namespace SpirAtheneum.Views.Meditations
             BindingContext = meditationVM;
             listView.ItemsSource = meditationVM.meditationList;
             Title = "All Categories";
-            toolbar.IsVisible = false;
+            listViewStackLayout.Margin = new Thickness(0,10, 0, 0);
+           flag = 1;
+           toolbar.IsVisible = false;
 
         }
 
@@ -71,6 +75,11 @@ namespace SpirAtheneum.Views.Meditations
         protected override void OnAppearing()
         {
             FetchAllMeditationAsync();
+            //to give some space between toolbar and bottom list 
+            if (flag == 1)
+            {
+                listViewStackLayout.Margin = new Thickness(0, 10, 0, 0);
+            }
             if (Settings.IsSubscriped)
             {
                 ADMob.IsVisible = false;
@@ -92,6 +101,11 @@ namespace SpirAtheneum.Views.Meditations
 
         protected override void OnDisappearing()
         {
+            //small hack to avoid space issue comming from hamberger menu
+            if (flag == 1)
+            {
+                listViewStackLayout.Margin = new Thickness(0,-10, 0, 0);
+            }
             meditationVM.meditationList.Clear();
             NoDataLabel.IsVisible = false;
             meditationVM.IsBusy = false;

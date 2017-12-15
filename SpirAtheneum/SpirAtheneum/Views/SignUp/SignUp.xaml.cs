@@ -35,10 +35,14 @@ namespace SpirAtheneum.Views
 			}
 
 		}
+        private void BackTapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Navigation.PopModalAsync();
+        }
 
-		//public void loginButtonClicked(object sender, EventArgs e)
-		//{
-		//    App.Current.MainPage = new Menu.MainPage();
-		//}
-	}
+        //public void loginButtonClicked(object sender, EventArgs e)
+        //{
+        //    App.Current.MainPage = new Menu.MainPage();
+        //}
+    }
 }

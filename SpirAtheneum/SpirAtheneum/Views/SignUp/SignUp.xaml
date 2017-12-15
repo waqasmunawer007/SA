@@ -11,6 +11,33 @@
              x:Name = "main_container"
              BackgroundColor="{StaticResource BackgroundColor}"         
              Orientation="Vertical">
+            <StackLayout
+                x:Name="toolbar" 
+                HorizontalOptions="FillAndExpand"  
+                HeightRequest="60" Orientation="Vertical"
+                BackgroundColor="Black">
+                <StackLayout
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    BackgroundColor="Black"
+                    Orientation="Horizontal">
+                    <!--Back button image-->
+                    <Image Source="icon_left_arrow_48.png" 
+                           Margin="20,0,17,0" 
+                           WidthRequest="25"
+                           HeightRequest="25">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BackTapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Label Text="Sign In" 
+                             TextColor="White" 
+                            FontSize="{StaticResource NormalFontSize}"
+                           Margin="15,0,17,0"  ></Label>
+                </StackLayout>
+            </StackLayout>
+
             <!--Sign title -->
               <Label 
                     Margin="0,15,0,0"

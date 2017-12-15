@@ -71,7 +71,7 @@ namespace SpirAtheneum.ViewModels
 
         void OnTapped(object s)   // Sign up button command
         {
-            navigation.PushAsync(new SignUp());
+            navigation.PushModalAsync(new SignUp());
             // Settings.Login = 0;
         }
 

@@ -12,7 +12,7 @@ namespace SpirAtheneum.Views.KnowledgeBase
 	public partial class Categories : ContentPage
 	{
         KnowledgeBaseVM knowledgeBaseVM;
-
+        int flag;
         public Categories(int? i = 0)
         {
             InitializeComponent();
@@ -21,6 +21,8 @@ namespace SpirAtheneum.Views.KnowledgeBase
             BindingContext = knowledgeBaseVM;
             listView.ItemsSource = knowledgeBaseVM.knowledgeBaseList;
             Title = "All Categories";
+            listViewStackLayout.Margin = new Thickness(0, -10, 0, 0);
+            flag = 0;
             //show hide toolbar
             if (i == 1)
                 toolbar.IsVisible = true;
@@ -35,6 +37,8 @@ namespace SpirAtheneum.Views.KnowledgeBase
             BindingContext = knowledgeBaseVM;
             listView.ItemsSource = knowledgeBaseVM.knowledgeBaseList;
             Title = "All Categories";
+            listViewStackLayout.Margin = new Thickness(0, 10, 0, 0);
+            flag = 1;
             toolbar.IsVisible = false;
         }
 
@@ -69,6 +73,11 @@ namespace SpirAtheneum.Views.KnowledgeBase
         {
 			
             FetchAllKnowledgeBaseAsync();
+            //to give some space between toolbar and bottom list 
+            if (flag == 1)
+            {
+                listViewStackLayout.Margin = new Thickness(0, 10, 0, 0);
+            }
             if (Settings.IsSubscriped)
             {
                 ADMob.IsVisible = false;
@@ -90,6 +99,11 @@ namespace SpirAtheneum.Views.KnowledgeBase
 
         protected override void OnDisappearing()
         {
+            //small hack to avoid space issue comming from hamberger menu
+            if (flag == 1)
+            {
+                listViewStackLayout.Margin = new Thickness(0, -10, 0, 0);
+            }
             knowledgeBaseVM.knowledgeBaseList.Clear();
             NoDataLabel.IsVisible = false;
             knowledgeBaseVM.IsBusy = false;

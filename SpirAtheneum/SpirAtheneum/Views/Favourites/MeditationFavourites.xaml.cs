@@ -82,7 +82,7 @@ namespace SpirAtheneum.Views.Favourites
             MeditationBinding item = (MeditationBinding)select;
             MedItemDetail medItemDetail = new MedItemDetail();
             medItemDetail.meditationItem = item;
-            await Navigation.PushAsync(medItemDetail);
+            await Navigation.PushModalAsync(medItemDetail);
             ((ListView)sender).SelectedItem = null;
         }
     }
