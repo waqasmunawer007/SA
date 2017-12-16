@@ -83,11 +83,10 @@
                         </Image.GestureRecognizers>
                     </Image>
                 </StackLayout>
-
             </StackLayout>
 
             <!--Item detail container -->
-            <StackLayout Orientation = "Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,10,0,10" >
+           <StackLayout Orientation = "Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,10,0,10" >
                 <WebView VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource BackgroundColor}" Source="{Binding Item.html_string, Converter={StaticResource htmlSource}}" />
             </StackLayout>
             <control:AdMob IsVisible="false" x:Name="ADMob" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50"/>

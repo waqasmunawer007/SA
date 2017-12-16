@@ -58,7 +58,7 @@
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center" 
                                 Text="Change Subscription" 
-                                FontSize="{StaticResource HeadingFontSize}" 
+                                FontSize="{StaticResource HeadingFontSize1}" 
                                 TextColor="{StaticResource NormalTextColor}"/>
 
                             <Local:UpgradeYellowButton Margin="0,30,0,0"
